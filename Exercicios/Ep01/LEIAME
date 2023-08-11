@@ -1,0 +1,1 @@
+O SHELL interpreta a operação de multiplicação (*) passada por parametro como expansor de arquivos do diretório. Por isso é necessário utilizar "expressão"
