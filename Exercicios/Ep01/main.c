@@ -50,7 +50,7 @@ int main(int argc, char **argv)
   char operacoes[NUM_OP];
   Float_t x[NUM_X];
 
-  trata_entrada(argc,argv,operacoes,x,NUM_PARAMETROS);
+  trata_entrada(operacoes,x,NUM_PARAMETROS);
 
 
   printf("Vetor Operacoes \n");
