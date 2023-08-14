@@ -23,3 +23,7 @@ Float_t calculaEpsilonRelativo( Float_t num );
 int AlmostEqualRelative(Float_t A, Float_t B);
 
 int AlmostEqualUlps(Float_t A, Float_t B, int maxULPs);
+
+double erro_abs(double a, double b);
+
+double erro_rel(double a , double b);
