@@ -9,7 +9,7 @@
 #define NUM_X 5
 
 
-void trata_entrada(int argc, char **argv,char *operacoes,Float_t *x, int n)
+void trata_entrada(char *operacoes,Float_t *x, int n)
 { 
   int cont_op = 0, cont_val = 0;
 
@@ -63,7 +63,26 @@ int main(int argc, char **argv)
   for(int i = 0; i < NUM_X;i++)
     printFloat_t(x[i]);
   printf("\n");
-   
+
+
+  printf("Teste Erro Relativo e Absoluto\n");
+  double a1 = 2112.9;
+  double y1 = 5.3;
+  double EA = 0.1;
+  double a2 = a1 + EA, y2 = y1 + EA;
+
+  double EAt = erro_abs(a1,a2);
+  printf("Erro Absoluto de a: %1.8f\n",EAt);
+
+  double ER = erro_rel(a1,a2);
+  printf("Erro Relativo de a: %1.8f\n",ER);
+
+  EAt = erro_abs(y1,y2);
+  printf("Erro Absoluto de y: %1.8f\n",EAt);
+
+  
+  ER = erro_rel(y1,y2);
+  printf("Erro Relativo de y: %1.8f\n",ER);   
   
   return 0;
 }
