@@ -9,7 +9,7 @@
 #define NUM_X 5
 
 
-void trata_entrada(int argc, char **argv,char *operacoes,Float_t *x, int n)
+void trata_entrada(char *operacoes,Float_t *x, int n)
 { 
   int cont_op = 0, cont_val = 0;
 
