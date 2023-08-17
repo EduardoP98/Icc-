@@ -110,15 +110,12 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           *resultado_m = soma_1;
           
           *resultado_M = soma_2;
-
-          fesetround(FE_TONEAREST);
           break;
       case '-':
           fesetround(FE_DOWNWARD);
           *resultado_m = a - d; 
           fesetround(FE_UPWARD); 
           *resultado_M = b - c;
-          fesetround(FE_TONEAREST);
           break;
       case '*':
           fesetround(FE_DOWNWARD);
@@ -129,7 +126,6 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           float result4 = b * d;
           *resultado_m = fminf(fminf(result1, result2), fminf(result3, result4));
           *resultado_M = fmaxf(fmaxf(result1, result2), fmaxf(result3, result4));
-          fesetround(FE_TONEAREST);
           break;
       case '/':
           if (c <= 0 && d >= 0) {
@@ -138,11 +134,19 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           } else if (c == 0) {
               *resultado_m = -INFINITY;
               *resultado_M = INFINITY;
+          } else {
+              fesetround(FE_DOWNWARD);
+              *resultado_m = fminf(fminf(a / c, a / d), fminf(b / c, b / d));
+              fesetround(FE_UPWARD);
+              *resultado_M = fmaxf(fmaxf(a / c, a / d), fmaxf(b / c, b / d));
           }
+          break;
       default:
+          // Operador desconhecido, você pode tratar isso de acordo com sua necessidade
           *resultado_m = 0.0;
           *resultado_M = 0.0;
   }
+  fesetround(FE_TONEAREST);
 
   
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
