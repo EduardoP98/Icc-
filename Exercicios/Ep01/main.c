@@ -14,7 +14,8 @@
 /* Recebe uma entrada padrao X1 01 X2 02 X3 03 X4 04 X5 e insere valors nos vetores
 
 */
-void trata_entrada(char *operacoes, Float_t *x, int n) { 
+void trata_entrada(char *operacoes, Float_t *x, int n)
+{ 
 
   // Para contrar o numero de operacoes e valores lidos
   int cont_op = 0, cont_val = 0;
@@ -64,23 +65,34 @@ void trata_entrada(char *operacoes, Float_t *x, int n) {
 */
 void calcula_intervalo (Float_t x, float *m, float *M) {
   // Retorna o próximo número de máquina na direção positiva a partir de x, o que corresponde a m(x).
+
+
+  //Define o modo de arredondamento para baixo
+  fesetround(FE_DOWNWARD);
+
+
   *m = nextafterf(x.f, 0);
 
-  // Define o modo de arredondamento para cima
-  fesetround(FE_DOWNWARD);
-  *M = x.f;
+  
   // Restaura o modo de arredondamento padrão
   fesetround(FE_TONEAREST);
+
+  *M = nextafterf(x.f,INFINITY);
+  
+  
 }
 
 
+/* Calcula o número de valores representáveis entre dois números do tipo float
+
+*/
 int calcula_ulps(float a , float b)
 {
   Float_t num1, num2;
   num1.f = a;
   num2.f = b;
 
-   int ulps = (int) abs(num1.i - num2.i);
+   int ulps = (int) fabs(num1.i - num2.i);
 
   return ulps;
 
@@ -90,16 +102,34 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
   // Calcula cada operacao intervalar basica
   switch (operador) {
       case '+':
-          *resultado_m = a + c;
-          *resultado_M = b + d;
+          fesetround(FE_DOWNWARD);
+          float soma_1 = a + c;
+          fesetround(FE_UPWARD);
+          float soma_2 = b + d;
+          
+          *resultado_m = soma_1;
+          
+          *resultado_M = soma_2;
+
+          fesetround(FE_TONEAREST);
           break;
       case '-':
-          *resultado_m = a - d;
+          fesetround(FE_DOWNWARD);
+          *resultado_m = a - d; 
+          fesetround(FE_UPWARD); 
           *resultado_M = b - c;
+          fesetround(FE_TONEAREST);
           break;
       case '*':
-          *resultado_m = fminf(fminf(a * c, a * d), fminf(b * c, b * d));
-          *resultado_M = fmaxf(fmaxf(a * c, a * d), fmaxf(b * c, b * d));
+          fesetround(FE_DOWNWARD);
+          float result1 = a * c;
+          float result2 = a * d;
+          fesetround(FE_UPWARD);
+          float result3 = b * c;
+          float result4 = b * d;
+          *resultado_m = fminf(fminf(result1, result2), fminf(result3, result4));
+          *resultado_M = fmaxf(fmaxf(result1, result2), fmaxf(result3, result4));
+          fesetround(FE_TONEAREST);
           break;
       case '/':
           if (c <= 0 && d >= 0) {
@@ -108,17 +138,13 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           } else if (c == 0) {
               *resultado_m = -INFINITY;
               *resultado_M = INFINITY;
-          } else {
-              *resultado_m = fminf(fminf(a / c, a / d), fminf(b / c, b / d));
-              *resultado_M = fmaxf(fmaxf(a / c, a / d), fmaxf(b / c, b / d));
           }
-          break;
       default:
-          // Operador desconhecido, você pode tratar isso de acordo com sua necessidade
-          *resultado_m = 0.1;
-          *resultado_M = 0.2;
+          *resultado_m = 0.0;
+          *resultado_M = 0.0;
   }
 
+  
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
   float erro_absoluto = erro_abs(*resultado_m, *resultado_M);
   float erro_relativo = erro_rel(*resultado_m,*resultado_M);
@@ -133,6 +159,7 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
   printf("[%1.8e,%1.8e]\n", *resultado_m, *resultado_M);
   printf("EA: %1.8e; ER: %1.8e; ULPs: %d\n\n", erro_absoluto, erro_relativo, ulps);
   sequencia++;
+        
 }
 
 int main(int argc, char **argv)
@@ -170,7 +197,7 @@ int main(int argc, char **argv)
   // Imprime os valores de m(x) e M(x) para cada valor de x
   printf("Valores de m(x) e M(x) para cada X\n");
   for (int i = 0; i < NUM_X; i++) {
-      printf("x = %1.8f, m(x) = %1.8f, M(x) = %1.8f\n", x[i].f, mx_values[i], Mx_values[i]);
+      printf("x[%d] = %1.8e, m(x) = %1.8e, M(x) = %1.8e\n",i, x[i].f, mx_values[i], Mx_values[i]);
   }
   printf("\n");
 
