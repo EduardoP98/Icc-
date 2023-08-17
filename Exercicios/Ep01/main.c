@@ -64,7 +64,7 @@ void trata_entrada(char *operacoes, Float_t *x, int n) {
 */
 void calcula_intervalo (Float_t x, float *m, float *M) {
   // Retorna o próximo número de máquina na direção positiva a partir de x, o que corresponde a m(x).
-  *m = nextafterf(x.f, -INFINITY);
+  *m = nextafterf(x.f, 0);
 
   // Define o modo de arredondamento para cima
   fesetround(FE_DOWNWARD);
@@ -120,8 +120,8 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
   }
 
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
-  float erro_absoluto = *resultado_M - *resultado_m;
-  float erro_relativo = erro_absoluto / fmaxf(fabsf(*resultado_m), fabsf(*resultado_M));
+  float erro_absoluto = erro_abs(*resultado_m, *resultado_M);
+  float erro_relativo = erro_rel(*resultado_m,*resultado_M);
 
   // Calcula ULPs
   int ulps = calcula_ulps(*resultado_m,*resultado_M);
