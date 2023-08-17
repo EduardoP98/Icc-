@@ -73,6 +73,19 @@ void calcula_intervalo (Float_t x, float *m, float *M) {
   fesetround(FE_TONEAREST);
 }
 
+
+int calcula_ulps(float a , float b)
+{
+  Float_t num1, num2;
+  num1.f = a;
+  num2.f = b;
+
+   int ulps = (int) abs(num1.i - num2.i);
+
+  return ulps;
+
+}
+
 void calcula_operacao_intervalar(float a, float b, char operador, float c, float d, float *resultado_m, float *resultado_M) {
   // Calcula cada operacao intervalar basica
   switch (operador) {
@@ -102,8 +115,8 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           break;
       default:
           // Operador desconhecido, você pode tratar isso de acordo com sua necessidade
-          *resultado_m = 0.0;
-          *resultado_M = 0.0;
+          *resultado_m = 0.1;
+          *resultado_M = 0.2;
   }
 
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
@@ -111,7 +124,7 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
   float erro_relativo = erro_absoluto / fmaxf(fabsf(*resultado_m), fabsf(*resultado_M));
 
   // Calcula ULPs
-  int ulps = 2;
+  int ulps = calcula_ulps(*resultado_m,*resultado_M);
 
   // Imprime os resultados formatados
   static int sequencia = 1;
@@ -157,7 +170,7 @@ int main(int argc, char **argv)
   // Imprime os valores de m(x) e M(x) para cada valor de x
   printf("Valores de m(x) e M(x) para cada X\n");
   for (int i = 0; i < NUM_X; i++) {
-      printf("x = %.8f, m(x) = %.8f, M(x) = %.8f\n", x[i].f, mx_values[i], Mx_values[i]);
+      printf("x = %1.8f, m(x) = %1.8f, M(x) = %1.8f\n", x[i].f, mx_values[i], Mx_values[i]);
   }
   printf("\n");
 

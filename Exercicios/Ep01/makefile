@@ -1,4 +1,4 @@
-flags_compilacao = -Wall -O3 -mavx -march=native
+flags_compilacao = -Wall -O3 -mavx -march=native -lm
 nomePrograma = exe1
 
 all: $(nomePrograma)
