@@ -81,11 +81,11 @@ int AlmostEqualUlps(Float_t A, Float_t B, int maxULPs)
 //Retorna o Erro Absoluto Real
 float erro_abs(float a, float b)
 {
-  return b - a;
+  return fabs(b - a);
 }
 
 //Retorna o Erro Relativo Real
 float erro_rel(float a, float b)
 {
-   return (b -a) / a;
+   return fabs((b -a) / a);
 }
