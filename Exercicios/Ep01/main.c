@@ -100,6 +100,7 @@ int calcula_ulps(float a , float b)
 
 void calcula_operacao_intervalar(float a, float b, char operador, float c, float d, float *resultado_m, float *resultado_M) {
   // Calcula cada operacao intervalar basica
+  // Função fesetroun() utilizada para forçar os limiares e evitar arredondamento que zere o cálculo
   switch (operador) {
       case '+':
           fesetround(FE_DOWNWARD);
@@ -152,8 +153,6 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
   float erro_absoluto = erro_abs(*resultado_m, *resultado_M);
   float erro_relativo = erro_rel(*resultado_m,*resultado_M);
-
-  // Calcula ULPs
   int ulps = calcula_ulps(*resultado_m,*resultado_M);
 
   // Imprime os resultados formatados
@@ -177,17 +176,21 @@ int main(int argc, char **argv)
   // Recebe uma entrada padrao X1 01 X2 02 X3 03 X4 04 X5 e insere valors nos vetores
   trata_entrada(operacoes, x, NUM_PARAMETROS);
 
+  #ifdef DEBUG
   // Imprime operadores para checagem
   printf("\nVetor Operacoes \n");
   for(int i = 0; i < NUM_OP;i++)
     printf("%c  ", operacoes[i]);
   printf("\n\n");
+  #endif
 
+  #ifdef DEBUG
   // Imprime numeros reais para checagem
   printf("Vetor de Valores de X\n");
   for(int i = 0; i < NUM_X;i++)
     printFloat_t(x[i]);
   printf("\n");
+  #endif
 
   // Arrays para armazenar m(x) e M(x)
   float mx_values[NUM_X];
@@ -198,12 +201,14 @@ int main(int argc, char **argv)
       calcula_intervalo(x[i], &mx_values[i], &Mx_values[i]);
   }
 
+  #ifdef DEBUG
   // Imprime os valores de m(x) e M(x) para cada valor de x
   printf("Valores de m(x) e M(x) para cada X\n");
   for (int i = 0; i < NUM_X; i++) {
       printf("x[%d] = %1.8e, m(x) = %1.8e, M(x) = %1.8e\n",i, x[i].f, mx_values[i], Mx_values[i]);
   }
   printf("\n");
+  #endif
 
   // Realiza as operações intervalares em ordem (((X1 O1 X2) O2 X3) O3 X4) O4 X5
   float resultado_m, resultado_M;
