@@ -1,4 +1,4 @@
-flags_compilacao = -Wall -O3 -mavx -march=native -lm
+flags_compilacao = -Wall -O3 -mavx -march=native -lm #-DDEBUG
 nomePrograma = exe1
 
 all: $(nomePrograma)
