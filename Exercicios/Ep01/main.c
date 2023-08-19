@@ -1,21 +1,21 @@
-/* Aluno: Eduardo Purkote GRR20182960 e Mariana  GRR*/
+// Aluno: Eduardo Purkote GRR20182960 e Mariana Moreira dos Santos  GRR20186554
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
+// Biblioteca personalizada
 #include "floatType.h"
 
+// Permite configurar alguns aspectos do ponto flutuante, incluindo a definicao de modos de arredondamento e o tratamento de excecoes
 #include <fenv.h>
-#include <math.h>
 
 #define NUM_PARAMETROS 9
 #define NUM_OP 4
 #define NUM_X 5
 
-/* Recebe uma entrada padrao X1 01 X2 02 X3 03 X4 04 X5 e insere valors nos vetores
-
-*/
-void trata_entrada(char *operacoes, Float_t *x, int n)
-{ 
+// Recebe uma entrada padrao X1 01 X2 02 X3 03 X4 04 X5 e insere valors nos vetores
+void trata_entrada(char *operacoes, Float_t *x, int n) { 
 
   // Para contrar o numero de operacoes e valores lidos
   int cont_op = 0, cont_val = 0;
@@ -59,40 +59,33 @@ void trata_entrada(char *operacoes, Float_t *x, int n)
 }
 
 /*  
+  Calcula a representacao intervalar de um determinado numero.
   Seja x um valor real qualquer. A representacao intervalar de e dada por X = [m(x), M(X)] onde
   m(x): maior numero de maquina menor ou igual a x
   M(x): menor número de máquina maior ou igual a x
 */
 void calcula_intervalo (Float_t x, float *m, float *M) {
-  // Retorna o próximo número de máquina na direção positiva a partir de x, o que corresponde a m(x).
-
-
   //Define o modo de arredondamento para baixo
   fesetround(FE_DOWNWARD);
 
-
+  // Calcula o maior numero de maquina menor ou igual a x (m(x))
   *m = nextafterf(x.f, 0);
 
-  
   // Restaura o modo de arredondamento padrão
   fesetround(FE_TONEAREST);
 
+  // Calcula o menor número de maquina maior ou igual a x (M(x))
   *M = nextafterf(x.f,INFINITY);
-  
-  
 }
 
 
-/* Calcula o número de valores representáveis entre dois números do tipo float
-
-*/
-int calcula_ulps(float a , float b)
-{
+// Calcula o numero de valores representaveis (ULPs) entre dois numeros do tipo float
+int calcula_ulps(float a , float b) {
   Float_t num1, num2;
   num1.f = a;
   num2.f = b;
 
-   int ulps = (int) fabs(num1.i - num2.i);
+  int ulps = (int) fabs(num1.i - num2.i);
 
   return ulps;
 
@@ -143,12 +136,10 @@ void calcula_operacao_intervalar(float a, float b, char operador, float c, float
           }
           break;
       default:
-          // Operador desconhecido, você pode tratar isso de acordo com sua necessidade
           *resultado_m = 0.0;
           *resultado_M = 0.0;
   }
   fesetround(FE_TONEAREST);
-
   
   // Aqui calculamos o erro absoluto, erro relativo e ULPs
   float erro_absoluto = erro_abs(*resultado_m, *resultado_M);
@@ -176,6 +167,7 @@ int main(int argc, char **argv)
   // Recebe uma entrada padrao X1 01 X2 02 X3 03 X4 04 X5 e insere valors nos vetores
   trata_entrada(operacoes, x, NUM_PARAMETROS);
 
+  // Flag utilizada apenas para quando desejamos testar e debugar o codigo
   #ifdef DEBUG
   // Imprime operadores para checagem
   printf("\nVetor Operacoes \n");
