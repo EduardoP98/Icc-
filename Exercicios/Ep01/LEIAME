@@ -1,1 +1,28 @@
+ALUNOS
+Eduardo Purkote (GRR20182960)
+Mariana Moreira dos Santos (GRR20186554)
+
+NOTAS
 O SHELL interpreta a operação de multiplicação (*) passada por parametro como expansor de arquivos do diretório. Por isso é necessário utilizar "expressão"
+
+LIMITAÇÕES
+1. PRECISÃO
+Como qualquer cálculo envolvendo números de ponto flutuante, este código está sujeito à precisão limitada desses números. 
+Isso significa que, para valores muito grandes ou muito pequenos ou para operações extremamente sensíveis à precisão, os resultados podem não ser completamente precisos.
+
+Exemplo.
+Operacoes com numeros muito grandes
+1.0e100 * 1.0e100 * 1.0e100 * 1.0e100 * 1.0e100
+
+Operacoes com numeros muito pequenos
+1.0e-100 + 0 + 0 + 0 / 1.0e100
+
+Um numero muito pequeno dividido por um numero muito grande
+1.0e-100 / 1.0e100 + 0 + 0 + 0
+O erro relativo resulta em inf porque acabamos dividindo por zero no calculo do erro
+
+2. ENTRADA
+Se voce nao adicionar exatamente os 5 numeros o programa irá esperar indefinidamente pela entrada. 
+
+Exemplo.
+1 + 1 + 1
