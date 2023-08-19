@@ -2,9 +2,6 @@ ALUNOS
 Eduardo Purkote (GRR20182960)
 Mariana Moreira dos Santos (GRR20186554)
 
-NOTAS
-O SHELL interpreta a operação de multiplicação (*) passada por parametro como expansor de arquivos do diretório. Por isso é necessário utilizar "expressão"
-
 LIMITAÇÕES
 1. PRECISÃO
 Como qualquer cálculo envolvendo números de ponto flutuante, este código está sujeito à precisão limitada desses números. 
