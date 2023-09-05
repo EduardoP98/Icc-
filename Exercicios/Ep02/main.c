@@ -9,30 +9,26 @@
 
 int main()
 {
+  int mat_ordem;
   SISTEMA_LINEAR_t *SL;
 
-  /* Aloca Memória */
-  SL = malloc(sizeof(SISTEMA_LINEAR_t));
-  scanf("%d",&SL->n);
-  SL->A = malloc (SL->n * sizeof (double*));
-  for (int i = 0; i < SL->n; i++)
-    SL->A[i] = malloc (SL->n * sizeof (double)) ;
+  scanf("%d",&mat_ordem);
+  /* Aloca Memória para um Sistema Linear */
+  SL = aloca_sistema_linear(mat_ordem);
+  
+    /* Trata Entrada */
+  le_sistema_linear(SL);
 
-  SL->b= malloc (SL->n * sizeof (double)) ;
-  SL->x= malloc (SL->n * sizeof (double)) ;
+  /*
+  - Passo 1 ElimGauss (Triangularizar Matriz)
+    -Implementar ElimGauss Com pivoteamento Parcial
+    -Implementar ElimGauss Com pivoteamento Total
 
-  /* Trata Entrada */
-  le_sistema_linear(SL->A,SL->b,SL->x,SL->n);
-  imprime_sistema_linear(SL->A,SL->b,SL->x,SL->n);
-
-
-  /* Libera Memória */
-  for (int i = 0; i < SL->n; i++)
-    free (SL->A[i]);
-  free (SL->A) ;
-  free(SL->b);
-  free(SL->x);
-  free(SL);
-
+  - Passo 2 Retrosubs
+  - Passo 3 Resíduo
+  
+  */
+  imprime_sistema_linear(SL);
+  libera_sistema_linear(SL);
   return 0;
 }

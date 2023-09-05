@@ -3,53 +3,55 @@
 #include <stdio.h>
 
 
-void le_sistema_linear(double **A, double *b , double *x, int n)
+void le_sistema_linear(SISTEMA_LINEAR_t *SL)
 {
   int cont = 0;
-  for(int i = 0; i < n; ++i)
+  for(int i = 0; i < SL->n; ++i)
   {
-    for(int j = 0; j < n; ++j)
+    for(int j = 0; j < SL->n; ++j)
     {
-      scanf("%lf",&A[i][j]);
+      scanf("%lf",&SL->A[i][j]);
       
     }
 
-    scanf("%lf",&b[cont]);
+    scanf("%lf",&SL->b[cont]);
     cont ++;
   }
   
     
 }
 
-void imprime_sistema_linear(double **A, double *b , double *x, int n)
+void imprime_sistema_linear(SISTEMA_LINEAR_t *SL)
 {
+
+    printf("ORDEM DO SISTEMA LINEAR: %d\n\n",SL->n);
     printf("****************************************\n");
     printf("**             Matriz A               **\n");
     printf("****************************************\n");
 
-    for(int i = 0; i < n; ++i)
+    for(int i = 0; i < SL->n; ++i)
     {
-      for(int j = 0; j < n; ++j)
-        printf("%f  ",A[i][j]);
-      printf("\n");
+      for(int j = 0; j < SL->n; ++j)
+        printf("%f  ",SL->A[i][j]);
+      printf("\n\n");
     }
 
     printf("****************************************\n");
     printf("**             Vetor b                **\n");
     printf("****************************************\n");
 
-    for(int i = 0; i < n; ++i)
-        printf("%f  ",b[i]);
-    printf("\n");
+    for(int i = 0; i < SL->n; ++i)
+        printf("%f  ",SL->b[i]);
+    printf("\n\n");
 
 
     printf("****************************************\n");
     printf("**             Vetor x                **\n");
     printf("****************************************\n");
 
-    for(int i = 0; i < n; ++i)
-        printf("%f  ",x[i]);
-    printf("\n");
+    for(int i = 0; i < SL->n; ++i)
+        printf("%f  ",SL->x[i]);
+    printf("\n\n");
 }
 
 
@@ -66,4 +68,58 @@ void retrosubs(double **A,double *b,double *x, int n)
 }
 
 
+void libera_sistema_linear(SISTEMA_LINEAR_t *SL)
+{
+   /* Libera Matriz de Coeficientes */
+  for (int i = 0; i < SL->n; i++)
+    free (SL->A[i]);
+  free (SL->A) ;
 
+  // Libera Vetores
+  free(SL->b);
+  free(SL->x);
+
+  // Libera SL
+  free(SL);
+}
+
+SISTEMA_LINEAR_t *aloca_sistema_linear(int n)
+{
+  SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
+
+    // if (!SL)
+    //     return NULL;
+
+    SL->n = n;
+
+    SL->A = malloc (SL->n * sizeof (double*));
+    for (int i = 0; i < SL->n; i++)
+      SL->A[i] = malloc (SL->n * sizeof (double));
+
+    // if (!SL->A)
+    // {
+    //     free(SL);
+    //     return NULL;
+    // }
+
+    SL->b= malloc (SL->n * sizeof (double));
+
+    // if (!SL->b)
+    // {
+    //     free(SL->A);
+    //     free(SL);
+    //     return NULL;
+    // }
+
+    SL->x= malloc (SL->n * sizeof (double));
+
+    // if (!SL->x)
+    // {
+    //     free(SL->A);
+    //     free(SL->b);
+    //     free(SL);
+    //     return NULL;
+    // }
+
+    return SL;
+}

@@ -15,6 +15,10 @@ typedef struct
 
 void retrosubs(double **A,double *b,double *x, int n);
 
-void imprime_sistema_linear(double **A, double *b , double *x, int n);
+void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
 
-void le_sistema_linear(double **A, double *b , double *x, int n);
+void le_sistema_linear(SISTEMA_LINEAR_t *SL);
+
+void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
+
+SISTEMA_LINEAR_t *aloca_sistema_linear(int n);
