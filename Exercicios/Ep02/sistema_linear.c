@@ -102,7 +102,7 @@ void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destin
 {
     destino->n = origem->n;
 
-    // Copia a matriz A
+    // Copie a matriz A
     for (int i = 0; i < destino->n; ++i)
     {
       for (int j = 0; j < destino->n; ++j)
@@ -111,11 +111,13 @@ void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destin
       }
     }
 
-    // Copia o vetor b
+    // Copie o vetor b
     for (int i = 0; i < destino->n; ++i)
     {
         destino->b[i] = origem->b[i];
     }
+
+    destino->residuo = origem->residuo;
 }
 
 /* Funções de Cálculo */
@@ -136,7 +138,7 @@ void retrosubs(double **A,double *b,double *x, int n)
 unsigned int encontraMax(double **A, int i, int n)
 {
   unsigned int maxIndex = i;
-  double maxValor = fabs(A[i][i]); // Assumindo que o valor na diagonal é o máximo inicial
+  double maxValor = fabs(A[i][i]);
   for (int k = i + 1; k < n; ++k)
   {
     double valorAtual = fabs(A[k][i]);
