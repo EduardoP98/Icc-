@@ -96,6 +96,28 @@ SISTEMA_LINEAR_t *aloca_sistema_linear(int n)
     return SL;
 }
 
+
+// Função para copiar uma variável do tipo SISTEMA_LINEAR_t para outra
+void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino)
+{
+    destino->n = origem->n;
+
+    // Copie a matriz A
+    for (int i = 0; i < destino->n; ++i)
+    {
+      for (int j = 0; j < destino->n; ++j)
+      {
+        destino->A[i][j] = origem->A[i][j];
+      }
+    }
+
+    // Copie o vetor b
+    for (int i = 0; i < destino->n; ++i)
+    {
+        destino->b[i] = origem->b[i];
+    }
+}
+
 /* Funções de Cálculo */
 
 //Função que resolve um Sistema triangular por retrosubs

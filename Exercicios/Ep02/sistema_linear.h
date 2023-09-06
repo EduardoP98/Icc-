@@ -36,3 +36,5 @@ void elimGauss_sem_multiplicadores(double **A, double *b, int n);
 void elimGauss_sem_pivoteamento(double **A, double *b, int n);
 
 double calculaResiduo(double **A, double *b, double *x, int n);
+
+void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino);
