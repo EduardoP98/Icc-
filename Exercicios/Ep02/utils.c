@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include "calc_time.h"
+#include "utils.h"
 
 
 //Retorna o tempo em milisegundos

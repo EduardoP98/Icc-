@@ -1,19 +1,25 @@
-flags_compilacao = -Wall -O3 -mavx -march=native -lm #-g
+flags_compilacao = -Wall -O3 -mavx -march=native -lm -DLIKWID_PERFMON -llikwid #-g
 nomePrograma = perfEG
 
 all: $(nomePrograma)
 
-$(nomePrograma): main.o sistema_linear.o calc_time.o
-	gcc -o $(nomePrograma) main.o sistema_linear.o calc_time.o $(flags_compilacao)
+$(nomePrograma): main.o sistema_linear.o utils.o
+	gcc -o $(nomePrograma) main.o sistema_linear.o utils.o $(flags_compilacao) -I/usr/include -L/usr/lib
 
 sistema_linear.o: sistema_linear.c 
-	gcc -c sistema_linear.c $(flags_compilacao)
+	gcc -c sistema_linear.c $(flags_compilacao) -I/usr/include -L/usr/lib
 
 main.o: main.c 
-	gcc -c main.c $(flags_compilacao)
+	gcc -c main.c $(flags_compilacao) -I/usr/include -L/usr/lib
 
-calc_time.o: calc_time.c 
-	gcc -c calc_time.c $(flags_compilacao)
+utils.o: utils.c 
+	gcc -c utils.c $(flags_compilacao) -I/usr/include -L/usr/lib
 
-purge:
-	rm -f *.o *.gch $(nomePrograma)
+clean:
+	@echo "Limpando sujeira ..."
+	@rm -f *~ *.bak
+
+purge:  clean
+		@rm -f *.o *.gch $(nomePrograma)
+		@echo "Limpando tudo ..."
+		
