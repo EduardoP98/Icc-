@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "sistema_linear.h"
+#include "calc_time.h"
 
 
 
@@ -28,7 +29,21 @@ int main()
   - Passo 3 Resíduo
   
   */
+  double time_i = timestamp();
+
+  elimGauss_parcial(SL->A,SL->b,SL->x,SL->n);
+
+  retrosubs(SL->A,SL->b,SL->x,SL->n);
+
+  SL->residuo = calculaResiduo(SL->A,SL->b,SL->x,SL->n);
+
   imprime_sistema_linear(SL);
+
   libera_sistema_linear(SL);
+
+  double time_f = timestamp();
+  
+  printf("Tempo Em MiliSegundos:%lf \n\n",time_f-time_i);
+
   return 0;
 }
