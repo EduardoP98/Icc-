@@ -1,0 +1,14 @@
+ALUNOS
+Eduardo Purkote (GRR20182960)
+Mariana Moreira dos Santos (GRR20186554)
+
+LIMITAÇÕES
+1. LIKWID 
+A biblioteca utilizada para medir métricas de desempenho foi a biblioteca de código aberto Likwid. Portanto, para a correta utilização do programa a biblioteca deve estar corretamente instalada no ambiente.
+
+2. MEMÓRIA
+Pode ocorrer um estouro de memória na alocação do sistemas lineares em forma matricial durante a leitura da entrada. Portanto, atente-se ao tamanho da matriz de entrada.
+
+3. PRECISÃO
+Como qualquer cálculo envolvendo números de ponto flutuante, este código está sujeito à precisão limitada desses números. 
+Isso significa que, para valores muito grandes ou muito pequenos ou para operações extremamente sensíveis à precisão, os resultados podem não ser completamente precisos.
