@@ -3,17 +3,13 @@
 #include "utils.h"
 #include "interpolacao_pol.h"
 
-
-
-int main(int argc, char **argv)
-{
-  if(argc != 2)
-  {
+int main (int argc, char **argv) {
+  if(argc != 2) {
     perror("Número de Parâmetros Inválido!\n");
     exit(1);
   }
 
-  //Trata Xe 
+  // Trata Xe 
   char *ptr;
   double xe = strtod(argv[1],&ptr);
   
@@ -21,11 +17,11 @@ int main(int argc, char **argv)
   double *values_x,*values_y;
   scanf("%d",&N);
   
-  //Aloca vetores
+  // Aloca vetores
   values_x = malloc(N * sizeof(double));
   values_y = malloc(N * sizeof(double));
 
-  //trata entrada
+  // Trata entrada
   le_tabela(values_x,values_y,N);
 
   #ifdef DEBUG
@@ -34,7 +30,7 @@ int main(int argc, char **argv)
   imprime_tabela(values_x,values_y,N);
   #endif
 
-  //Libera Memória Alocada
+  // Libera memoria alocada
   free(values_x);
   free(values_y);
   
