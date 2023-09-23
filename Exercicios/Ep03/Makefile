@@ -37,7 +37,7 @@ utils.o: utils.c
 
 clean:
 	@echo "Limpando sujeira ..."
-	@rm -f *~ *.bak
+	@rm -f *~ *.bak resultado.txt
 
 purge: clean
 	@echo "Limpando tudo ..."

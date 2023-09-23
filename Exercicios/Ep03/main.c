@@ -7,15 +7,14 @@
 #include <likwid.h>
 #else
 #define LIKWID_MARKER_INIT
-#define LIKWID_MARKER_THREADINIT
-#define LIKWID_MARKER_SWITCH
-#define LIKWID_MARKER_REGISTER(regionTag)
+// #define LIKWID_MARKER_THREADINIT
+// #define LIKWID_MARKER_SWITCH
+// #define LIKWID_MARKER_REGISTER(regionTag)
 #define LIKWID_MARKER_START(regionTag)
 #define LIKWID_MARKER_STOP(regionTag)
 #define LIKWID_MARKER_CLOSE
-#define LIKWID_MARKER_GET(regionTag, nevents, events, time, count)
+// #define LIKWID_MARKER_GET(regionTag, nevents, events, time, count)
 #endif
-
 int main (int argc, char **argv) {
 
   // Verificacao de argumentos de entrada
@@ -46,8 +45,18 @@ int main (int argc, char **argv) {
 
   // Verificando se xe pertence ao intervalo da tabela de pontos
   double x_min = x[0];
-  double x_max = x[N-1];   
-  if (! (xe >= x_min && xe <= x_max)) {
+  double x_max = x[0];
+
+  for (int i = 1; i < N; i++) {
+    if (x[i] < x_min) {
+      x_min = x[i];
+    }
+    if (x[i] > x_max) {
+      x_max = x[i];
+    }
+  }
+
+  if (!(xe >= x_min && xe <= x_max)) {
     fprintf(stderr, "Erro: xe = %.2lf está fora do intervalo da tabela.\n", xe);
     return 1;
   }
@@ -68,7 +77,7 @@ int main (int argc, char **argv) {
   interpolacao_lagrange(xe, x, y, N);
   double time_f = timestamp();
   LIKWID_MARKER_STOP("polinomio-lagrange");
-  printf("Tempo Em Milisegundos:%lf \n\n", time_f - time_i);
+  double time_lagrange = time_f - time_i;
 
 
   // Interpolacao de Newton
@@ -79,8 +88,13 @@ int main (int argc, char **argv) {
   interpolacao_newton(x, coeficientes, N, xe);
   time_f = timestamp();
   LIKWID_MARKER_STOP("polinomio-newton");
-  printf("Tempo Em Milisegundos:%lf \n\n", time_f - time_i);
   
+  printf("tLagrange: %lf \n", time_lagrange);
+  printf("tNewton: %lf \n\n", time_f - time_i);
+
+  // FInaliza o Likwid
+  LIKWID_MARKER_CLOSE;
+
   // Libera memoria alocada
   free(x);
   free(y);

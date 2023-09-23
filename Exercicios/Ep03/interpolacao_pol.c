@@ -51,7 +51,7 @@ void interpolacao_lagrange(double xe, double *x, double *y, int N) {
     resultado += y[k] * polinomio_lagrange(xe, x, k, N);
   }
 
-  printf("f(%.2lf) = %.6lf\n", xe, resultado);
+  printf("\nfL(%.2lf) = %.6lf\n", xe, resultado);
 }
 
 // Função para calcular os coeficientes do polinomio de Newton
@@ -61,18 +61,6 @@ void polinomio_newton (double *x, double *y, double *coeficientes, int N) {
   for (int i = 0; i < N; i++) {
       matrizDiferencas[i][0] = y[i];
   }
-
-
-  #ifdef DEBUG
-  // Imprimir a matriz de diferenças divididas
-  printf("\nMatriz de Diferenças Divididas:\n");
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j <= i; j++) {
-      printf("%.6lf\t", matrizDiferencas[i][j]);
-    }
-    printf("\n");
-  }
-  #endif
 
   // Calcula as diferenças divididas
   for (int j = 1; j < N; j++) {
@@ -85,15 +73,6 @@ void polinomio_newton (double *x, double *y, double *coeficientes, int N) {
   for (int i = 0; i < N; i++) {
       coeficientes[i] = matrizDiferencas[0][i];
   }
-
-  #ifdef DEBUG
-  // Imprimi os coeficientes
-  printf("\nCoeficientes do Polinômio de Newton:\n");
-  for (int i = 0; i < N; i++) {
-      printf("%.6lf\t", coeficientes[i]);
-    printf("\n");
-  }
-  #endif
 }
 
 // Função para interpolar por Newton
@@ -106,5 +85,5 @@ void interpolacao_newton(double *x, double *coeficientes, int N, double xe) {
     resultado += coeficientes[i] * termo;
   }
 
-  printf("f(%.2lf) = %.6lf\n", xe, resultado);
+  printf("fN(%.2lf) = %.6lf\n", xe, resultado);
 }

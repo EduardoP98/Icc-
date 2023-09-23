@@ -1,0 +1,29 @@
+ALUNOS
+Eduardo Purkote (GRR20182960)
+Mariana Moreira dos Santos (GRR20186554)
+
+OBSEVAÇÕES
+1. SCRIPT
+O script bash que criamos executa duas tarefas:
+a) Compila o programa com o "make" caso ele ainda não tenha sido compilado
+
+b) Executa o LIKWID para medir os MFLOPs utilizando a CPU número 01, o valor de xe = 3 e o teste 1:
+likwid-perfctra -C 1 -g FLOPS_DP -m ./interpola 3 < teste1 > resultado.txt
+
+Se você desejar rodar outros testes, altere esses valores no arquivo bash.sh e rode novamente o script.
+
+2) SAÍDA
+O arquivo resultado.txt é um arquivo criado com o resultado da execução do programa.
+
+Ao rodar um "make purge" ele será excluído. 
+
+LIMITAÇÕES
+1. LIKWID 
+A biblioteca utilizada para medir métricas de desempenho foi a biblioteca de código aberto Likwid. Portanto, para a correta utilização do programa a biblioteca deve estar corretamente instalada no ambiente.
+
+2. MEMÓRIA
+Pode ocorrer um estouro de memória na alocação da tabela de pontos durante a leitura da entrada. Portanto, atente-se ao tamanho dos valores de entrada.
+
+3. PRECISÃO
+Como qualquer cálculo envolvendo números de ponto flutuante, este código está sujeito à precisão limitada desses números. 
+Isso significa que, para valores muito grandes ou muito pequenos ou para operações extremamente sensíveis à precisão, os resultados podem não ser completamente precisos.
