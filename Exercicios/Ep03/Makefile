@@ -1,37 +1,45 @@
 # PROGRAMA
-    PROG = interpola
+PROG = interpola
 
-# # Compilador
-#     CC     = gcc
-#     CFLAGS = 
-#     LFLAGS = -lm
-flags_compilacao = -Wall -O3 -mavx -march=native -lm -DLIKWID_PERFMON -llikwid #-DDEBUG
+# Compilador
+CC = gcc
 
 # Lista de arquivos para distribuição
 DISTFILES = *.c *.h LEIAME* Makefile
 DISTDIR = `basename ${PWD}`
 
+# Opção de depuração (pode ser definida externamente ou deixada em branco para desativar)
+DEBUG ?=
+
+ifeq ($(DEBUG),yes)
+    debug_flags = -g -DDEBUG
+else
+    debug_flags =
+endif
+
+flags_compilacao = -Wall -O3 -mavx -march=native -lm -DLIKWID_PERFMON -llikwid $(debug_flags)
+
 all: $(PROG)
 
 $(PROG): main.o interpolacao_pol.o utils.o
-	gcc -o $(PROG) main.o interpolacao_pol.o utils.o $(flags_compilacao) -I/usr/include -L/usr/lib
+	$(CC) -o $(PROG) main.o interpolacao_pol.o utils.o $(flags_compilacao) -I/usr/include -L/usr/lib
 
 main.o: main.c
-	gcc -c main.c $(flags_compilacao)
+	$(CC) -c main.c $(flags_compilacao)
 
 interpolacao_pol.o: interpolacao_pol.c
-	gcc -c interpolacao_pol.c $(flags_compilacao) -I/usr/include -L/usr/lib
+	$(CC) -c interpolacao_pol.c $(flags_compilacao) -I/usr/include -L/usr/lib
 
 utils.o: utils.c
-	gcc -c utils.c $(flags_compilacao) -I/usr/include -L/usr/lib
+	$(CC) -c utils.c $(flags_compilacao) -I/usr/include -L/usr/lib
 
 .PHONY: all clean purge dist
 
 clean:
 	@echo "Limpando sujeira ..."
-	@rm -f *~ *.bak
+	@rm -f *~ *.bak resultado.txt
 
-purge:  clean
+purge: clean
 	@echo "Limpando tudo ..."
 	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
 

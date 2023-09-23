@@ -1,13 +1,13 @@
 #include <stdio.h>
 
+void le_tabela (double *values_x, double *values_y, int n);
 
+void imprime_tabela(double *values_x, double *values_y, int n);
 
-void le_tabela (double *values_x,double *values_y, int n);
+double polinomio_lagrange(double xe, double *x, int k, int N);
 
-void imprime_tabela(double *values_x,double *values_y, int n);
+void interpolacao_lagrange(double xe, double *x, double *y, int N);
 
-//Função para calcular o Polinômio interpolador de Lagrange
-double inter_lagrange(double xe, double *values_x,double *values_y, int n );
+void polinomio_newton (double *x, double *y, double *coeficientes, int N);
 
-// Função para calcular a interpolação de Newton
-double inter_newton(double xe, double *values_x,double *values_y, int n );
+void interpolacao_newton(double *x, double *y, int N, double xe);
