@@ -34,7 +34,7 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
 
     for(int i = 0; i < SL->n; ++i) {
       for(int j = 0; j < SL->n; ++j)
-        printf("[%.17e, %.17e]   ", SL->A[i][j].m.f, SL->A[i][j].M.f);
+        printf("[%.8e, %.8e]   ", SL->A[i][j].m.f, SL->A[i][j].M.f);
       printf("\n\n");
     }
 
@@ -43,7 +43,7 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
     printf("****************************************\n");
 
     for(int i = 0; i < SL->n; ++i)
-      printf("[%.17e, %.17e]   ", SL->b[i].m.f, SL->b[i].M.f);
+      printf("[%.8e, %.8e]   ", SL->b[i].m.f, SL->b[i].M.f);
     printf("\n\n");
 
 
@@ -52,7 +52,7 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
     printf("****************************************\n");
 
     for(int i = 0; i < SL->n; ++i) {
-      printf("x[%d]: [%.17e, %.17e]  ", i, SL->x[i].m.f, SL->x[i].M.f);
+      printf("x[%d]: [%.8e, %.8e]  ", i, SL->x[i].m.f, SL->x[i].M.f);
       printf("\n");
     }
     
@@ -60,7 +60,7 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
     printf("\n\n****************************************\n");
     printf("**             Resíduo                **\n");
     printf("****************************************\n");
-    printf("Residuo: [%.17e, %.17e] \n", SL->residuo.m.f, SL->residuo.M.f);
+    printf("Residuo: [%.8e, %.8e] \n", SL->residuo.m.f, SL->residuo.M.f);
         
 }
 
