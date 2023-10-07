@@ -6,6 +6,8 @@
 #include "tabela.h"
 #include "doubleType.h"
 #include "interval.h"
+#include "min_quadrados.h"
+
 // #include "likwid.h"
 
 // #ifdef LIKWID_PERFMON
@@ -20,58 +22,77 @@
 // #define LIKWID_MARKER_GET(regionTag, nevents, events, time, count)
 // #endif
 
+int main() {
+  // N = grau do polinomio de ajuste (1ª linha)
+  int N;
+  
+  // K = quantidade de pontos da tabela (2ª linha)
+  int K; 
 
-
-int main()
-{
-  int N,K;
-  double tgeraSL,tsolSL, t_inicio = 0.0, t_final = 0.0;
+  // Variaveis para calculo do tempo gasto
+  // double tgeraSL, tsolSL, t_inicio = 0.0, t_final = 0.0;
 
   TABELA_t *Tabela;
   SISTEMA_LINEAR_t *SL;
   
   // Lê parâmetros de entrada
-  scanf("%d",&N);
-  scanf("%d",&K);
+  int entrada = scanf("%d", &N);
+  if (entrada != 1) {
+    perror("Erro ao ler o valor de N");
+    exit(1);
+  }
 
-  Tabela = aloca_tabela(K);
-  SL = aloca_sistema_linear(N+1);
+  entrada = scanf("%d", &K);
+  if (entrada != 1) {
+    perror("Erro ao ler o valor de K");
+    exit(1);
+  }
+
+  Tabela = aloca_tabela (K);
+  SL = aloca_sistema_linear (N+1);
   
-  // Lê tabela de pontos
+  // Lê tabela de pontos e calcula intervalo para cada valor
   le_tabela(Tabela);
-  t_inicio = timestamp();
-  // Gera SL a partir da Tabela de pontos
-  minQuadrados(Tabela,N,SL);
-  t_final = timestamp();
-  tgeraSL = t_final - t_inicio;
-
-  imprime_sistema_linear(SL);
-  
-  // Resolve SL
-  t_inicio = timestamp();
-  elimGauss_parcial(SL->A,SL->b,SL->x, N+1);
-  retrosubs(SL->A,SL->b,SL->x,N+1);
-  t_final = timestamp();
-  tsolSL = t_final - t_inicio;
-  
-  // Calcula Rseíduo
-  // calculaResiduo(SL->A,SL->b,SL->x,N+1);
 
   #ifdef DEBUG
-  printf("Grau do Polinômio: %d \n", N);
+  printf("****************************************\n");
+  printf("**          CÁLCULO INTERVALAR        **\n");
+  printf("****************************************\n");
+  printf("Grau do Polinômio (N): %d \n", N);
   imprime_tabela(Tabela);
   #endif
 
+  // // Gera SL a partir da tabela de pontos
+  // t_inicio = timestamp();
+  minQuadrados (Tabela, N, SL);
+  // t_final = timestamp();
+  // tgeraSL = t_final - t_inicio;
 
-  // Imprime Resultados
-  printf("tgeraSL: %lf\n",tgeraSL);
-  printf("tsolSL: %lf\n",tsolSL);
-
+  #ifdef DEBUG
   imprime_sistema_linear(SL);
+  #endif
 
-  // Libera memoria alocada
-  libera_tabela(Tabela);
-  // libera_sistema_linear(SL);
+  // // Resolve SL
+  // t_inicio = timestamp();
+  elimGauss_parcial(SL->A, SL->b, SL->x, N+1);
+  retrosubs(SL->A, SL->b, SL->x, N+1);
+  // t_final = timestamp();
+  // tsolSL = t_final - t_inicio;
+  
+  // // Calcula Rseíduo
+  // // calculaResiduo(SL->A,SL->b,SL->x,N+1);
+
+  // // Imprime Resultados
+  // printf("tgeraSL: %lf\n",tgeraSL);
+  // printf("tsolSL: %lf\n",tsolSL);
+
+  #ifdef DEBUG
+  imprime_sistema_linear(SL);
+  #endif
+
+  // // Libera memoria alocada
+  // libera_tabela(Tabela);
+  // // libera_sistema_linear(SL);
 
   return 0;
 }

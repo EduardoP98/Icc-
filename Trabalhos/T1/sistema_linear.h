@@ -11,7 +11,7 @@ typedef struct
   INTERVAL_t *x;
   INTERVAL_t residuo;
 
-}SISTEMA_LINEAR_t;
+} SISTEMA_LINEAR_t;
 
 
 
@@ -24,7 +24,6 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
 
 SISTEMA_LINEAR_t *aloca_sistema_linear(int n);
-
 
 unsigned int encontraMax(INTERVAL_t **A, int i, int n);
 

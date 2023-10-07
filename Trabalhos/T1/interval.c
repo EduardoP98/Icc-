@@ -18,14 +18,12 @@ INTERVAL_t calcula_intervalo (Double_t x)
   //Define o modo de arredondamento para baixo
   fesetround(FE_DOWNWARD);
 
-
   intervalo.m.f = nextafter(x.f,-INFINITY);
 
-  
   // Restaura o modo de arredondamento padrão
   fesetround(FE_UPWARD);
  
-  intervalo.M.f = nextafter(x.f,INFINITY);
+  intervalo.M.f = nextafter(x.f, INFINITY);
   
   fesetround(FE_TONEAREST);
 
@@ -33,10 +31,8 @@ INTERVAL_t calcula_intervalo (Double_t x)
   
 }
 
-// Cálculo das operações intervalares
 
-
-// Calcula Soma entre dois intervalos
+// Calcula soma entre dois intervalos
 INTERVAL_t calcula_soma(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
@@ -51,7 +47,7 @@ INTERVAL_t calcula_soma(INTERVAL_t x, INTERVAL_t y)
 
 }
 
-// Calcula subtração entre dois intervalos
+// Calcula a subtração entre dois intervalos
 INTERVAL_t calcula_subtracao(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
@@ -65,7 +61,7 @@ INTERVAL_t calcula_subtracao(INTERVAL_t x, INTERVAL_t y)
   return resultado;
 }
 
-// Calcula Divisão entre dois intervalos
+// Calcula a divisão entre dois intervalos
 INTERVAL_t calcula_div(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado; 
@@ -89,7 +85,7 @@ INTERVAL_t calcula_div(INTERVAL_t x, INTERVAL_t y)
   return resultado;
 }
 
-// Calcula Multiplicação entre dois intervalos
+// Calcula a multiplicação entre dois intervalos
 INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
@@ -108,7 +104,7 @@ INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y)
 }
 
 
-// Calcula a Potência de um intervalo
+// Calcula a potência de um intervalo
 INTERVAL_t calcula_pot(INTERVAL_t x, int p)
 {
   INTERVAL_t resultado;
