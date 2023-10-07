@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "doubletype.h": "c"
+        "doubletype.h": "c",
+        "random": "c"
     }
 }

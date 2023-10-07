@@ -188,8 +188,7 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n) {
       // Define o elemento como [0,0]
       A[k][i].m.f = 0.0; 
       A[k][i].M.f = 0.0; 
-      for (int j = i + 1; j < n; ++j)
-      {
+      for (int j = i + 1; j < n; ++j) {
         INTERVAL_t produto = calcula_mult(A[i][j], m);
         A[k][j] = calcula_subtracao(A[k][j], produto);
       }
