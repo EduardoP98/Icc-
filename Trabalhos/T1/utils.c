@@ -3,7 +3,6 @@
 #include <sys/time.h>
 #include "utils.h"
 
-
 //Retorna o tempo em milisegundos
 double timestamp(void)
 {

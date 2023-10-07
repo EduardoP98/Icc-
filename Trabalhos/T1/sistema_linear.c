@@ -21,18 +21,20 @@
     
 // }
 
-void imprime_sistema_linear(SISTEMA_LINEAR_t *SL)
-{
-    #ifdef DEBUG
-    printf("ORDEM DO SISTEMA LINEAR: %d\n\n",SL->n);
+void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
+    printf("\n****************************************\n");
+    printf("**           SISTEMA LINEAR           **\n");
+    printf("****************************************\n");
+
+    printf("\nOrdem do SL: %d\n\n", SL->n);
+
     printf("****************************************\n");
     printf("**             Matriz A               **\n");
     printf("****************************************\n");
 
-    for(int i = 0; i < SL->n; ++i)
-    {
+    for(int i = 0; i < SL->n; ++i) {
       for(int j = 0; j < SL->n; ++j)
-        printf("%f  ",SL->A[i][j].m.f);
+        printf("[%.8e, %.8e]   ", SL->A[i][j].m.f, SL->A[i][j].M.f);
       printf("\n\n");
     }
 
@@ -41,30 +43,31 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL)
     printf("****************************************\n");
 
     for(int i = 0; i < SL->n; ++i)
-        printf("%f  ",SL->b[i].m.f);
+      printf("[%.8e, %.8e]   ", SL->b[i].m.f, SL->b[i].M.f);
     printf("\n\n");
 
 
     printf("****************************************\n");
     printf("**             Vetor x                **\n");
     printf("****************************************\n");
-    #endif
 
-    for(int i = 0; i < SL->n; ++i)
-    {
-      printf("x[%d]: %f  ",i,SL->x[i].m.f);
+    for(int i = 0; i < SL->n; ++i) {
+      printf("x[%d]: [%.8e, %.8e]  ", i, SL->x[i].m.f, SL->x[i].M.f);
+      printf("\n");
     }
-    printf("\n");
-
-    printf("Residuo: %.10e\n",SL->residuo.m.f);
-        
     
+
+    printf("\n\n****************************************\n");
+    printf("**             Resíduo                **\n");
+    printf("****************************************\n");
+    printf("Residuo: [%.8e, %.8e] \n", SL->residuo.m.f, SL->residuo.M.f);
+        
 }
 
 
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL)
 {
-   /* Libera Matriz de Coeficientes */
+  //Libera Matriz de Coeficientes
   for (int i = 0; i < SL->n; i++)
     free (SL->A[i]);
   free (SL->A) ;
@@ -119,8 +122,6 @@ void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destin
     destino->residuo = origem->residuo;
 }
 
-/* Funções de Cálculo */
-
 //Função que resolve um Sistema triangular por retrosubs
 void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n)
 {
@@ -136,8 +137,6 @@ void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n)
     x[i] = div_result;
   }
 }
-
-
 
 
 // Função auxiliar para encontrar a linha com o maior valor absoluto na coluna i
@@ -178,22 +177,18 @@ void trocaLinha(INTERVAL_t **A, INTERVAL_t *b, int i, int iPivo, int n)
 
 
 // Eliminação de Gauss com Pivoteamento Parcial
-void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n)
-{
-  for (int i = 0; i < n; ++i)
-  {
+void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n) {
+  for (int i = 0; i < n; ++i) {
     unsigned int iPivo = encontraMax(A, i, n);
     if (i != iPivo)
       trocaLinha(A, b, i, iPivo, n);
 
-    for (int k = i + 1; k < n; ++k)
-    {
+    for (int k = i + 1; k < n; ++k) {
       INTERVAL_t m = calcula_div(A[k][i], A[i][i]);
       // Define o elemento como [0,0]
       A[k][i].m.f = 0.0; 
       A[k][i].M.f = 0.0; 
-      for (int j = i + 1; j < n; ++j)
-      {
+      for (int j = i + 1; j < n; ++j) {
         INTERVAL_t produto = calcula_mult(A[i][j], m);
         A[k][j] = calcula_subtracao(A[k][j], produto);
       }
@@ -202,8 +197,6 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n)
     }
   }
 }
-
-
 
 
 double calculaResiduo(double **A, double *b, double *x, int n)

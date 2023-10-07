@@ -18,14 +18,12 @@ INTERVAL_t calcula_intervalo (Double_t x)
   //Define o modo de arredondamento para baixo
   fesetround(FE_DOWNWARD);
 
-
   intervalo.m.f = nextafter(x.f,-INFINITY);
 
-  
   // Restaura o modo de arredondamento padrão
   fesetround(FE_UPWARD);
  
-  intervalo.M.f = nextafter(x.f,INFINITY);
+  intervalo.M.f = nextafter(x.f, INFINITY);
   
   fesetround(FE_TONEAREST);
 
@@ -33,14 +31,13 @@ INTERVAL_t calcula_intervalo (Double_t x)
   
 }
 
-// Cálculo das operações intervalares
 
-
-// Calcula Soma entre dois intervalos
+// Calcula soma entre dois intervalos
 INTERVAL_t calcula_soma(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
 
+  // Seja X = [a,b] e Y = [c,d], entao X + Y = [a+c, b+d]
   fesetround(FE_DOWNWARD);
   resultado.m.f  = x.m.f + y.m.f;
 
@@ -51,48 +48,52 @@ INTERVAL_t calcula_soma(INTERVAL_t x, INTERVAL_t y)
 
 }
 
-// Calcula subtração entre dois intervalos
+// Calcula a subtração entre dois intervalos
 INTERVAL_t calcula_subtracao(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
 
+  // Seja X = [a,b] e Y = [c,d], entao X - Y = [a-d, b-c]
   fesetround(FE_DOWNWARD);
-  resultado.m.f= x.m.f - y.m.f;
+  resultado.m.f= x.m.f - y.M.f;
 
   fesetround(FE_UPWARD);
-  resultado.M.f = x.M.f - y.M.f;
+  resultado.M.f = x.M.f - y.m.f;
 
   return resultado;
 }
 
-// Calcula Divisão entre dois intervalos
+// Calcula a divisão entre dois intervalos
 INTERVAL_t calcula_div(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado; 
-  if (y.m.f <= 0 && y.M.f >= 0)
-  {
+
+  // Seja X = [a,b] e Y = [c,d], entao X / Y = [a,b] * [1/d,1/c], se 0 não pertence ao intervalo Y
+  // Para simplificar, considere que se 0 (zero)  pertence a Y, então X / Y =[-inf,+inf], para qualquer intervalo X.
+
+  // Verifica se 0 pertence ao intervalo Y
+  if (y.m.f <= 0 && y.M.f >= 0) {
     resultado.m.f = -INFINITY;
     resultado.M.f = INFINITY;
   }
-  else if (y.m.f == 0)
-  {
+  else if (y.m.f == 0) {
     resultado.m.f = -INFINITY;
     resultado.M.f = INFINITY;
   }
-  else
-  {
+  else {
     fesetround(FE_DOWNWARD);
-    resultado.m.f = fminf(fminf(x.m.f / y.m.f, x.m.f / y.M.f), fminf(x.M.f / y.m.f, x.M.f / y.M.f));
+    resultado.m.f = fmin(x.m.f / y.M.f, fmin(x.M.f / y.M.f, fmin(x.m.f / y.m.f, x.M.f / y.m.f)));
     fesetround(FE_UPWARD);
-    resultado.M.f = fmaxf(fmaxf(x.m.f / y.m.f, x.m.f / y.M.f), fmaxf(x.M.f / y.m.f, x.M.f / y.M.f));
+    resultado.M.f = fmax(x.m.f / y.M.f, fmax(x.M.f / y.M.f, fmax(x.m.f / y.m.f, x.M.f / y.m.f)));
   }
   return resultado;
 }
 
-// Calcula Multiplicação entre dois intervalos
+// Calcula a multiplicação entre dois intervalos
 INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y)
 {
   INTERVAL_t resultado;
+
   fesetround(FE_DOWNWARD);
   double result1 = x.m.f * y.m.f;
   double result2 = x.m.f * y.M.f;
@@ -108,7 +109,7 @@ INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y)
 }
 
 
-// Calcula a Potência de um intervalo
+// Calcula a potência de um intervalo
 INTERVAL_t calcula_pot(INTERVAL_t x, int p)
 {
   INTERVAL_t resultado;

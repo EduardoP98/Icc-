@@ -17,7 +17,7 @@ typedef union
         uint64_t sign : 1;      // próximo bit (ou seja, o bit mais à esquerda)
     } parts;
 
-}Double_t;
+} Double_t;
 
 
 void printDouble_t( Double_t num );
