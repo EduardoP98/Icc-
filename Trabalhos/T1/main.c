@@ -30,7 +30,7 @@ int main() {
   int K; 
 
   // Variaveis para calculo do tempo gasto
-  // double tgeraSL, tsolSL, t_inicio = 0.0, t_final = 0.0;
+  double tgeraSL, tsolSL, t_inicio = 0.0, t_final = 0.0;
 
   TABELA_t *Tabela;
   SISTEMA_LINEAR_t *SL;
@@ -63,28 +63,31 @@ int main() {
   #endif
 
   // // Gera SL a partir da tabela de pontos
-  // t_inicio = timestamp();
+  t_inicio = timestamp();
   minQuadrados (Tabela, N, SL);
-  // t_final = timestamp();
-  // tgeraSL = t_final - t_inicio;
+  t_final = timestamp();
+  tgeraSL = t_final - t_inicio;
+  
+  //Imprime o Resultado na formatação de entrega
+  imprime_sl_min(SL);
 
   #ifdef DEBUG
   imprime_sistema_linear(SL);
   #endif
 
   // // Resolve SL
-  // t_inicio = timestamp();
+  t_inicio = timestamp();
   elimGauss_parcial(SL->A, SL->b, SL->x, N+1);
   retrosubs(SL->A, SL->b, SL->x, N+1);
-  // t_final = timestamp();
-  // tsolSL = t_final - t_inicio;
+  t_final = timestamp();
+  tsolSL = t_final - t_inicio;
   
   // // Calcula Rseíduo
   // // calculaResiduo(SL->A,SL->b,SL->x,N+1);
 
   // // Imprime Resultados
-  // printf("tgeraSL: %lf\n",tgeraSL);
-  // printf("tsolSL: %lf\n",tsolSL);
+  printf("tgeraSL: %lf\n",tgeraSL);
+  printf("tsolSL: %lf\n",tsolSL);
 
   #ifdef DEBUG
   imprime_sistema_linear(SL);

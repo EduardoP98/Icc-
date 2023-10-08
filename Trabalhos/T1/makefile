@@ -1,4 +1,4 @@
-flags_compilacao = -Wall -O3 -mavx -march=native -lm -DDEBUG  #-g#-DLIKWID_PERFMON -llikwid #-g
+flags_compilacao = -Wall -O3 -mavx -march=native -lm #-DDEBUG  #-g#-DLIKWID_PERFMON -llikwid #-g
 nomePrograma = ajustePol
 
 all: $(nomePrograma)
