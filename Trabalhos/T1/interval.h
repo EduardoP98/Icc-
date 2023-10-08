@@ -1,5 +1,11 @@
-#include "doubleType.h"
+/*
+  Aunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+  
+*/
 
+#include "doubleType.h"
 #ifndef INTERVAL_H_
 #define INTERVAL_H_
 

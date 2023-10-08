@@ -1,26 +1,15 @@
+/*
+  Aunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+  
+*/
 #include "sistema_linear.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
 /* Funções Auxiliares */
-// void le_sistema_linear(SISTEMA_LINEAR_t *SL)
-// {
-//   int cont = 0;
-//   for(int i = 0; i < SL->n; ++i)
-//   {
-//     for(int j = 0; j < SL->n; ++j)
-//     {
-//       scanf("%lf",&SL->A[i][j]);
-      
-//     }
-
-//     scanf("%lf",&SL->b[cont]);
-//     cont ++;
-//   }
-    
-// }
-
 void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
     printf("\n****************************************\n");
     printf("**           SISTEMA LINEAR           **\n");

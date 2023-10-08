@@ -1,3 +1,10 @@
+/*
+  Aunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+  
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fenv.h>
