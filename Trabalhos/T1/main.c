@@ -15,7 +15,7 @@
 #include "interval.h"
 #include "min_quadrados.h"
 
-// #include "likwid.h"
+#include "likwid.h"
 
 // #ifdef LIKWID_PERFMON
 // #else
@@ -41,6 +41,7 @@ int main() {
 
   TABELA_t *Tabela;
   SISTEMA_LINEAR_t *SL;
+  INTERVAL_t *residuo;
   
   // Lê parâmetros de entrada
   int entrada = scanf("%d", &N);
@@ -57,6 +58,7 @@ int main() {
 
   Tabela = aloca_tabela (K);
   SL = aloca_sistema_linear (N+1);
+  residuo = malloc (K * sizeof (INTERVAL_t));
   
   // Lê tabela de pontos e calcula intervalo para cada valor
   le_tabela(Tabela);
@@ -86,16 +88,12 @@ int main() {
   t_final = timestamp();
   tsolSL = t_final - t_inicio;
 
+   // // Calcula Resíduo
+  calcula_residuo(Tabela,SL->x,residuo,N);
 
-  //Imprime o Resultado na formatação de entrega
+  // Imprime Resultados
   imprime_coef(SL);
-  
-  // // Calcula Rseíduo
-  // // calculaResiduo(SL->A,SL->b,SL->x,N+1);
-
-
-  
-  // // Imprime Resultados
+  imprime_residuo(residuo,K);
   printf("tgeraSL: %lf\n",tgeraSL);
   printf("tsolSL: %lf\n",tsolSL);
 
@@ -104,8 +102,9 @@ int main() {
   #endif
 
   // // Libera memoria alocada
-  // libera_tabela(Tabela);
-  // // libera_sistema_linear(SL);
+  libera_tabela(Tabela);
+  libera_sistema_linear(SL);
+  free(residuo);
 
   return 0;
 }
