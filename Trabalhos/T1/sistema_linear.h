@@ -1,3 +1,9 @@
+/*
+  Aunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+  
+*/
 #include "interval.h"
 #ifndef  SISTEMA_LINEAR_H
 #define  SISTEMA_LINEAR_H
@@ -18,8 +24,6 @@ typedef struct
 void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n);
 
 void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
-
-// void le_sistema_linear(SISTEMA_LINEAR_t *SL);
 
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
 
