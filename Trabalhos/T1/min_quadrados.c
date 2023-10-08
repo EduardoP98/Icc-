@@ -41,16 +41,3 @@ void minQuadrados(TABELA_t *tabela, int n, SISTEMA_LINEAR_t *SL) {
     SL->b[i] = soma_b;
   }
 }
-
-//Imprime o Resultado na formatação de entrega
-void imprime_sl_min(SISTEMA_LINEAR_t *SL)
-{
-  for(int i = 0; i < SL->n; i++)
-  {
-    for(int j = 0; j < SL->n; j++)
-    {
-      printf("(a[%d][%d])[%.8e, %.8e]  ",i,j,SL->A[i][j].m.f,SL->A[i][j].M.f);
-    }
-    printf("\n");
-  }
-}

@@ -74,9 +74,6 @@ int main() {
   minQuadrados (Tabela, N, SL);
   t_final = timestamp();
   tgeraSL = t_final - t_inicio;
-  
-  //Imprime o Resultado na formatação de entrega
-  imprime_sl_min(SL);
 
   #ifdef DEBUG
   imprime_sistema_linear(SL);
@@ -88,10 +85,16 @@ int main() {
   retrosubs(SL->A, SL->b, SL->x, N+1);
   t_final = timestamp();
   tsolSL = t_final - t_inicio;
+
+
+  //Imprime o Resultado na formatação de entrega
+  imprime_coef(SL);
   
   // // Calcula Rseíduo
   // // calculaResiduo(SL->A,SL->b,SL->x,N+1);
 
+
+  
   // // Imprime Resultados
   printf("tgeraSL: %lf\n",tgeraSL);
   printf("tsolSL: %lf\n",tsolSL);

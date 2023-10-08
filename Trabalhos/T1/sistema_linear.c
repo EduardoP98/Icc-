@@ -223,3 +223,12 @@ double calculaResiduo(double **A, double *b, double *x, int n)
 
   return normaResiduo;
 }
+
+//Imprime o Resultado na formatação de entrega
+void imprime_coef(SISTEMA_LINEAR_t *SL)
+{
+    for(int j = 0; j < SL->n; j++)
+      printf("(a[%d])=[%.17e, %.17e]  ",j,SL->x[j].m.f,SL->x[j].M.f);
+
+    printf("\n");
+}
