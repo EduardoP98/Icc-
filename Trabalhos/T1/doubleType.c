@@ -3,8 +3,9 @@
  */
 
  /*
-  Estrutura de modificada pelos alunos.
-  Aunos: 
+ 
+  Estrutura modificada pelos alunos.
+  Alunos: 
   Eduardo Purkote (GRR20182960)
   Mariana Moreira dos Santos (GRR20186554)
   

@@ -17,7 +17,7 @@ else
     debug_flags =
 endif
 
-flags_compilacao = -Wall -O3 -mavx -march=native -lm -DLIKWID_PERFMON -llikwid $(debug_flags)
+flags_compilacao = -Wall -O3 -mavx -march=native -lm -DLIKWID_PERFMON -llikwid -g ENERGY $(debug_flags)
 
 all: $(PROG)
 

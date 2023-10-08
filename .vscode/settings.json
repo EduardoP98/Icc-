@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "doubletype.h": "c",
-        "random": "c"
+        "random": "c",
+        "interval.h": "c",
+        "math.h": "c",
+        "sistema_linear.h": "c"
     }
 }

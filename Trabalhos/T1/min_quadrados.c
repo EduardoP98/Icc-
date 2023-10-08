@@ -1,22 +1,31 @@
 /*
-  Aunos: 
+  Alunos: 
   Eduardo Purkote (GRR20182960)
   Mariana Moreira dos Santos (GRR20186554)
-  
 */
 
 #include <stdio.h>
 #include <math.h>
 #include "min_quadrados.h"
 
-void minQuadrados(TABELA_t *tabela, int n, SISTEMA_LINEAR_t *SL) {
+/*  
+  Implementacao do Metodo dos Minimos Quadrados
 
+  Dada uma tabela de K pontos (x,y) e a escolha do grau N do polinomio, 
+  a função ira calcular a matriz A e o vetor B que posteriomente serao resolvidos com uma Eliminacao de Gauss
+
+  Todos os calculos levam em consideracao a aritmetica intervalar e por isso ha a chamada de funcoes auxiliares
+
+*/
+void minQuadrados(TABELA_t *tabela, int n, SISTEMA_LINEAR_t *SL) {
   int k;
 
   // Para cada elemento da matriz A e do vetor B
   for (int i = 0; i <= n; i++) {
+
+    // Matriz A
     for (int j = 0; j <= n; j++) {
-      // Ira guardar o valor final da soma dos produtos dos valores de x elevados as potencias i + j
+      // Ira guardar o valor final da soma dos valores de x elevados as potencias i + j
       INTERVAL_t soma;
       soma.m.f = 0.0;
       soma.M.f = 0.0;

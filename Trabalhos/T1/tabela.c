@@ -1,16 +1,16 @@
 /*
-  Aunos: 
+  Alunos: 
   Eduardo Purkote (GRR20182960)
   Mariana Moreira dos Santos (GRR20186554)
-  
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "sistema_linear.h"
 #include "tabela.h"
 #include "doubleType.h"
 
-// Função que le tabela de pontos
+// Funcao que le tabela de pontos
 void le_tabela (TABELA_t *tabela) {
   Double_t x,y;
 
@@ -32,10 +32,15 @@ void le_tabela (TABELA_t *tabela) {
   }
 }
 
-// Função que imprime tabela de pontos 
-void imprime_tabela(TABELA_t *tabela)
+// Funcao que imprime tabela de pontos 
+void imprime_tabela(TABELA_t *tabela, int N)
 {
+  printf("****************************************\n");
+  printf("**          CÁLCULO INTERVALAR        **\n");
+  printf("****************************************\n");
+  printf("Grau do Polinômio (N): %d \n", N);
   printf("Número de Pontos (K): %d \n", tabela->k);
+  
   for(int i= 0; i < tabela->k; i++)
   {
     printf("x[%d]: [%.17e, %.17e] ", i, tabela->x[i].m.f, tabela->x[i].M.f);
@@ -47,7 +52,7 @@ void imprime_tabela(TABELA_t *tabela)
 TABELA_t *aloca_tabela(int k) {
   TABELA_t *tabela = (TABELA_t *)malloc(sizeof(TABELA_t));
   
-  //Verifica se foi alocada memória para a tabela de pontos
+  //Verifica se foi alocada memoria para a tabela de pontos
   if (!tabela) {
     perror("Erro ao alocar Tabela\n");
     exit (1) ;
@@ -57,13 +62,13 @@ TABELA_t *aloca_tabela(int k) {
   tabela->x = malloc(tabela->k * sizeof(INTERVAL_t)); //Aloca vetor para pontos x
   tabela->y = malloc(tabela->k * sizeof(INTERVAL_t));// Aloca vetor para pontos y
 
-  //Verifica se foi alocada memória para o vetor X
+  //Verifica se foi alocada memoria para o vetor X
   if (!tabela->x) {
     perror("Erro ao alocar Vetor X\n");
     exit (1) ;
   }
 
-  //Verifica se foi alocada memória para o vetor Y
+  //Verifica se foi alocada memoria para o vetor Y
   if (!tabela->y) {
     perror("Erro ao alocar Vetor Y\n");
     exit (1) ;

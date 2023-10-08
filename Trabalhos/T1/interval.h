@@ -1,43 +1,42 @@
 /*
-  Aunos: 
+  Alunos: 
   Eduardo Purkote (GRR20182960)
   Mariana Moreira dos Santos (GRR20186554)
-  
 */
 
 #include "doubleType.h"
 #ifndef INTERVAL_H_
 #define INTERVAL_H_
 
+/*  
+  Estrutura de dados utilizada para armazenar o intervalo de representacao dos numeros
+
+  Dado um numero X qualquer
+  m: maior numero de maquina menor ou igual a x
+  M: é o menor numero de maquina maior ou igual a x
+
+*/
 typedef struct {
-  // m: maior número de máquina menor ou igual a x
   Double_t m; 
-  
-  // M: é o menor número de máquina maior ou igual a x
-  Double_t M;
+    Double_t M;
 } INTERVAL_t;
 
+// Dado um numero x retorna o intervalo de representacao [m(x), M(x)]
 INTERVAL_t calcula_intervalo (Double_t x);
 
 // Calcula a soma entre dois intervalos
 INTERVAL_t calcula_soma(INTERVAL_t x, INTERVAL_t y);
 
-// Calcula a subtração entre dois intervalos
+// Calcula a subtracao entre dois intervalos
 INTERVAL_t calcula_subtracao(INTERVAL_t x, INTERVAL_t y);
 
-// Calcula a divisão entre dois intervalos
+// Calcula a divisao entre dois intervalos
 INTERVAL_t calcula_div(INTERVAL_t x, INTERVAL_t y);
 
-// Calcula a multiplicação entre dois intervalos
+// Calcula a multiplicacao entre dois intervalos
 INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y);
 
-// Calcula a potência de um intervalo
+// Calcula a potencia de um intervalo
 INTERVAL_t calcula_pot(INTERVAL_t x,int p);
-
-// Função para calcular o valor absoluto de um intervalo
-INTERVAL_t calcula_abs(INTERVAL_t x);
-
-// Função para calcular o maior entre dois intervalos
-int calcula_maior(INTERVAL_t x, INTERVAL_t y);
 
 #endif
