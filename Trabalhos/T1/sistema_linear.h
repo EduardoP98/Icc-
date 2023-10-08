@@ -5,6 +5,7 @@
   
 */
 #include "interval.h"
+#include "tabela.h"
 #ifndef  SISTEMA_LINEAR_H
 #define  SISTEMA_LINEAR_H
 
@@ -15,7 +16,6 @@ typedef struct
   INTERVAL_t **A;
   INTERVAL_t *b;
   INTERVAL_t *x;
-  INTERVAL_t residuo;
 
 } SISTEMA_LINEAR_t;
 
@@ -35,9 +35,15 @@ void trocaLinha(INTERVAL_t **A, INTERVAL_t *b, int i, int iPivo, int n);
 
 void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n);
 
-double calculaResiduo(double **A, double *b, double *x, int n);
+// double calculaResiduo(double **A, double *b, double *x, int n);
 
-void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino);
+// void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino);
+
+INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, int n);
+
+void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,int g);
+
+void imprime_residuo(INTERVAL_t *residuo, int n);
 
 //Imprime o Resultado na formatação de entrega
 void imprime_coef(SISTEMA_LINEAR_t *SL);

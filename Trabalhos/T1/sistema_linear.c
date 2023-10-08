@@ -45,12 +45,6 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
       printf("\n");
     }
     
-
-    printf("\n\n****************************************\n");
-    printf("**             Resíduo                **\n");
-    printf("****************************************\n");
-    printf("Residuo: [%.8e, %.8e] \n", SL->residuo.m.f, SL->residuo.M.f);
-        
 }
 
 
@@ -85,30 +79,6 @@ SISTEMA_LINEAR_t *aloca_sistema_linear(int n)
     SL->x= malloc (SL->n * sizeof (INTERVAL_t));
 
     return SL;
-}
-
-
-// Função para copiar uma variável do tipo SISTEMA_LINEAR_t para outra
-void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino)
-{
-    destino->n = origem->n;
-
-    // Copie a matriz A
-    for (int i = 0; i < destino->n; ++i)
-    {
-      for (int j = 0; j < destino->n; ++j)
-      {
-        destino->A[i][j] = origem->A[i][j];
-      }
-    }
-
-    // Copie o vetor b
-    for (int i = 0; i < destino->n; ++i)
-    {
-        destino->b[i] = origem->b[i];
-    }
-
-    destino->residuo = origem->residuo;
 }
 
 //Função que resolve um Sistema triangular por retrosubs
@@ -188,47 +158,53 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n) {
 }
 
 
-double calculaResiduo(double **A, double *b, double *x, int n)
+// Função que calcula o valor estimado usando uma equação linear
+INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, int n)
 {
-  double *Ax = malloc(n * sizeof(double)); // Aloca espaço para o vetor Ax
-    
-  // Calcula Ax multiplicando A por x
-  for (int i = 0; i < n; ++i)
+  // calcula_pot(INTERVAL_t x, int p)
+  INTERVAL_t valor_previsto;
+  valor_previsto.m.f = 0.0;
+  valor_previsto.M.f = 0.0;
+
+  for(int i = 0; i <= n; i++)
   {
-    Ax[i] = 0.0;
-    for (int j = 0; j < n; ++j)
+    INTERVAL_t termo = calcula_pot(x,i);
+    INTERVAL_t produto = calcula_mult(coeficientes[i],termo);
+
+    valor_previsto = calcula_soma(valor_previsto,produto);
+  }
+  return valor_previsto;
+}
+
+// Função que calcula o resíduo entre a tabela de pontos e a equação de ajuste
+void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,int g)
+{
+    int i;
+    for (i = 0; i < tabela->k; i++)
     {
-      Ax[i] += A[i][j] * x[j];
+        // Calcula o valor estimado usando a equação de ajuste (substitua f(xi) pelo seu cálculo real)
+        INTERVAL_t valor_estimado = calcula_valor_estimado(coeficientes, tabela->x[i],g);
+
+        // Calcula o resíduo para o ponto atual (ri = yi - f(xi))
+        residuos[i] = calcula_subtracao(tabela->y[i], valor_estimado);
     }
-  }
+}
 
-  // Calcula o vetor de resíduo
-  double *residuo = malloc(n * sizeof(double));
-  for (int i = 0; i < n; ++i)
-  {
-    residuo[i] = Ax[i] - b[i];
-  }
+//Imprime o Resultado na formatação de entrega
+void imprime_residuo(INTERVAL_t *residuo,int n)
+{
+    for(int j = 0; j < n; j++)
+      printf("[%.17e, %.17e]  ",residuo[j].m.f,residuo[j].M.f);
 
-  // Calcula a norma 2 do vetor de resíduo
-  double normaResiduo = 0.0;
-  for (int i = 0; i < n; ++i)
-  {
-    normaResiduo += residuo[i] * residuo[i];
-  }
-  normaResiduo = sqrt(normaResiduo);
-
-  // Libera a memória alocada
-  free(Ax);
-  free(residuo);
-
-  return normaResiduo;
+    printf("\n");
 }
 
 //Imprime o Resultado na formatação de entrega
 void imprime_coef(SISTEMA_LINEAR_t *SL)
 {
-    for(int j = 0; j < SL->n; j++)
-      printf("(a[%d])=[%.17e, %.17e]  ",j,SL->x[j].m.f,SL->x[j].M.f);
-
-    printf("\n");
+    for(int i = 0; i < SL->n; i++)
+    {
+      printf("[%.17e, %.17e]  ",SL->x[i].m.f,SL->x[i].M.f);
+      printf("\n");
+    }    
 }
