@@ -39,4 +39,7 @@ double calculaResiduo(double **A, double *b, double *x, int n);
 
 void copiaSistemaLinear(const SISTEMA_LINEAR_t *origem, SISTEMA_LINEAR_t *destino);
 
+//Imprime o Resultado na formatação de entrega
+void imprime_coef(SISTEMA_LINEAR_t *SL);
+
 #endif
