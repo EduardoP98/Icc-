@@ -95,8 +95,8 @@ int main(int argc, char **argv) {
   // Imprime resultados
   imprime_coef(SL);
   imprime_residuo(residuo, K);
-  printf("%lf\n", tgeraSL);
-  printf("%lf\n", tsolSL);
+  printf("%1.8e\n", tgeraSL);
+  printf("%1.8e\n", tsolSL);
 
   // Finaliza o Likwid
   LIKWID_MARKER_CLOSE;
