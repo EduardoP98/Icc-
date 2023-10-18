@@ -1,5 +1,20 @@
-flags_compilacao = -Wall -O3 -mavx -march=native -lm -DDEBUG  #-g#-DLIKWID_PERFMON -llikwid #-g
+# Nome do programa
 nomePrograma = ajustePol
+
+# Opção de depuração (pode ser definida externamente ou deixada em branco para desativar)
+DEBUG ?=
+
+ifeq ($(DEBUG),yes)
+    debug_flags = -g -DDEBUG
+else
+    debug_flags =
+endif
+
+# Flags
+flags_compilacao = -Wall -O3 -mavx -march=native $(debug_flags) -lm -DLIKWID_PERFMON -llikwid 
+
+# Compilador
+CC = gcc
 
 all: $(nomePrograma)
 

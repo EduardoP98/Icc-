@@ -1,3 +1,9 @@
+/*
+  Alunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+*/
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>

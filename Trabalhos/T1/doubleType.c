@@ -2,6 +2,15 @@
  * source: https://randomascii.wordpress.com/2012/01/11/tricks-with-the-floating-point-format/
  */
 
+ /*
+ 
+  Estrutura modificada pelos alunos.
+  Alunos: 
+  Eduardo Purkote (GRR20182960)
+  Mariana Moreira dos Santos (GRR20186554)
+  
+*/
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
