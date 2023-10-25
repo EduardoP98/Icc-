@@ -17,14 +17,14 @@
   Todos os calculos levam em consideracao a aritmetica intervalar e por isso ha a chamada de funcoes auxiliares
 
 */
-void minQuadrados(TABELA_t *tabela, int n, SISTEMA_LINEAR_t *SL) {
-  int k;
+void minQuadrados(TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
+  long long int k;
 
   // Para cada elemento da matriz A e do vetor B
-  for (int i = 0; i <= n; i++) {
+  for (long long int i = 0; i <= n; i++) {
 
     // Matriz A
-    for (int j = 0; j <= n; j++) {
+    for (long long int j = 0; j <= n; j++) {
       // Ira guardar o valor final da soma dos valores de x elevados as potencias i + j
       INTERVAL_t soma;
       soma.m.f = 0.0;
@@ -42,7 +42,7 @@ void minQuadrados(TABELA_t *tabela, int n, SISTEMA_LINEAR_t *SL) {
     soma_b.m.f = 0.0;
     soma_b.M.f = 0.0;
 
-    for (int k = 0; k < tabela->k; k++) {
+    for (long long int k = 0; k < tabela->k; k++) {
       INTERVAL_t termo1 = calcula_pot(tabela->x[k], i);
       INTERVAL_t produto = calcula_mult(termo1, tabela->y[k]);
       soma_b = calcula_soma(soma_b, produto);

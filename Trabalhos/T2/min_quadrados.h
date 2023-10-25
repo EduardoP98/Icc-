@@ -10,6 +10,6 @@
 #include "sistema_linear.h"
 
 // Implementacao do Metodo dos Minimos Quadrados 
-void minQuadrados(TABELA_t *tabela, int n,SISTEMA_LINEAR_t *SL);
+void minQuadrados(TABELA_t *tabela, long long int n,SISTEMA_LINEAR_t *SL);
 
 #endif
