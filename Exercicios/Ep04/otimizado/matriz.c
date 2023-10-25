@@ -129,22 +129,27 @@ void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res) {
  */
 
 void multMatMat (MatRow A, MatRow B, int n, MatRow C) {
-  // Variavel para armazenar o valor de A[i*n+k]
-  double Aik;
 
-  for (int i=0; i < n; ++i) {
-    for (int j=0; j < n; ++j) {
-      C[i * n + j] = 0.0;
-      for (int k=0; k < n; k += UF) {
-      // Realiza as multiplicações e somas em paralelo (fator 4)
-      Aik = A[i * n + k];
-      C[i * n + j] += Aik * B[k * n + j];
-      Aik = A[i * n + k + 1];
-      C[i * n + j] += Aik * B[(k + 1) * n + j];
-      Aik = A[i * n + k + 2];
-      C[i * n + j] += Aik * B[(k + 2) * n + j];
-      Aik = A[i * n + k + 3];
-      C[i * n + j] += Aik * B[(k + 3) * n + j];
+  int block = n / BK;
+  int istart, iend, jstart, jend, kstart, kend;
+
+  for (int ii=0; ii<block; ++ii) {
+    istart = ii * BK; iend = istart + BK;
+    for (int jj=0; jj < block; ++jj) {
+      jstart = jj * BK; jend = jstart + BK;
+      for (int kk=0; kk < block; ++kk) {
+        kstart = kk * BK; kend = kstart + BK;
+        for (int i=istart; i < iend; ++i)
+          for (int j=jstart; j < jend; j+= UF) {
+            //C[i*n + j] = 0.0; 
+            for (int k=kstart; k < kend; ++k) {
+              Aik = A[i*n + k];
+              C[i*n + j] += Aik * B[k*n + j];
+              C[i*n + j+1] += Aik * B[k*n + j+1];
+              C[i*n + j] += Aik * B[(k + 2) * n + j];
+              C[i * n + j] += Aik * B[(k + 3) * n + j];
+            }
+          }
       }
     }
   }
