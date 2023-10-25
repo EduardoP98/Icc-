@@ -28,7 +28,7 @@
 
 int main(int argc, char **argv) {
   // N = grau do polinomio de ajuste (1a linha)
-  int N;
+  long long int N;
   
   // K = quantidade de pontos da tabela (2a linha)
   int K; 
@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
   INTERVAL_t *residuo;
   
   // Le parametros de entrada
-  int entrada = scanf("%d", &N);
+  int entrada = scanf("%lld", &N);
   if (entrada != 1) {
     perror("Erro ao ler o valor de N");
     exit(1);
