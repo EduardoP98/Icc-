@@ -18,17 +18,17 @@
 typedef struct {
   INTERVAL_t *x;
   INTERVAL_t *y;
-  int k;
+  long long int k;
 } TABELA_t;
 
 // Le tabela de pontos
 void le_tabela (TABELA_t *tabela);
 
 // Imprime tabela de pontos 
-void imprime_tabela(TABELA_t *tabela, int N);
+void imprime_tabela(TABELA_t *tabela, long long int N);
 
 // Alocacao de memoria
-TABELA_t *aloca_tabela (int k);
+TABELA_t *aloca_tabela (long long int k);
 
 // Libera memoria utilizada
 void libera_tabela (TABELA_t *tabela);

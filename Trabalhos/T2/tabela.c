@@ -14,7 +14,7 @@
 void le_tabela (TABELA_t *tabela) {
   Double_t x,y;
 
-  for(int i = 0; i < tabela->k; i++) {
+  for(long long int i = 0; i < tabela->k; i++) {
     int entrada = scanf("%lf", &x.f);
     if (entrada != 1) {
       perror("Erro ao ler o valor de X");
@@ -33,23 +33,23 @@ void le_tabela (TABELA_t *tabela) {
 }
 
 // Funcao que imprime tabela de pontos 
-void imprime_tabela(TABELA_t *tabela, int N)
+void imprime_tabela(TABELA_t *tabela, long long int N)
 {
   printf("****************************************\n");
   printf("**          CÁLCULO INTERVALAR        **\n");
   printf("****************************************\n");
-  printf("Grau do Polinômio (N): %d \n", N);
-  printf("Número de Pontos (K): %d \n", tabela->k);
+  printf("Grau do Polinômio (N): %lld \n", N);
+  printf("Número de Pontos (K): %lld \n", tabela->k);
   
-  for(int i= 0; i < tabela->k; i++)
+  for(long long int i= 0; i < tabela->k; i++)
   {
-    printf("x[%d]: [%.17e, %.17e] ", i, tabela->x[i].m.f, tabela->x[i].M.f);
-    printf("y[%d]: [%.17e, %.17e] \n", i, tabela->y[i].m.f, tabela->y[i].M.f);
+    printf("x[%lld]: [%.17e, %.17e] ", i, tabela->x[i].m.f, tabela->x[i].M.f);
+    printf("y[%lldd]: [%.17e, %.17e] \n", i, tabela->y[i].m.f, tabela->y[i].M.f);
   }
 }
 
 
-TABELA_t *aloca_tabela(int k) {
+TABELA_t *aloca_tabela(long long int k) {
   TABELA_t *tabela = (TABELA_t *)malloc(sizeof(TABELA_t));
   
   //Verifica se foi alocada memoria para a tabela de pontos
