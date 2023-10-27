@@ -13,8 +13,16 @@
 #include <getopt.h>    /* getopt */
 #include <time.h>
 #include "lib-utils/utils/utils.h"
-
 #include "matriz.h"
+
+#ifdef LIKWID_PERFMON
+#include <likwid.h>
+#else
+#define LIKWID_MARKER_INIT
+#define LIKWID_MARKER_START(regionTag)
+#define LIKWID_MARKER_STOP(regionTag)
+#define LIKWID_MARKER_CLOSE
+#endif
 
 /**
  * Exibe mensagem de erro indicando forma de uso do programa e termina
@@ -40,8 +48,8 @@ int main (int argc, char *argv[])
 {
   int n=DEF_SIZE;
   
-  MatRow mRow_1, mRow_2, resMat;
-  Vetor vet, res;
+  MatRow mRow_1, mRow_2, resMat, resMat_Otimizado;
+  Vetor vet, res, res_Otimizado;
   
   /* =============== TRATAMENTO DE LINHA DE COMANDO =============== */
 
@@ -56,7 +64,11 @@ int main (int argc, char *argv[])
       
   res = geraVetor (n, 0); // (real_t *) malloc (n*sizeof(real_t));
   resMat = geraMatRow(n, n, 1);
-    
+
+  // Variaveis para guardar os resultados das versoes otimizadas
+  res_Otimizado = geraVetor (n, 0);
+  resMat_Otimizado = geraMatRow(n, n, 1);
+
   mRow_1 = geraMatRow (n, n, 0);
   mRow_2 = geraMatRow (n, n, 0);
 
@@ -78,35 +90,72 @@ int main (int argc, char *argv[])
     prnVetor (vet, n);
     printf ("=================================\n\n");
 #endif /* _DEBUG_ */
-
+  
   // Variaveis para calculo do tempo gasto
-  rtime_t t_multMatVet, t_multMatMat, t_inicio = 0.0, t_final = 0.0;
+  rtime_t t_multMatVet, t_multMatVet_Otimizado, t_multMatMat, t_multMatMat_Otimizado, t_inicio = 0.0, t_final = 0.0;
 
-  // Multiplica uma matriz por um vetor
+  // Inicia LIKWID
+  LIKWID_MARKER_INIT;
+
+  // Vetor x matriz (nao otimizado)
   t_inicio = timestamp();
   multMatVet (mRow_1, vet, n, n, res);
   t_final = timestamp();
   t_multMatVet = t_final - t_inicio;
+
+  // Vetor x matriz (otimizado)
+  t_inicio = timestamp();
+  LIKWID_MARKER_START("multMatVet_Otimizado");
+  multMatVet_Otimizado (mRow_1, vet, n, n, res_Otimizado);
+  LIKWID_MARKER_STOP("multMatVet_Otimizado");
+  t_final = timestamp();
+  t_multMatVet_Otimizado = t_final - t_inicio;
   
-  // Multiplica uma matriz por uma matriz
+  // Checa resultado da versao nao otimizada x otimizada
+  
+  // Matriz x matriz (nao otimizado)
   t_inicio = timestamp();
   multMatMat (mRow_1, mRow_2, n, resMat);
   t_final = timestamp();
   t_multMatMat = t_final - t_inicio;
-    
+
+  // Matriz x matriz (otimizado)
+  t_inicio = timestamp();
+  LIKWID_MARKER_START("multMatMat_Otimizado");
+  multMatMat_Otimizado (mRow_1, mRow_2, n, resMat_Otimizado);
+  LIKWID_MARKER_STOP("multMatMat_Otimizado");
+  t_final = timestamp();
+  t_multMatMat_Otimizado = t_final - t_inicio;
+
+
+  #ifdef _DEBUG_
+  // Checa resultado da versao nao otimizada x otimizada
+  checa_resultado (resMat, resMat_Otimizado, n);
+  #endif /* _DEBUG_ */
+
 #ifdef _DEBUG_
     prnVetor (res, n);
     prnMat (resMat, n, n);
+    prnVetor (res_Otimizado, n);
+    prnMat (resMat_Otimizado, n, n);
 #endif /* _DEBUG_ */
 
   liberaVetor ((void*) mRow_1);
   liberaVetor ((void*) mRow_2);
   liberaVetor ((void*) resMat);
+  liberaVetor ((void*) resMat_Otimizado);
   liberaVetor ((void*) vet);
   liberaVetor ((void*) res);
+  liberaVetor ((void*) res_Otimizado);
 
   // Imprime o tempo
-  printf("Tempo MultMatVet: %1.8e\nTempo MultMatMat: %1.8e\n", t_multMatVet, t_multMatMat);
+  printf("Tempo - Matriz x Vetor - NÃO OTIMIZADO: %1.8e\n", t_multMatVet);
+  printf("Tempo - Matriz x Vetor - OTIMIZADO: %1.8e\n\n", t_multMatVet_Otimizado);
+  printf("Tempo - Matriz x Matriz - NÃO OTIMIZADO: %1.8e\n", t_multMatMat);
+  printf("Tempo - Matriz x Matriz -  OTIMIZADO: %1.8e\n", t_multMatMat_Otimizado);
+
+  // Encerra LIKWID
+  LIKWID_MARKER_CLOSE;
 
   return 0;
 }

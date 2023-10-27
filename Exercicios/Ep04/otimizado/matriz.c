@@ -108,15 +108,63 @@ void liberaVetor (void *vet)
  *
  */
 
-void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res) {
+void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res)
+{
+    
+  /* Efetua a multiplicação */
   if (res) {
     for (int i=0; i < m; ++i)
-      for (int j=0; j < n; j += UF)
-        for (int k = 0; k < UF; ++k)
-              res[i] += mat[n * i + j + k] * v[j + k];
+      for (int j=0; j < n; ++j)
+        res[i] += mat[n*i + j] * v[j];
   }
 }
 
+
+/**
+ *  Funcao multMatVet_Otimizado:  Efetua multiplicacao entre matriz 'mxn' por vetor
+ *                                    de 'n' elementos e aplica otimizacao unroll & jam
+ *  @param mat matriz 'mxn'
+ *  @param m número de linhas da matriz
+ *  @param n número de colunas da matriz
+ *  @param res vetor que guarda o resultado. Deve estar previamente alocado e com
+ *             seus elementos inicializados em 0.0 (zero)
+ *  @return vetor de 'm' elementos
+ *
+ */
+
+void multMatVet_Otimizado (MatRow mat, Vetor v, int m, int n, Vetor res) {
+  int i, j;
+
+  // Calcula residuo para posteriormente trata-lo
+  int residuo = (m % UF);
+
+  #ifdef _DEBUG_
+  printf("Resíduo do laço: %d\n\n", residuo);
+  #endif /* _DEBUG_ */
+
+  // Unroll & Jam
+  for(i=0; i < m - residuo; i+=UF) {
+    for(j=0; j < m; ++j) {
+      res[i] += mat[m*i + j] * v[j];
+      res[i + 1] += mat[m*(i+1) + j] * v[j];
+      res[i + 2] += mat[m*(i+2) + j] * v[j]; 
+      res[i + 3] += mat[m*(i+3) + j] * v[j];
+      res[i + 4] += mat[m*(i+4) + j] * v[j];
+      res[i + 5] += mat[m*(i+5) + j] * v[j]; 
+      res[i + 6] += mat[m*(i+6) + j] * v[j]; 
+      res[i + 7] += mat[m*(i+7) + j] * v[j]; 
+    }
+  }
+
+  // Residuo
+  if (residuo > 0) {
+    for(i=m-residuo; i < m; ++i) {
+      for(j=0; j < m; ++j){
+        res[i] += mat[m*i + j] * v[j];
+      }
+    }
+  }
+}
 
 /**
  *  Funcao multMatMat: Efetua multiplicacao de duas matrizes 'n x n' 
@@ -128,33 +176,83 @@ void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res) {
  *
  */
 
-void multMatMat (MatRow A, MatRow B, int n, MatRow C) {
+void multMatMat (MatRow A, MatRow B, int n, MatRow C)
+{
 
-  int block = n / BK;
-  int istart, iend, jstart, jend, kstart, kend;
+  /* Efetua a multiplicação */
+  for (int i=0; i < n; ++i)
+    for (int j=0; j < n; ++j)
+      for (int k=0; k < n; ++k)
+	C[i*n+j] += A[i*n+k] * B[k*n+j];
+}
 
-  for (int ii=0; ii<block; ++ii) {
-    istart = ii * BK; iend = istart + BK;
-    for (int jj=0; jj < block; ++jj) {
-      jstart = jj * BK; jend = jstart + BK;
-      for (int kk=0; kk < block; ++kk) {
-        kstart = kk * BK; kend = kstart + BK;
-        for (int i=istart; i < iend; ++i)
-          for (int j=jstart; j < jend; j+= UF) {
-            //C[i*n + j] = 0.0; 
-            for (int k=kstart; k < kend; ++k) {
+
+/**
+ *  Funcao multMatMat_Otimizado: Efetua multiplicacao de duas matrizes 'n x n' e utiliza otimizacao
+ *  @param A matriz 'n x n'
+ *  @param B matriz 'n x n'
+ *  @param n ordem da matriz quadrada
+ *  @param C   matriz que guarda o resultado. Deve ser previamente gerada com 'geraMatPtr()'
+ *             e com seus elementos inicializados em 0.0 (zero)
+ *
+ */
+
+void multMatMat_Otimizado (MatRow A, MatRow B, int n, MatRow C) {
+
+  int b = n / BK;
+  int istart, iend, jstart, jend, kstart, kend, i, ii, j, jj, k, kk;
+  double Aik;
+
+  // Loop blocking
+  for (ii=0; ii < n/b; ++ii) {
+    istart = ii * b; iend = istart + b;
+    for (jj=0; jj < n/b; ++jj) {
+      jstart = jj * b; jend = jstart + b;
+      for (kk=0; kk < n/b; ++kk) {
+        kstart = kk * b; kend = kstart + b;
+        for (i=istart; i < iend; ++i) {
+          // Unroll & Jam
+          for (j=jstart; j < jend; j+= UF) {
+            //C[i*n+j] = C[i*n+j+1] = C[i*n+j+2] = C[i*n+j+3] = C[i*n+j+4] = C[i*n+j+5] = C[i*n+j+6] = C[i*n+j+7] = 0.0;
+            for (k=kstart; k < kend; ++k) {
               Aik = A[i*n + k];
-              C[i*n + j] += Aik * B[k*n + j];
-              C[i*n + j+1] += Aik * B[k*n + j+1];
-              C[i*n + j] += Aik * B[(k + 2) * n + j];
-              C[i * n + j] += Aik * B[(k + 3) * n + j];
+              C[i*n+j] += Aik * B[k*n+j];
+              C[i*n+j + 1] += Aik * B[k*n+j + 1];
+              C[i*n+j + 2] += Aik * B[k*n+j + 2];
+              C[i*n+j + 3] += Aik * B[k*n+j + 3];
+              C[i*n+j + 4] += Aik * B[k*n+j + 4];
+              C[i*n+j + 5] += Aik * B[k*n+j + 5];
+              C[i*n+j + 6] += Aik * B[k*n+j + 6];
+              C[i*n+j + 7] += Aik * B[k*n+j + 7];
             }
           }
+        }
       }
     }
   }
 }
 
+/**
+ *  Funcao checa_resultado:  Verifica se os resultados da versao nao otimizada e otimizada sao iguais
+ *  @param A matriz A
+ *  @param B matriz B
+ *  @param n número de colunas da matriz
+ *
+ */
+int checa_resultado (MatRow A, MatRow B, int n) {
+  int i;
+  double erro = 0.001;
+  for(i=0; i < n*n; ++i){
+    if(fabs(A[i] - B[i]) >= erro) {
+      printf("Algum valor não está batendo! Verifique os resultados:\nA[%i]: %f\nB[%i]: %f\n\n", i, A[i], i, B[i]);
+      return 0;
+    }
+  }
+
+  printf("\nO resultado bateu! :)\n\n");
+  return 1;
+
+}
 
 /**
  *  Funcao prnMat:  Imprime o conteudo de uma matriz em stdout

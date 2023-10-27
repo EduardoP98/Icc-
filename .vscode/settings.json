@@ -6,6 +6,7 @@
         "math.h": "c",
         "sistema_linear.h": "c",
         "time.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "matriz.h": "c"
     }
 }
