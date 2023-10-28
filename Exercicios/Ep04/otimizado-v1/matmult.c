@@ -63,12 +63,16 @@ int main (int argc, char *argv[])
   res = geraVetor (n, 1); // (real_t *) malloc (n*sizeof(real_t));
   resMat = geraMatRow(n, n, 1);
 
-  // Variaveis para guardar os resultados das versoes otimizadas
+  // Variaveis para guardar os resultados das versoes otimizadas //INICIALIZA COM VALORES NULOS
   res_Otimizado = geraVetor (n, 1);
   resMat_Otimizado = geraMatRow(n, n, 1);
 
   mRow_1 = geraMatRow (n, n, 0);
+  // printf("Matriz 1\n");
+  // prnMat(mRow_1,n,n);
   mRow_2 = geraMatRow (n, n, 0);
+  // printf("Matriz 2\n");
+  // prnMat(mRow_2,n,n);
 
   vet = geraVetor (n, 0);
 
@@ -162,7 +166,7 @@ int main (int argc, char *argv[])
   printf("TEMPOS DE EXECUÇÃO\n\nMatriz x Vetor\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatVet, t_multMatVet_Otimizado);
   printf("Matriz x Matriz\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatMat, t_multMatMat_Otimizado);
 
-  liberaVetor ((void*) mRow_1);
+  liberaVetor ((void*) mRow_1); // munmap erro aqui
   liberaVetor ((void*) mRow_2);
   liberaVetor ((void*) resMat);
   liberaVetor ((void*) resMat_Otimizado);
