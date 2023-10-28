@@ -37,6 +37,17 @@ CORE_ID=1
 echo "Utilizando o core ${CORE_ID}..."
 # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > resultados/L3_64.log
 
+# Verifique se a pasta já existe
+if [ ! -d "resultados" ]; then
+    # Crie a pasta se ela não existir
+    mkdir "resultados"
+    cd "resultados"
+    mkdir "L2"
+    mkdir "L3"
+    mkdir "ENERGY"
+    mkdir "FLOPS_DP"
+    cd ".."
+fi
 # Iniciando testes
 echo
 echo "Iniciando testes de desempenho..."
@@ -45,7 +56,10 @@ echo "1) BANDA DE MEMÓRIA"
 for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
 do
   echo "N = $n"
-  likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3/L3_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g L2 -m ./matmult ${n} > resultados/L2/L2_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY/Energy_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP/FLOPS_DP_$n.txt
 done
 echo "Pronto!"
 echo

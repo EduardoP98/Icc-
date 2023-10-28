@@ -3,7 +3,7 @@
         OBJS = $(PROG).o matriz.o utils.o
 
 # Compilador
-        CC = gcc -Wall
+        CC = gcc -Wall 
 
        	CFLAGS = -O3 -mavx -march=native -lm -DLIKWID_PERFMON
        	LFLAGS = -I /usr/local/include -L /usr/local/lib -llikwid

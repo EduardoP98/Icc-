@@ -91,7 +91,7 @@ Vetor geraVetor (int n, int zerar)
  *
  */
 void liberaVetor (void *vet) {
-	free(vet);
+	free(vet); //munmap erro
 }
 
 
