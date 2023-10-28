@@ -1,0 +1,134 @@
+--------------------------------------------------------------------------------
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
+--------------------------------------------------------------------------------
+TEMPOS DE EXECUÇÃO
+
+multmatvet: 9.84934002e-01
+multmatvet_otimizado: 5.86567000e-01
+
+multmatmat: 2.69382499e+00
+multmatmat_otimizado: 1.52878399e+00
+
+--------------------------------------------------------------------------------
+Region multMatVet, Group 1: L2CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000060 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |      84385 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |     206889 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |     152932 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |       9469 |
+|     L2_RQSTS_MISS     |   PMC1  |       2615 |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0001 |
+| Runtime unhalted [s] |     0.0001 |
+|      Clock [MHz]     |  2294.1600 |
+|          CPI         |     2.4517 |
+|    L2 request rate   |     0.1122 |
+|     L2 miss rate     |     0.0310 |
+|     L2 miss ratio    |     0.2762 |
++----------------------+------------+
+
+Region multMatVet_Otimizado, Group 1: L2CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000017 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |      28941 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |      47234 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |      33490 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |       4975 |
+|     L2_RQSTS_MISS     |   PMC1  |       1685 |
++-----------------------+---------+------------+
+
++----------------------+--------------+
+|        Metric        |  HWThread 1  |
++----------------------+--------------+
+|  Runtime (RDTSC) [s] | 1.671472e-05 |
+| Runtime unhalted [s] | 2.785288e-05 |
+|      Clock [MHz]     |    2391.7966 |
+|          CPI         |       1.6321 |
+|    L2 request rate   |       0.1719 |
+|     L2 miss rate     |       0.0582 |
+|     L2 miss ratio    |       0.3387 |
++----------------------+--------------+
+
+Region multMatMat, Group 1: L2CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.001988 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |    8114718 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |    4768689 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |    3377832 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |     204142 |
+|     L2_RQSTS_MISS     |   PMC1  |      34410 |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0020 |
+| Runtime unhalted [s] |     0.0028 |
+|      Clock [MHz]     |  2394.1184 |
+|          CPI         |     0.5877 |
+|    L2 request rate   |     0.0252 |
+|     L2 miss rate     |     0.0042 |
+|     L2 miss ratio    |     0.1686 |
++----------------------+------------+
+
+Region multMatMat_Otimizado, Group 1: L2CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000808 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |    2409171 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |    1786982 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |    1320747 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |      71228 |
+|     L2_RQSTS_MISS     |   PMC1  |      14896 |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0008 |
+| Runtime unhalted [s] |     0.0011 |
+|      Clock [MHz]     |  2294.4849 |
+|          CPI         |     0.7417 |
+|    L2 request rate   |     0.0296 |
+|     L2 miss rate     |     0.0062 |
+|     L2 miss ratio    |     0.2091 |
++----------------------+------------+
+

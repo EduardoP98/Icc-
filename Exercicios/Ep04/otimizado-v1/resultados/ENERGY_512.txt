@@ -1,0 +1,170 @@
+--------------------------------------------------------------------------------
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
+--------------------------------------------------------------------------------
+TEMPOS DE EXECUÇÃO
+
+multmatvet: 7.22718000e-01
+multmatvet_otimizado: 4.49158013e-01
+
+multmatmat: 7.36673505e+02
+multmatmat_otimizado: 8.48719520e+01
+
+--------------------------------------------------------------------------------
+Region multMatVet, Group 1: ENERGY
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000340 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |    2105363 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |     894337 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |     584783 |
+|       TEMP_CORE       |   TMP0  |         57 |
+|     PWR_PKG_ENERGY    |   PWR0  |     0.0101 |
+|     PWR_PP0_ENERGY    |   PWR1  |     0.0063 |
+|     PWR_PP1_ENERGY    |   PWR2  |     0.0001 |
+|    PWR_DRAM_ENERGY    |   PWR3  |      -     |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0003 |
+| Runtime unhalted [s] |     0.0005 |
+|      Clock [MHz]     |  2593.9777 |
+|          CPI         |     0.4248 |
+|    Temperature [C]   |         57 |
+|      Energy [J]      |     0.0101 |
+|       Power [W]      |    29.6009 |
+|    Energy PP0 [J]    |     0.0063 |
+|     Power PP0 [W]    |    18.4333 |
+|    Energy PP1 [J]    |     0.0001 |
+|     Power PP1 [W]    |     0.2242 |
+|    Energy DRAM [J]   |          0 |
+|    Power DRAM [W]    |          0 |
++----------------------+------------+
+
+Region multMatVet_Otimizado, Group 1: ENERGY
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000098 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |     595356 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |     261628 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |     171054 |
+|       TEMP_CORE       |   TMP0  |         57 |
+|     PWR_PKG_ENERGY    |   PWR0  |          0 |
+|     PWR_PP0_ENERGY    |   PWR1  |          0 |
+|     PWR_PP1_ENERGY    |   PWR2  |          0 |
+|    PWR_DRAM_ENERGY    |   PWR3  |      -     |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0001 |
+| Runtime unhalted [s] |     0.0002 |
+|      Clock [MHz]     |  2594.2436 |
+|          CPI         |     0.4394 |
+|    Temperature [C]   |         57 |
+|      Energy [J]      |          0 |
+|       Power [W]      |          0 |
+|    Energy PP0 [J]    |          0 |
+|     Power PP0 [W]    |          0 |
+|    Energy PP1 [J]    |          0 |
+|     Power PP1 [W]    |          0 |
+|    Energy DRAM [J]   |          0 |
+|    Power DRAM [W]    |          0 |
++----------------------+------------+
+
+Region multMatMat, Group 1: ENERGY
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.736294 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  | 1076636000 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  | 1871777000 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  | 1234615000 |
+|       TEMP_CORE       |   TMP0  |         62 |
+|     PWR_PKG_ENERGY    |   PWR0  |     7.2777 |
+|     PWR_PP0_ENERGY    |   PWR1  |     4.4650 |
+|     PWR_PP1_ENERGY    |   PWR2  |     0.0672 |
+|    PWR_DRAM_ENERGY    |   PWR3  |      -     |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.7363 |
+| Runtime unhalted [s] |     1.1036 |
+|      Clock [MHz]     |  2571.4751 |
+|          CPI         |     1.7385 |
+|    Temperature [C]   |         62 |
+|      Energy [J]      |     7.2777 |
+|       Power [W]      |     9.8842 |
+|    Energy PP0 [J]    |     4.4650 |
+|     Power PP0 [W]    |     6.0642 |
+|    Energy PP1 [J]    |     0.0672 |
+|     Power PP1 [W]    |     0.0913 |
+|    Energy DRAM [J]   |          0 |
+|    Power DRAM [W]    |          0 |
++----------------------+------------+
+
+Region multMatMat_Otimizado, Group 1: ENERGY
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.084437 |
+|     call count    |          1 |
++-------------------+------------+
+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |  244734500 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |  215945100 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |  141331800 |
+|       TEMP_CORE       |   TMP0  |         64 |
+|     PWR_PKG_ENERGY    |   PWR0  |     0.8283 |
+|     PWR_PP0_ENERGY    |   PWR1  |     0.5291 |
+|     PWR_PP1_ENERGY    |   PWR2  |     0.0067 |
+|    PWR_DRAM_ENERGY    |   PWR3  |      -     |
++-----------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0844 |
+| Runtime unhalted [s] |     0.1273 |
+|      Clock [MHz]     |  2591.5717 |
+|          CPI         |     0.8824 |
+|    Temperature [C]   |         64 |
+|      Energy [J]      |     0.8283 |
+|       Power [W]      |     9.8093 |
+|    Energy PP0 [J]    |     0.5291 |
+|     Power PP0 [W]    |     6.2659 |
+|    Energy PP1 [J]    |     0.0067 |
+|     Power PP1 [W]    |     0.0795 |
+|    Energy DRAM [J]   |          0 |
+|    Power DRAM [W]    |          0 |
++----------------------+------------+
+

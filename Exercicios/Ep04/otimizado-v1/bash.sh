@@ -17,92 +17,56 @@ echo
 echo "Programa compilado. Iniciando preparação do ambiente..."
 echo
 
-# # Topologia
-# echo "Criando arquivo contendo informações sobre a topologia..."
-# likwid-topology -g -c >> informacoes/likwid_topology.txt
-# echo
+# Topologia
+echo "Criando arquivo contendo informações sobre a topologia..."
+likwid-topology -g -c > informacoes/likwid_topology.txt
+echo
 
-# # Frequencia do processador
-# echo  "Fixando frequência do processador..."
-# chmod a+rw /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
-# echo "performance" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+# Frequencia do processador
+echo  "Fixando frequência do processador..."
+chmod a+rw /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+echo "performance" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
 # Modulos
-# echo
-# echo "Carregando módulo msr"
-# echo modprobe msr
+echo
+echo "Carregando módulo msr"
+echo modprobe msr
 
 # Nucleo
 CORE_ID=1
 echo "Utilizando o core ${CORE_ID}..."
 # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > resultados/L3_64.log
 
-# Verifique se a pasta já existe
-if [ ! -d "resultados" ]; then
-    # Crie a pasta se ela não existir
-    mkdir "resultados"
-    cd "resultados"
-    mkdir "L2"
-    mkdir "L3"
-    mkdir "ENERGY"
-    mkdir "FLOPS_DP"
-    cd ".."
-fi
+# # Verifique se a pasta já existe
+# if [ ! -d "resultados" ]; then
+#     # Crie a pasta se ela não existir
+#     mkdir "resultados"
+# fi
+
 # Iniciando testes
-echo
-echo "Iniciando testes de desempenho..."
-echo
-echo "1) BANDA DE MEMÓRIA"
-for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
-do
-  echo "N = $n"
-  likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3/L3_$n.txt
-  likwid-perfctr -C ${CORE_ID} -g L2 -m ./matmult ${n} > resultados/L2/L2_$n.txt
-  likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY/Energy_$n.txt
-  likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP/FLOPS_DP_$n.txt
-done
-echo "Pronto!"
-echo
-
-# echo "------------------ CACHE MISS L2 ------------------"
-# for n in 64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000, 4000
+# echo
+# echo "Iniciando testes de desempenho..."
+# echo
+# for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
 # do
-#   echo "N = $n \n"
-#   likwid-perfctr -C 1 -g MEM -m ./matmult $n > L2CACHE_$n.log
+#   echo "N = $n"
+#   # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./matmult ${n} > resultados/L2CACHE_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP_$n.txt
 # done
-
-# echo "------------------ ENERGIA ------------------"
-# for n in 64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000, 4000
-# do
-#   echo "N = $n \n"
-#   likwid-perfctr -C 1 -g MEM -m ./matmult $n > ENERGY_$n.log
-# done
-
-# echo "------------------ FLOPS_DPS------------------"
-# for n in 64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000, 4000
-# do
-#   echo "N = $n \n"
-#   likwid-perfctr -C 1 -g FLOPS_DP -m ./matmult $n > FLOPS_DP_$n.log
-# done
-
-# # Filtra as métricas do LIKWID relacionadas a operações aritméticas e energia
-# # Para operações aritméticas, utilizamos o grupo FLOPS_DP e reportamos FLOPS_DP e FLOPS_AVX
-# # Para energia, utilizamos o grupo ENERGY e reportamos Energy[J]
-# grep -n "." resultado_flops.out | sed -n '1,10p' | cut -d: -f2- > resultado.out
-# grep -E 'Region (gera|soluciona)|DP \[MFLOP/s\]|AVX DP \[MFLOP/s\]' resultado_flops.out >> resultado.out
-# echo -------------------------------------------------------------------------------- >> resultado.out
-# grep -E 'Region (gera|soluciona)|Energy \[J\]' resultado_energy.out >> resultado.out
-# echo -------------------------------------------------------------------------------- >> resultado.out
+# echo "Pronto! Arquivos criados no diretório resultados..."
+# echo
 
 # # Limpando
-# echo
-# echo "Finalizando execução e removendo arquivos temporários"
-# make purge
+echo
+echo "Finalizando execução e removendo arquivos temporários"
+make purge
 
 # Frequencia original
-# echo
-# echo "Retornando computador a frequencia original..."
-# echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+echo
+echo "Retornando computador a frequencia original..."
+echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
 # Mensagem final
 echo

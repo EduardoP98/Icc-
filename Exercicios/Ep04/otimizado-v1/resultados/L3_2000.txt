@@ -1,0 +1,146 @@
+--------------------------------------------------------------------------------
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
+--------------------------------------------------------------------------------
+TEMPOS DE EXECUÇÃO
+
+multmatvet: 6.12514800e+00
+multmatvet_otimizado: 2.76499400e+00
+
+multmatmat: 1.01943710e+05
+multmatmat_otimizado: 9.73039592e+03
+
+--------------------------------------------------------------------------------
+Region multMatVet, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.005654 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  |   32017680 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  |   13737090 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  |    9370332 |
+|     L2_LINES_IN_ALL    |   PMC0  |     515083 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |       2331 |
++------------------------+---------+------------+
+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |     0.0057 |
+|      Runtime unhalted [s]     |     0.0081 |
+|          Clock [MHz]          |  2486.5608 |
+|              CPI              |     0.4290 |
+|  L3 load bandwidth [MBytes/s] |  5830.2789 |
+|  L3 load data volume [GBytes] |     0.0330 |
+| L3 evict bandwidth [MBytes/s] |    26.3848 |
+| L3 evict data volume [GBytes] |     0.0001 |
+|    L3 bandwidth [MBytes/s]    |  5856.6637 |
+|    L3 data volume [GBytes]    |     0.0331 |
++-------------------------------+------------+
+
+Region multMatVet_Otimizado, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.002264 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  |    9008496 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  |    5684736 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  |    3743825 |
+|     L2_LINES_IN_ALL    |   PMC0  |     262056 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |       3583 |
++------------------------+---------+------------+
+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |     0.0023 |
+|      Runtime unhalted [s]     |     0.0034 |
+|          Clock [MHz]          |  2575.4556 |
+|              CPI              |     0.6310 |
+|  L3 load bandwidth [MBytes/s] |  7407.0503 |
+|  L3 load data volume [GBytes] |     0.0168 |
+| L3 evict bandwidth [MBytes/s] |   101.2740 |
+| L3 evict data volume [GBytes] |     0.0002 |
+|    L3 bandwidth [MBytes/s]    |  7508.3243 |
+|    L3 data volume [GBytes]    |     0.0170 |
++-------------------------------+------------+
+
+Region multMatMat, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] | 101.946200 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+--------------+
+|          Event         | Counter |  HWThread 1  |
++------------------------+---------+--------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  |  66674520000 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  | 248747500000 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  | 169907600000 |
+|     L2_LINES_IN_ALL    |   PMC0  |   8891143000 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |     70534220 |
++------------------------+---------+--------------+
+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |   101.9462 |
+|      Runtime unhalted [s]     |   146.6559 |
+|          Clock [MHz]          |  2483.1630 |
+|              CPI              |     3.7308 |
+|  L3 load bandwidth [MBytes/s] |  5581.7005 |
+|  L3 load data volume [GBytes] |   569.0332 |
+| L3 evict bandwidth [MBytes/s] |    44.2801 |
+| L3 evict data volume [GBytes] |     4.5142 |
+|    L3 bandwidth [MBytes/s]    |  5625.9806 |
+|    L3 data volume [GBytes]    |   573.5473 |
++-------------------------------+------------+
+
+Region multMatMat_Otimizado, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   9.730287 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+-------------+
+|          Event         | Counter |  HWThread 1 |
++------------------------+---------+-------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  | 14869840000 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  | 23964920000 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  | 16228080000 |
+|     L2_LINES_IN_ALL    |   PMC0  |  1146711000 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |     5430358 |
++------------------------+---------+-------------+
+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |     9.7303 |
+|      Runtime unhalted [s]     |    14.1292 |
+|          Clock [MHz]          |  2504.7718 |
+|              CPI              |     1.6116 |
+|  L3 load bandwidth [MBytes/s] |  7542.3781 |
+|  L3 load data volume [GBytes] |    73.3895 |
+| L3 evict bandwidth [MBytes/s] |    35.7176 |
+| L3 evict data volume [GBytes] |     0.3475 |
+|    L3 bandwidth [MBytes/s]    |  7578.0958 |
+|    L3 data volume [GBytes]    |    73.7370 |
++-------------------------------+------------+
+

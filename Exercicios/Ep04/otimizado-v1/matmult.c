@@ -163,8 +163,8 @@ int main (int argc, char *argv[])
 #endif /* _DEBUG_ */
 
   // Imprime o tempo
-  printf("TEMPOS DE EXECUÇÃO\n\nMatriz x Vetor\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatVet, t_multMatVet_Otimizado);
-  printf("Matriz x Matriz\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatMat, t_multMatMat_Otimizado);
+  printf("TEMPOS DE EXECUÇÃO\n\nmultmatvet: %1.8e\nmultmatvet_otimizado: %1.8e\n\n", t_multMatVet, t_multMatVet_Otimizado);
+  printf("multmatmat: %1.8e\nmultmatmat_otimizado: %1.8e\n\n", t_multMatMat, t_multMatMat_Otimizado);
 
   liberaVetor ((void*) mRow_1); // munmap erro aqui
   liberaVetor ((void*) mRow_2);
