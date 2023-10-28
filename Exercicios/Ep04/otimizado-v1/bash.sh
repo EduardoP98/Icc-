@@ -17,26 +17,38 @@ echo
 echo "Programa compilado. Iniciando preparação do ambiente..."
 echo
 
-# Frequencia do processador
-echo "Fixando frequencia do processador."
-echo "performance" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+# # Topologia
+# echo "Criando arquivo contendo informações sobre a topologia..."
+# likwid-topology -g -c >> informacoes/likwid_topology.txt
+# echo
+
+# # Frequencia do processador
+# echo  "Fixando frequência do processador..."
+# chmod a+rw /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+# echo "performance" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
 # Modulos
+# echo
+# echo "Carregando módulo msr"
+# echo modprobe msr
+
+# Nucleo
+CORE_ID=1
+echo "Utilizando o core ${CORE_ID}..."
+# likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > resultados/L3_64.log
+
+# Iniciando testes
 echo
-echo "Carregando módulo msr"
-echo modprobe msr
-
-# Teste inicial
-echo likwid-perfctr -C 1 -g L3 -m ./matmult 64 > L3_64.log
-
-# # Iniciando testes
-# echo "------------------ BANDA DE MEMÓRIA ------------------"
-# for n in 64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000, 4000
-# do
-#   echo "N = $n \n"
-#   likwid-perfctr -C 1 -g MEM -m ./matmult $n > L3_$n.log
-# done
-
+echo "Iniciando testes de desempenho..."
+echo
+echo "1) BANDA DE MEMÓRIA"
+for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
+do
+  echo "N = $n"
+  likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
+done
+echo "Pronto!"
+echo
 
 # echo "------------------ CACHE MISS L2 ------------------"
 # for n in 64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000, 4000
@@ -74,9 +86,9 @@ echo likwid-perfctr -C 1 -g L3 -m ./matmult 64 > L3_64.log
 # make purge
 
 # Frequencia original
-echo
-echo "Retornando computador a frequencia original..."
-echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+# echo
+# echo "Retornando computador a frequencia original..."
+# echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
 # Mensagem final
 echo

@@ -35,8 +35,6 @@ static void usage(char *progname)
   exit(1);
 }
 
-
-
 /**
  * Programa principal
  * Forma de uso: matmult [ -n <ordem> ]
@@ -62,11 +60,11 @@ int main (int argc, char *argv[])
  
   srandom(20232);
       
-  res = geraVetor (n, 0); // (real_t *) malloc (n*sizeof(real_t));
+  res = geraVetor (n, 1); // (real_t *) malloc (n*sizeof(real_t));
   resMat = geraMatRow(n, n, 1);
 
   // Variaveis para guardar os resultados das versoes otimizadas
-  res_Otimizado = geraVetor (n, 0);
+  res_Otimizado = geraVetor (n, 1);
   resMat_Otimizado = geraMatRow(n, n, 1);
 
   mRow_1 = geraMatRow (n, n, 0);
@@ -74,21 +72,32 @@ int main (int argc, char *argv[])
 
   vet = geraVetor (n, 0);
 
-  if (!res || !resMat || !mRow_1 || !mRow_2 || !vet) {
-    fprintf(stderr, "Falha em alocação de memória !!\n");
-    liberaVetor ((void*) mRow_1);
-    liberaVetor ((void*) mRow_2);
-    liberaVetor ((void*) resMat);
-    liberaVetor ((void*) vet);
-    liberaVetor ((void*) res);
-    exit(2);
-  }
+  // if (!res || !resMat || !mRow_1 || !mRow_2 || !vet || !res_Otimizado || !resMat_Otimizado) {
+  //   fprintf(stderr, "Falha em alocação de memória !!\n");
+  //   liberaVetor ((void*) mRow_1);
+  //   liberaVetor ((void*) mRow_2);
+  //   liberaVetor ((void*) resMat);
+  //   liberaVetor ((void*) vet);
+  //   liberaVetor ((void*) res);
+  //   liberaVetor ((void*) res_Otimizado);
+  //   liberaVetor ((void*) resMat_Otimizado);
+  //   exit(2);
+  // }
     
 #ifdef _DEBUG_
+    printf ("n = %d\n\n", n);
+    printf ("mRow_1:\n\n");
     prnMat (mRow_1, n, n);
+    printf ("mRow_2:\n\n");
     prnMat (mRow_2, n, n);
+    printf ("vet:\n\n");
     prnVetor (vet, n);
-    printf ("=================================\n\n");
+    printf ("res:\n\n");
+    prnVetor (res, n);
+    printf ("res_Otimizado:\n\n");
+    prnVetor (res_Otimizado, n);
+    printf ("resMat_Otimizado:\n\n");
+    prnMat (resMat_Otimizado, n, n);
 #endif /* _DEBUG_ */
   
   // Variaveis para calculo do tempo gasto
@@ -99,38 +108,47 @@ int main (int argc, char *argv[])
 
   // Vetor x matriz (nao otimizado)
   t_inicio = timestamp();
+  LIKWID_MARKER_START("multMatVet");
   multMatVet (mRow_1, vet, n, n, res);
+  LIKWID_MARKER_STOP("multMatVet");
   t_final = timestamp();
   t_multMatVet = t_final - t_inicio;
 
   // Vetor x matriz (otimizado)
   t_inicio = timestamp();
   LIKWID_MARKER_START("multMatVet_Otimizado");
-  multMatVet_Otimizado (mRow_1, vet, n, n, res_Otimizado);
+  multMatVetOtimizado (mRow_1, vet, n, n, res_Otimizado);
   LIKWID_MARKER_STOP("multMatVet_Otimizado");
   t_final = timestamp();
   t_multMatVet_Otimizado = t_final - t_inicio;
-  
+
+  #ifdef _DEBUG_
   // Checa resultado da versao nao otimizada x otimizada
+  checaResultadoVetor (res, res_Otimizado, n);
+  #endif /* _DEBUG_ */
   
   // Matriz x matriz (nao otimizado)
   t_inicio = timestamp();
+  LIKWID_MARKER_START("multMatMat");
   multMatMat (mRow_1, mRow_2, n, resMat);
+  LIKWID_MARKER_STOP("multMatMat");
   t_final = timestamp();
   t_multMatMat = t_final - t_inicio;
 
   // Matriz x matriz (otimizado)
   t_inicio = timestamp();
   LIKWID_MARKER_START("multMatMat_Otimizado");
-  multMatMat_Otimizado (mRow_1, mRow_2, n, resMat_Otimizado);
+  multMatMatOtimizado (mRow_1, mRow_2, n, resMat_Otimizado);
   LIKWID_MARKER_STOP("multMatMat_Otimizado");
   t_final = timestamp();
   t_multMatMat_Otimizado = t_final - t_inicio;
 
+  // Encerra LIKWID
+  LIKWID_MARKER_CLOSE;
 
   #ifdef _DEBUG_
   // Checa resultado da versao nao otimizada x otimizada
-  checa_resultado (resMat, resMat_Otimizado, n);
+  checaResultadoMatriz (resMat, resMat_Otimizado, n);
   #endif /* _DEBUG_ */
 
 #ifdef _DEBUG_
@@ -140,6 +158,10 @@ int main (int argc, char *argv[])
     prnMat (resMat_Otimizado, n, n);
 #endif /* _DEBUG_ */
 
+  // Imprime o tempo
+  printf("TEMPOS DE EXECUÇÃO\n\nMatriz x Vetor\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatVet, t_multMatVet_Otimizado);
+  printf("Matriz x Matriz\nNão otimizado: %1.8ems\nOtimizado: %1.8ems\n\n", t_multMatMat, t_multMatMat_Otimizado);
+
   liberaVetor ((void*) mRow_1);
   liberaVetor ((void*) mRow_2);
   liberaVetor ((void*) resMat);
@@ -147,15 +169,6 @@ int main (int argc, char *argv[])
   liberaVetor ((void*) vet);
   liberaVetor ((void*) res);
   liberaVetor ((void*) res_Otimizado);
-
-  // Imprime o tempo
-  printf("Tempo - Matriz x Vetor - NÃO OTIMIZADO: %1.8e\n", t_multMatVet);
-  printf("Tempo - Matriz x Vetor - OTIMIZADO: %1.8e\n\n", t_multMatVet_Otimizado);
-  printf("Tempo - Matriz x Matriz - NÃO OTIMIZADO: %1.8e\n", t_multMatMat);
-  printf("Tempo - Matriz x Matriz -  OTIMIZADO: %1.8e\n", t_multMatMat_Otimizado);
-
-  // Encerra LIKWID
-  LIKWID_MARKER_CLOSE;
 
   return 0;
 }

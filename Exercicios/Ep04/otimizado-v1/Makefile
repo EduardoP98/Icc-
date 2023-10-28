@@ -5,8 +5,8 @@
 # Compilador
         CC = gcc -Wall
 
-       	CFLAGS = -O3 -mavx -march=native -lm
-       	LFLAGS = -DLIKWID_PERFMON -I /usr/local/include -L /usr/local/lib -llikwid
+       	CFLAGS = -O3 -mavx -march=native -lm -DLIKWID_PERFMON
+       	LFLAGS = -I /usr/local/include -L /usr/local/lib -llikwid
 
 
 # Lista de arquivos para distribuição

@@ -6,9 +6,8 @@
 #define DEF_SIZE 128
 #define BASE 32
 
-#define UF 8
+#define UF 4
 #define BK 4
-
 
 #define ABS(num)  ((num) < 0.0 ? -(num) : (num))
 
@@ -26,12 +25,8 @@ Vetor geraVetor (int n, int zerar);
 
 void liberaVetor (void *vet);
 
-void multMatVet (MatRow mat, Vetor v, int m, int n, Vetor res);
-void multMatMat(MatRow A, MatRow B, int n, MatRow C);
-
 void multMatVet_Otimizado (MatRow mat, Vetor v, int m, int n, Vetor res);
-void multMatMat_Otimizado(MatRow A, MatRow B, int n, MatRow C);
-int checa_resultado(MatRow A, MatRow B, int n);
+void multMatMat_Otimizado (MatRow A, MatRow B, int n, MatRow C);
 
 void prnMat (MatRow mat, int m, int n);
 void prnVetor (Vetor vet, int n);
