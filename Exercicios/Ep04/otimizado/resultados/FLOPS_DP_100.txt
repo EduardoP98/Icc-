@@ -1,0 +1,146 @@
+--------------------------------------------------------------------------------
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
+--------------------------------------------------------------------------------
+TEMPOS DE EXECUÇÃO
+
+multmatvet: 3.94300014e-01
+multmatvet_otimizado: 3.39276001e-01
+
+multmatmat: 1.66781600e+00
+multmatmat_otimizado: 7.07386002e-01
+
+--------------------------------------------------------------------------------
+Region multMatVet, Group 1: FLOPS_DP
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000017 |
+|     call count    |          1 |
++-------------------+------------+
+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |      84480 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |      58086 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |      37995 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |      24866 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
+
++----------------------+--------------+
+|        Metric        |  HWThread 1  |
++----------------------+--------------+
+|  Runtime (RDTSC) [s] | 1.720743e-05 |
+| Runtime unhalted [s] | 3.424621e-05 |
+|      Clock [MHz]     |    2593.0086 |
+|          CPI         |       0.6876 |
+|     DP [MFLOP/s]     |    1445.0734 |
+|   AVX DP [MFLOP/s]   |            0 |
+|   Packed [MUOPS/s]   |            0 |
+|   Scalar [MUOPS/s]   |    1445.0734 |
+|  Vectorization ratio |            0 |
++----------------------+--------------+
+
+Region multMatVet_Otimizado, Group 1: FLOPS_DP
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000009 |
+|     call count    |          1 |
++-------------------+------------+
+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |      29036 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |      26208 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |      17170 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |      11429 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
+
++----------------------+--------------+
+|        Metric        |  HWThread 1  |
++----------------------+--------------+
+|  Runtime (RDTSC) [s] | 8.764668e-06 |
+| Runtime unhalted [s] | 1.545165e-05 |
+|      Clock [MHz]     |    2588.9432 |
+|          CPI         |       0.9026 |
+|     DP [MFLOP/s]     |    1303.9855 |
+|   AVX DP [MFLOP/s]   |            0 |
+|   Packed [MUOPS/s]   |            0 |
+|   Scalar [MUOPS/s]   |    1303.9855 |
+|  Vectorization ratio |            0 |
++----------------------+--------------+
+
+Region multMatMat, Group 1: FLOPS_DP
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.001296 |
+|     call count    |          1 |
++-------------------+------------+
+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |    8114813 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |    3247119 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |    2131766 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |    2197779 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0013 |
+| Runtime unhalted [s] |     0.0019 |
+|      Clock [MHz]     |  2583.5544 |
+|          CPI         |     0.4001 |
+|     DP [MFLOP/s]     |  1695.2573 |
+|   AVX DP [MFLOP/s]   |          0 |
+|   Packed [MUOPS/s]   |          0 |
+|   Scalar [MUOPS/s]   |  1695.2573 |
+|  Vectorization ratio |          0 |
++----------------------+------------+
+
+Region multMatMat_Otimizado, Group 1: FLOPS_DP
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000380 |
+|     call count    |          1 |
++-------------------+------------+
+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |    2409115 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |     939018 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |     613938 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |    1298652 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0004 |
+| Runtime unhalted [s] |     0.0006 |
+|      Clock [MHz]     |  2594.2292 |
+|          CPI         |     0.3898 |
+|     DP [MFLOP/s]     |  3418.3041 |
+|   AVX DP [MFLOP/s]   |          0 |
+|   Packed [MUOPS/s]   |          0 |
+|   Scalar [MUOPS/s]   |  3418.3041 |
+|  Vectorization ratio |          0 |
++----------------------+------------+
+
