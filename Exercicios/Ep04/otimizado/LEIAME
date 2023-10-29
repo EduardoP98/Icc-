@@ -1,0 +1,43 @@
+ALUNOS
+Eduardo Purkote (GRR20182960)
+Mariana Moreira dos Santos (GRR20186554)
+
+OBSEVAÇÕES
+1. SCRIPT
+O script bash que criamos executa as seguintes tarefas:
+a) Compila o programa com o "make" caso ele ainda não tenha sido compilado
+
+
+b) Cria um arquivo de texto contendo a topologia da máquina (através do likwid-topology). O arquivo é salvo no diretório "informacoes".
+
+c) Fixa a frequência do processador
+
+d) Carrega módulo msr
+
+e) Cria um diretório para salvar os resultados
+
+f) Executa o LIKWID para medir as metricas (L3,L2CACHE,ENERGY E FLOPS_DP) utilizando a CPU número 01,para os valores de entrada "64, 100, 128, 200, 256, 512, 600, 900, 1024, 2000, 2048, 3000 e 4000":
+  likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./matmult ${n} > resultados/L2CACHE_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY_$n.txt
+  likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP_$n.txt
+
+g) Limpa os arquivos (purge)
+
+h) Retorna a frequência original do processador
+
+Se você desejar rodar outros testes, altere esses valores no arquivo bash.sh e rode novamente o script.
+
+
+2. SAÍDA
+Os resultados são salvos no diretório "resultados" no formato txt. O nomes dos arquivos seguem como prefixo a métrica analisada e o valor "n" de entrada do teste separados por "_": Exemplo: L3_64.txt
+
+3. GRÁFICOS
+Para confecionar os gŕaficos dos resultados e comparar o código com/sem otimização criamos um script python (Jupyter notebook) para plotar os pontos obtido para cada métrica (utilizamos a biblioteca matplotlib). O script gera os gráficos para cada métrica de acordo com a saída do programa. Os gráficos gerados comparam a otimização em relação ass funções de multiplicação de mat-vet e mat-matriz, sendo salvos em formato  de imagem (png). Por fim também é salvo em arquivo "resumo-resultados.txt" um resumo de todas as métricas que indicam todos os valores obtidos que foram plotados.
+
+LIMITAÇÕES
+1. LIKWID 
+A biblioteca utilizada para medir métricas de desempenho foi a biblioteca de código aberto Likwid. Portanto, para a correta utilização do programa a biblioteca deve estar corretamente instalada no ambiente. Importante observar as variáveis disponíveis na máquina de teste, as métricas utilizadas não estejam disponíveis poderá haver erro nos script ou nos resultados.
+
+2. MEMÓRIA
+Poderá ocorrer um erro dinâmico de acesso de memória, especificamente na função de multiplicação de matri-matriz caso os valores de UF e BK não sejam adequados com a arquitetura utilizada.
