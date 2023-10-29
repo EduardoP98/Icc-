@@ -35,7 +35,9 @@ echo modprobe msr
 # Nucleo
 CORE_ID=1
 echo "Utilizando o core ${CORE_ID}..."
-# likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > resultados/L3_64.log
+
+# Teste unico
+# likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > debug.txt
 
 # # Verifique se a pasta já existe
 # if [ ! -d "resultados" ]; then

@@ -63,30 +63,26 @@ int main (int argc, char *argv[])
   res = geraVetor (n, 1); // (real_t *) malloc (n*sizeof(real_t));
   resMat = geraMatRow(n, n, 1);
 
-  // Variaveis para guardar os resultados das versoes otimizadas //INICIALIZA COM VALORES NULOS
+  // Variaveis para guardar os resultados das versoes otimizadas. Inicializa com valores nulos. 
   res_Otimizado = geraVetor (n, 1);
   resMat_Otimizado = geraMatRow(n, n, 1);
 
   mRow_1 = geraMatRow (n, n, 0);
-  // printf("Matriz 1\n");
-  // prnMat(mRow_1,n,n);
   mRow_2 = geraMatRow (n, n, 0);
-  // printf("Matriz 2\n");
-  // prnMat(mRow_2,n,n);
 
   vet = geraVetor (n, 0);
 
-  // if (!res || !resMat || !mRow_1 || !mRow_2 || !vet || !res_Otimizado || !resMat_Otimizado) {
-  //   fprintf(stderr, "Falha em alocação de memória !!\n");
-  //   liberaVetor ((void*) mRow_1);
-  //   liberaVetor ((void*) mRow_2);
-  //   liberaVetor ((void*) resMat);
-  //   liberaVetor ((void*) vet);
-  //   liberaVetor ((void*) res);
-  //   liberaVetor ((void*) res_Otimizado);
-  //   liberaVetor ((void*) resMat_Otimizado);
-  //   exit(2);
-  // }
+  if (!res || !resMat || !mRow_1 || !mRow_2 || !vet || !res_Otimizado || !resMat_Otimizado) {
+    fprintf(stderr, "Falha em alocação de memória !!\n");
+    liberaVetor ((void*) mRow_1);
+    liberaVetor ((void*) mRow_2);
+    liberaVetor ((void*) resMat);
+    liberaVetor ((void*) vet);
+    liberaVetor ((void*) res);
+    liberaVetor ((void*) res_Otimizado);
+    liberaVetor ((void*) resMat_Otimizado);
+    exit(2);
+  }
     
 #ifdef _DEBUG_
     printf ("n = %d\n\n", n);
@@ -166,7 +162,7 @@ int main (int argc, char *argv[])
   printf("TEMPOS DE EXECUÇÃO\n\nmultmatvet: %1.8e\nmultmatvet_otimizado: %1.8e\n\n", t_multMatVet, t_multMatVet_Otimizado);
   printf("multmatmat: %1.8e\nmultmatmat_otimizado: %1.8e\n\n", t_multMatMat, t_multMatMat_Otimizado);
 
-  liberaVetor ((void*) mRow_1); // munmap erro aqui
+  liberaVetor ((void*) mRow_1);
   liberaVetor ((void*) mRow_2);
   liberaVetor ((void*) resMat);
   liberaVetor ((void*) resMat_Otimizado);
