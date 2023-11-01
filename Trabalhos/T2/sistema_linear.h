@@ -32,8 +32,14 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
 // Liberacao de memoria alocada das variaveis
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
 
+// Libera SL otimizado
+void libera_sistema_linearOtimizado(SISTEMA_LINEAR_t *SL);
+
 // Alocacao de memoria das variaveis
 SISTEMA_LINEAR_t *aloca_sistema_linear(long long int n);
+
+//Alocação Otimizada
+SISTEMA_LINEAR_t *aloca_sistema_linearOtimizado(long long int n);
 
 // Resolve um sistema linear triangular por retrosubstituicao
 void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,long long int n);
