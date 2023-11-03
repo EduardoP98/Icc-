@@ -50,3 +50,7 @@ void minQuadrados(TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
     SL->b[i] = soma_b;
   }
 }
+
+void minQuadradosOtimizado(TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
+
+}

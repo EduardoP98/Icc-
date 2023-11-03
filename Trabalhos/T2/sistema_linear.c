@@ -251,6 +251,10 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long l
   return valor_previsto;
 }
 
+INTERVAL_t calcula_valor_estimadoOtimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n){
+
+}
+
 /*  
   Calcula o residuo entre a tabela de pontos e a equacao de ajuste
 
@@ -270,6 +274,10 @@ void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *res
         // Calcula o residuo para o ponto atual (ri = yi - f(xi))
         residuos[i] = calcula_subtracao(tabela->y[i], valor_estimado);
     }
+}
+
+void calcula_residuoOtimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g){
+
 }
 
 // Imprime o residuo na formatacao de entrega definida pelo professor
