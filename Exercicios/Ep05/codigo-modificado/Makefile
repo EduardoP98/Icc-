@@ -10,8 +10,8 @@ DISTDIR = `basename ${PWD}`
 # Opção de depuração (pode ser definida externamente ou deixada em branco para desativar)
 DEBUG ?=
 
-ifeq ($(DEBUG),yes)
-    debug_flags = -g -DDEBUG
+ifeq ($(DEBUG), yes)
+    debug_flags = -g -D_DEBUG_
 else
     debug_flags =
 endif
