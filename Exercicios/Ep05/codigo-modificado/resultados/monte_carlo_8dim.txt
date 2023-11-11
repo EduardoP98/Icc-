@@ -1,0 +1,50 @@
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1925.475846 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1986.398509 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 2575.845537 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 2265.992682 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1843.419158 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1927.766121 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1714.472844 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1926.866425 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1817.742381 seg.
+Método de Monte Carlo: -2290394835.399107
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 8
+Tempo decorrido: 1873.998327 seg.
+Método de Monte Carlo: -2290394835.399107
+
