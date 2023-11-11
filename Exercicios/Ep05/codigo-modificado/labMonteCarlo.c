@@ -11,72 +11,82 @@
 
 #define UF 4
 
-// Integral Monte Carlo da função Styblinski-Tang de 2 variáveis
+// Integral Monte Carlo da função Styblinski-Tang
 double styblinskiTang(double a, double b, int namostras, int n_variaveis)
 {
-  double resultado;
+  double resultado = 0.0;
   double soma = 0.0;
   
   printf("Metodo de Monte Carlo (x, y).\n");
   printf("a = (%f), b = (%f), n = (%d), variaveis = %d\n", a, b, namostras, n_variaveis);
   
   double t_inicial = timestamp();
-  double diff = b - a;
+
+  // Comprimento do intervalo de integracao: intervalo [a, b]
+  #ifdef _DEBUG_
+  printf("Intervalo [%lf, %lf]: %lf\n", a, b, b - a);
+  #endif
 
   // Para 2 variaveis
   if (n_variaveis == 2) {
     for (int i = 0; i < namostras; ++i) {
       // Gera um valor aleatorio para x1 e x2 dentro do intervalo [a, b]
-      double x1 = a + NRAND * diff;
-      double x2 = a + NRAND * diff;
+      double x1 = a + NRAND * (b - a);
+      double x2 = a + NRAND * (b - a);
+
       // Utiliza a funcao Styblinski-Tang com os valores aleatorios
-      soma += x1 * (x1 * x1 * x1 - x1 * 16 + 5) + x2 * (x2 * x2 * x2 - x2 * 16 + 5);
+      soma += (((x1*x1*x1*x1) - (16*x1*x1) + (5*x1))/2) + (((x2*x2*x2*x2) - (16*x2*x2) + (5*x2))/2);
+
     }
 
-    // Calcula a media do resultado
-    resultado = (soma / namostras) * diff;
+    // Integracao pela media
+    resultado = (soma / namostras) * (b - a) * (b - a);
   } 
   // Para 4 variaveis
   else if (n_variaveis == 4) {
-    diff = b - a;
     for (int i = 0; i < namostras; ++i) {
       // Gera um valor aleatorio para x1 a x4 dentro do intervalo [a, b]
-      double x1 = a + NRAND * diff;
-      double x2 = a + NRAND * diff;
-      double x3 = a + NRAND * diff;
-      double x4 = a + NRAND * diff;
+      double x1 = a + NRAND * (b - a);
+      double x2 = a + NRAND * (b - a);
+      double x3 = a + NRAND * (b - a);
+      double x4 = a + NRAND * (b - a);
 
       // Utiliza a funcao Styblinski-Tang com os valores aleatorios
-      soma += x1 * (x1 * x1 * x1 - x1 * 16 + 5) + x2 * (x2 * x2 * x2 - x2 * 16 + 5) +
-              x3 * (x3 * x3 * x3 - x3 * 16 + 5) + x4 * (x4 * x4 * x4 - x4 * 16 + 5);
+      soma += (((x1*x1*x1*x1) - (16*x1*x1) + (5*x1))/2) + 
+              (((x2*x2*x2*x2) - (16*x2*x2) + (5*x2))/2) +
+              (((x3*x3*x3*x3) - (16*x3*x3) + (5*x3))/2) +
+              (((x4*x4*x4*x4) - (16*x4*x4) + (5*x4))/2);
     }
 
-    // Calcula a media do resultado
-    resultado = (soma / namostras) * (diff * diff * diff);
+    // Integracao pela media
+    resultado = (soma / namostras) * ((b - a) * (b - a) * (b - a) * (b - a));
   } 
   // Para 8 variaveis
   else {
-    diff = b - a;
     for (int i = 0; i < namostras; ++i) {
       // Gera um valor aleatorio para x1 a x8 dentro do intervalo [a, b]
-      double x1 = a + NRAND * diff;
-      double x2 = a + NRAND * diff;
-      double x3 = a + NRAND * diff;
-      double x4 = a + NRAND * diff;
-      double x5 = a + NRAND * diff;
-      double x6 = a + NRAND * diff;
-      double x7 = a + NRAND * diff;
-      double x8 = a + NRAND * diff;
+      double x1 = a + NRAND * (b - a);
+      double x2 = a + NRAND * (b - a);
+      double x3 = a + NRAND * (b - a);
+      double x4 = a + NRAND * (b - a);
+      double x5 = a + NRAND * (b - a);
+      double x6 = a + NRAND * (b - a);
+      double x7 = a + NRAND * (b - a);
+      double x8 = a + NRAND * (b - a);
 
       // Utiliza a funcao Styblinski-Tang com os valores aleatorios
-      soma += x1 * (x1 * x1 * x1 - x1 * 16 + 5) + x2 * (x2 * x2 * x2 - x2 * 16 + 5) +
-              x3 * (x3 * x3 * x3 - x3 * 16 + 5) + x4 * (x4 * x4 * x4 - x4 * 16 + 5) +
-              x5 * (x5 * x5 * x5 - x5 * 16 + 5) + x6 * (x6 * x6 * x6 - x6 * 16 + 5) +
-              x7 * (x7 * x7 * x7 - x7 * 16 + 5) + x8 * (x8 * x8 * x8 - x8 * 16 + 5);
+      soma += (((x1*x1*x1*x1) - (16*x1*x1) + (5*x1))/2) + 
+              (((x2*x2*x2*x2) - (16*x2*x2) + (5*x2))/2) +
+              (((x3*x3*x3*x3) - (16*x3*x3) + (5*x3))/2) +
+              (((x4*x4*x4*x4) - (16*x4*x4) + (5*x4))/2) +
+              (((x5*x5*x5*x5) - (16*x5*x5) + (5*x5))/2) +
+              (((x6*x6*x6*x6) - (16*x6*x6) + (5*x6))/2) +
+              (((x7*x7*x7*x7) - (16*x7*x7) + (5*x7))/2) +
+              (((x8*x8*x8*x8) - (16*x8*x8) + (5*x8))/2);
     }
 
-    // Calcula a media do resultado
-    resultado = (soma / namostras) * (diff * diff * diff * diff * diff * diff * diff);
+    // Integracao pela media
+    resultado = (soma / namostras) * ((b - a) * (b - a) * (b - a) * (b - a) * (b - a) * (b - a) * (b - a) * (b - a));
   }
   
   double t_final = timestamp();
@@ -92,8 +102,8 @@ double styblinskiTang(double a, double b, int namostras, int n_variaveis)
 
 
 double retangulos_xy(double a, double b, int npontos) {
-
   double h = (b - a) / npontos; 
+
   double resultado = 0;
   double soma = 0;
   
@@ -102,56 +112,15 @@ double retangulos_xy(double a, double b, int npontos) {
   
   double t_inicial = timestamp();
 
-  double x10 = 0, x11 = 0, x12 = 0, x13 = 0, x14 = 0;
-  double x20 = 0, x21 = 0, x22 = 0, x23 = 0, x24 = 0;
-
-  int residuo = npontos % UF;
-
-  // Loop unroll com fator 4
-  for (int i = 0; i < npontos - residuo; i += UF) {
-    x11 = a + h * i;
-    x12 = a + h * (i+1);
-    x13 = a + h * (i+2);
-    x14 = a + h * (i+3);
-
-    for (int j = 0; j < npontos - residuo; j += UF) {
-      x21 = a + h * j;
-      x22 = a + h * (j+1);
-      x23 = a + h * (j+2);
-      x24 = a + h * (j+3);
-
-      soma += ((x11 * (x11*x11*x11 - x11*16 + 5)) + (x21 * (x21*x21*x21 - x21*16 + 5))) +
-              ((x11 * (x11*x11*x11 - x11*16 + 5)) + (x22 * (x22*x22*x22 - x22*16 + 5))) +
-              ((x11 * (x11*x11*x11 - x11*16 + 5)) + (x23 * (x23*x23*x23 - x23*16 + 5))) +
-              ((x11 * (x11*x11*x11 - x11*16 + 5)) + (x24 * (x24*x24*x24 - x24*16 + 5))) +
-              ((x12 * (x12*x12*x12 - x12*16 + 5)) + (x21 * (x21*x21*x21 - x21*16 + 5))) +
-              ((x12 * (x12*x12*x12 - x12*16 + 5)) + (x22 * (x22*x22*x22 - x22*16 + 5))) +
-              ((x12 * (x12*x12*x12 - x12*16 + 5)) + (x23 * (x23*x23*x23 - x23*16 + 5))) +
-              ((x12 * (x12*x12*x12 - x12*16 + 5)) + (x24 * (x24*x24*x24 - x24*16 + 5))) +
-              ((x13 * (x13*x13*x13 - x13*16 + 5)) + (x21 * (x21*x21*x21 - x21*16 + 5))) +
-              ((x13 * (x13*x13*x13 - x13*16 + 5)) + (x22 * (x22*x22*x22 - x22*16 + 5))) +
-              ((x13 * (x13*x13*x13 - x13*16 + 5)) + (x23 * (x23*x23*x23 - x23*16 + 5))) +
-              ((x13 * (x13*x13*x13 - x13*16 + 5)) + (x24 * (x24*x24*x24 - x24*16 + 5))) +
-              ((x14 * (x14*x14*x14 - x14*16 + 5)) + (x21 * (x21*x21*x21 - x21*16 + 5))) +
-              ((x14 * (x14*x14*x14 - x14*16 + 5)) + (x22 * (x22*x22*x22 - x22*16 + 5))) +
-              ((x14 * (x14*x14*x14 - x14*16 + 5)) + (x23 * (x23*x23*x23 - x23*16 + 5))) +
-              ((x14 * (x14*x14*x14 - x14*16 + 5)) + (x24 * (x24*x24*x24 - x24*16 + 5)));
+  for (int i = a; i < npontos; i++) {
+    double x1 = a + i*h;
+    for (int j = 0; j < npontos; j++) {
+      double x2 = a + j*h;
+      soma += (((x1*x1*x1*x1) - (16*x1*x1) + (5*x1))/2) + (((x2*x2*x2*x2) - (16*x2*x2) + (5*x2))/2);
     }
   }
 
-  // Calculando o residuo do looping
-  for (int i = npontos - residuo; i < npontos; ++i) {  
-    x10 = a + h * i;    
-    for (int j = npontos - residuo; j < npontos; ++j) {
-      x20 = a + h * j;
-      soma += (x10 * x10 * x10 * x10) - (x10 * x10 * 16) + (5 * x10) + (x20 * x20 * x20 * x20) - (x20 * x20 * 16) + (5 * x20);
-    }
-  }
-
-  resultado = 0.5 * soma * h * h;
-
-  // Multiplica pelo tamanho dos retângulos
-  resultado *= h * h; 
+  resultado = soma * h * h;
   
   double t_final = timestamp();
   printf("Tempo decorrido: %f seg.\n", t_final - t_inicial);
@@ -159,6 +128,68 @@ double retangulos_xy(double a, double b, int npontos) {
   return resultado;
 }
 
+double retangulos_xy_otimizado(double a, double b, int npontos) {
+  double h = (b - a) / npontos; 
+
+  double resultado = 0;
+  double soma = 0;
+  
+  printf("Metodo dos Retangulos (x, y).\n");
+  printf("a = (%f), b = (%f), n = (%d), h = (%lg)\n", a, b, npontos, h);
+  
+  // Residuo para loop unroll
+  int residuo = (npontos % UF);
+
+  double t_inicial = timestamp();
+
+  // Lop unroll com fator 4
+  for (int i = 0; i < npontos - residuo; i += UF) {
+    double x1_1 = a + i * h;
+    double x1_2 = a + (i + 1) * h;
+    double x1_3 = a + (i + 2) * h;
+    double x1_4 = a + (i + 3) * h;
+
+    for (int j = 0; j < npontos - residuo; j += UF) {
+      double x2_1 = a + j * h;
+      double x2_2 = a + (j + 1) * h;
+      double x2_3 = a + (j + 2) * h;
+      double x2_4 = a + (j + 3) * h;
+
+      soma += (((x1_1*x1_1*x1_1*x1_1) - (16*x1_1*x1_1) + (5*x1_1))/2) + (((x2_1*x2_1*x2_1*x2_1) - (16*x2_1*x2_1) + (5*x2_1))/2) +
+              (((x1_1*x1_1*x1_1*x1_1) - (16*x1_1*x1_1) + (5*x1_1))/2) + (((x2_2*x2_2*x2_2*x2_2) - (16*x2_2*x2_2) + (5*x2_2))/2) +
+              (((x1_1*x1_1*x1_1*x1_1) - (16*x1_1*x1_1) + (5*x1_1))/2) + (((x2_3*x2_3*x2_3*x2_3) - (16*x2_3*x2_3) + (5*x2_3))/2) +
+              (((x1_1*x1_1*x1_1*x1_1) - (16*x1_1*x1_1) + (5*x1_1))/2) + (((x2_4*x2_4*x2_4*x2_4) - (16*x2_4*x2_4) + (5*x2_4))/2) +
+              (((x1_2*x1_2*x1_2*x1_2) - (16*x1_2*x1_2) + (5*x1_2))/2) + (((x2_1*x2_1*x2_1*x2_1) - (16*x2_1*x2_1) + (5*x2_1))/2) +
+              (((x1_2*x1_2*x1_2*x1_2) - (16*x1_2*x1_2) + (5*x1_2))/2) + (((x2_2*x2_2*x2_2*x2_2) - (16*x2_2*x2_2) + (5*x2_2))/2) +
+              (((x1_2*x1_2*x1_2*x1_2) - (16*x1_2*x1_2) + (5*x1_2))/2) + (((x2_3*x2_3*x2_3*x2_3) - (16*x2_3*x2_3) + (5*x2_3))/2) +
+              (((x1_2*x1_2*x1_2*x1_2) - (16*x1_2*x1_2) + (5*x1_2))/2) + (((x2_4*x2_4*x2_4*x2_4) - (16*x2_4*x2_4) + (5*x2_4))/2) +
+              (((x1_3*x1_3*x1_3*x1_3) - (16*x1_3*x1_3) + (5*x1_3))/2) + (((x2_1*x2_1*x2_1*x2_1) - (16*x2_1*x2_1) + (5*x2_1))/2) +
+              (((x1_3*x1_3*x1_3*x1_3) - (16*x1_3*x1_3) + (5*x1_3))/2) + (((x2_2*x2_2*x2_2*x2_2) - (16*x2_2*x2_2) + (5*x2_2))/2) +
+              (((x1_3*x1_3*x1_3*x1_3) - (16*x1_3*x1_3) + (5*x1_3))/2) + (((x2_3*x2_3*x2_3*x2_3) - (16*x2_3*x2_3) + (5*x2_3))/2) +
+              (((x1_3*x1_3*x1_3*x1_3) - (16*x1_3*x1_3) + (5*x1_3))/2) + (((x2_4*x2_4*x2_4*x2_4) - (16*x2_4*x2_4) + (5*x2_4))/2) +
+              (((x1_4*x1_4*x1_4*x1_4) - (16*x1_4*x1_4) + (5*x1_4))/2) + (((x2_1*x2_1*x2_1*x2_1) - (16*x2_1*x2_1) + (5*x2_1))/2) +
+              (((x1_4*x1_4*x1_4*x1_4) - (16*x1_4*x1_4) + (5*x1_4))/2) + (((x2_2*x2_2*x2_2*x2_2) - (16*x2_2*x2_2) + (5*x2_2))/2) +
+              (((x1_4*x1_4*x1_4*x1_4) - (16*x1_4*x1_4) + (5*x1_4))/2) + (((x2_3*x2_3*x2_3*x2_3) - (16*x2_3*x2_3) + (5*x2_3))/2) +
+              (((x1_4*x1_4*x1_4*x1_4) - (16*x1_4*x1_4) + (5*x1_4))/2) + (((x2_4*x2_4*x2_4*x2_4) - (16*x2_4*x2_4) + (5*x2_4))/2);
+    }
+  }
+
+  // Tratando o residuo do loop unroll
+  for (int i = npontos - residuo; i < npontos; ++i) {  
+    double x1 = a + h * i;    
+    for (int j = npontos - residuo; j < npontos; ++j) {
+      double x2 = a + h * j;
+      soma += (((x1*x1*x1*x1) - (16*x1*x1) + (5*x1))/2) + (((x2*x2*x2*x2) - (16*x2*x2) + (5*x2))/2);
+    }
+  }
+
+  resultado = soma * h * h;
+  
+  double t_final = timestamp();
+  printf("Tempo decorrido: %f seg.\n", t_final - t_inicial);
+
+  return resultado;
+}
 
 int main(int argc, char **argv) {
   // LEITURA DA ENTRADA
@@ -185,14 +216,18 @@ int main(int argc, char **argv) {
   #endif
 
   // CHAMAR FUNÇÕES DE INTEGRAÇÃO E EXIBIR RESULTADOS
-  double retangulo = 0.0f;
+  // double retangulo = 0.0f;
+  // double retangulo_otimizado = 0.0f;
   double monteCarlo = 0.0f;
 
   // retangulo = retangulos_xy (inicial, final, n_amostras);
-  // printf("Resultado pelo Método dos Retângulos: %lf\n\n", retangulo);
- 
+  // printf("Método dos Retângulados: %lf\n\n", retangulo);
+
+  // retangulo_otimizado = retangulos_xy_otimizado (inicial, final, n_amostras);
+  // printf("Método dos Retângulados - Otimizado: %lf\n\n", retangulo_otimizado);
+
   monteCarlo = styblinskiTang (inicial, final, n_amostras, n_variaveis);
-  printf("Resultado pelo Método de Monte Carlo: %lf\n\n", monteCarlo);
+  printf("Método de Monte Carlo: %lf\n\n", monteCarlo);
  
   return 0;
 }

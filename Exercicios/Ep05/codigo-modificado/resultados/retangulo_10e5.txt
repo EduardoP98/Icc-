@@ -1,0 +1,50 @@
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 17367.466001 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 15876.206311 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 16203.110473 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 17038.823144 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 16600.340030 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 17415.582854 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 16779.476359 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 16640.925418 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 17369.266949 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
+Metodo dos Retangulos (x, y).
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 17617.080633 seg.
+Método dos Retângulados - Otimizado: -2184.546132
+
