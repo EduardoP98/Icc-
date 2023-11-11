@@ -217,14 +217,14 @@ int main(int argc, char **argv) {
 
   // CHAMAR FUNÇÕES DE INTEGRAÇÃO E EXIBIR RESULTADOS
   // double retangulo = 0.0f;
-  // double retangulo_otimizado = 0.0f;
+  double retangulo_otimizado = 0.0f;
   double monteCarlo = 0.0f;
 
   // retangulo = retangulos_xy (inicial, final, n_amostras);
   // printf("Método dos Retângulados: %lf\n\n", retangulo);
 
-  // retangulo_otimizado = retangulos_xy_otimizado (inicial, final, n_amostras);
-  // printf("Método dos Retângulados - Otimizado: %lf\n\n", retangulo_otimizado);
+  retangulo_otimizado = retangulos_xy_otimizado (inicial, final, n_amostras);
+  printf("Método dos Retângulados - Otimizado: %lf\n\n", retangulo_otimizado);
 
   monteCarlo = styblinskiTang (inicial, final, n_amostras, n_variaveis);
   printf("Método de Monte Carlo: %lf\n\n", monteCarlo);
