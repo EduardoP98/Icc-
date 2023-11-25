@@ -1,0 +1,50 @@
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 310.770531 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 296.401107 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 277.421707 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 283.374946 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 304.148200 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 283.231068 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 317.542124 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 316.805118 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 349.602516 seg.
+Método de Monte Carlo: -2184.499637
+
+Metodo de Monte Carlo (x, y).
+a = (-4.000000), b = (4.000000), n = (10000000), variaveis = 2
+Tempo decorrido: 341.112923 seg.
+Método de Monte Carlo: -2184.499637
+

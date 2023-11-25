@@ -4,6 +4,11 @@
         "random": "c",
         "interval.h": "c",
         "math.h": "c",
-        "sistema_linear.h": "c"
-    }
+        "sistema_linear.h": "c",
+        "time.h": "c",
+        "utils.h": "c",
+        "matriz.h": "c",
+        "*.tcc": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
 }
