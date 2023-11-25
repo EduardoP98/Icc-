@@ -9,10 +9,12 @@
 #include "sistema_linear.h"
 #include "tabela.h"
 #include "doubleType.h"
+#include "math.h"
 
 // Funcao que le tabela de pontos
 void le_tabela (TABELA_t *tabela) {
   Double_t x,y;
+  INTERVAL_t intervalo;
 
   for(long long int i = 0; i < tabela->k; i++) {
     int entrada = scanf("%lf", &x.f);
@@ -26,10 +28,21 @@ void le_tabela (TABELA_t *tabela) {
       perror("Erro ao ler o valor de Y");
       exit(1);
     }
+    // Não otimizado
+    // tabela->x[i] = calcula_intervalo(x);
+    // tabela->y[i] = calcula_intervalo(y);
 
-    tabela->x[i] = calcula_intervalo(x);
-    tabela->y[i] = calcula_intervalo(y);
+  
+    // Eliminado a chamada de função calcula intervalo
+    intervalo.m.f = nextafter(x.f, -INFINITY);
+    intervalo.M.f = nextafter(x.f, INFINITY);
+    tabela->x[i] = intervalo;
+
+    intervalo.m.f = nextafter(y.f, -INFINITY);
+    intervalo.M.f = nextafter(y.f, INFINITY);
+    tabela->y[i] = intervalo;
   }
+
 }
 
 // Funcao que imprime tabela de pontos 
