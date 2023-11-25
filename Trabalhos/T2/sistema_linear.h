@@ -32,8 +32,14 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
 // Liberacao de memoria alocada das variaveis
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
 
+// Libera SL otimizado
+void libera_sistema_linearOtimizado(SISTEMA_LINEAR_t *SL);
+
 // Alocacao de memoria das variaveis
 SISTEMA_LINEAR_t *aloca_sistema_linear(long long int n);
+
+//Alocação Otimizada
+SISTEMA_LINEAR_t *aloca_sistema_linearOtimizado(long long int n);
 
 // Resolve um sistema linear triangular por retrosubstituicao
 void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,long long int n);
@@ -50,9 +56,13 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, long long i
 // Calcula o valor estimado dado um vetor de coeficientes
 INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
 
+INTERVAL_t calcula_valor_estimadoOtimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
+
 
 // Calcula o residuo entre a tabela de pontos e a equacao de ajuste
 void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
+
+void calcula_residuoOtimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
 
 
 // Imprime o residuo na formatacao de entrega definida pelo professor

@@ -61,7 +61,21 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
   - Vetor X
   - Sistema linear
 */
+
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL) {
+  // Libera matriz de coeficientes
+  for (int i = 0; i < SL->n; i++)
+    free (SL->A[i]);
+  free (SL->A) ;
+
+  // Libera vetores
+  free(SL->b);
+  free(SL->x);
+
+  // Libera SL
+  free(SL);
+}
+void libera_sistema_linearOtimizado(SISTEMA_LINEAR_t *SL) {
   // Libera matriz de coeficientes
   // libera a memória da matriz
   free (SL->A[0]);
@@ -75,13 +89,32 @@ void libera_sistema_linear(SISTEMA_LINEAR_t *SL) {
   free(SL);
 }
 
+
 /*  
   Alocacao de memoria das variaveis
   - Matriz A
   - Vetor B
   - Vetor X
 */
+
 SISTEMA_LINEAR_t *aloca_sistema_linear(long long int n) {
+  SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
+
+    SL->n = n;
+
+    SL->A = malloc (SL->n * sizeof (INTERVAL_t*));
+    for (int i = 0; i < SL->n; i++)
+      SL->A[i] = malloc (SL->n * sizeof (INTERVAL_t));
+
+
+    SL->b= malloc (SL->n * sizeof (INTERVAL_t));
+
+    SL->x= malloc (SL->n * sizeof (INTERVAL_t));
+
+    return SL;
+}
+
+SISTEMA_LINEAR_t *aloca_sistema_linearOtimizado(long long int n) {
   SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
 
     SL->n = n;
@@ -218,6 +251,10 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long l
   return valor_previsto;
 }
 
+INTERVAL_t calcula_valor_estimadoOtimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n){
+
+}
+
 /*  
   Calcula o residuo entre a tabela de pontos e a equacao de ajuste
 
@@ -237,6 +274,10 @@ void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *res
         // Calcula o residuo para o ponto atual (ri = yi - f(xi))
         residuos[i] = calcula_subtracao(tabela->y[i], valor_estimado);
     }
+}
+
+void calcula_residuoOtimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g){
+
 }
 
 // Imprime o residuo na formatacao de entrega definida pelo professor
