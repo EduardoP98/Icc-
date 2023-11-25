@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 /*  
   Funcao auxiliar para debugar o codigo
 
@@ -51,7 +52,6 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
       printf("x[%lld]: [%.8e, %.8e]  ", i, SL->x[i].m.f, SL->x[i].M.f);
       printf("\n");
     }
-     printf("\n\n\n");
 }
 
 /*  
@@ -75,7 +75,7 @@ void libera_sistema_linear(SISTEMA_LINEAR_t *SL) {
   // Libera SL
   free(SL);
 }
-void libera_sistema_linearOtimizado(SISTEMA_LINEAR_t *SL) {
+void libera_sistema_linear_otimizado(SISTEMA_LINEAR_t *SL) {
   // Libera matriz de coeficientes
   // libera a memória da matriz
   free (SL->A[0]);
@@ -114,24 +114,23 @@ SISTEMA_LINEAR_t *aloca_sistema_linear(long long int n) {
     return SL;
 }
 
-SISTEMA_LINEAR_t *aloca_sistema_linearOtimizado(long long int n) {
+SISTEMA_LINEAR_t *aloca_sistema_linear_otimizado(long long int n) {
   SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
 
     SL->n = n;
 
-    // SL->A = malloc (SL->n * sizeof (INTERVAL_t*));
+    // Aloca um vetor de LIN ponteiros para linhas
+    SL->A = malloc (SL->n * sizeof (INTERVAL_t*));
 
-    // aloca um vetor de LIN ponteiros para linhas
-    SL->A = malloc (SL->n * sizeof (INTERVAL_t*)) ;
-    // aloca um vetor com todos os elementos da matriz
+    // Aloca um vetor com todos os elementos da matriz
     SL->A[0] = malloc (SL->n * SL->n * sizeof (INTERVAL_t));
 
-    // ajusta os demais ponteiros de linhas (i > 0)
+    // Ajusta os demais ponteiros de linhas (i > 0)
     for (long long int i = 1; i < SL->n; i++)
       SL->A[i] = SL->A[0] + i * SL->n;
 
     SL->b= malloc (SL->n * sizeof (INTERVAL_t));
-
+    
     SL->x= malloc (SL->n * sizeof (INTERVAL_t));
 
     return SL;
@@ -163,7 +162,7 @@ void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, long long int n) {
   Funcao auxiliar ao Metodo de Eliminacao de Gauss
   Utilizada para realizar o pivoteamento parcial
 */
-unsigned int encontraMax(INTERVAL_t **A, long long int i, long long int n) {
+unsigned int encontra_max(INTERVAL_t **A, long long int i, long long int n) {
   unsigned int maxIndex = i;
   double maxValor = fabs(A[i][i].m.f);
 
@@ -180,13 +179,12 @@ unsigned int encontraMax(INTERVAL_t **A, long long int i, long long int n) {
 }
 
 
-
 /*  
   Troca duas linhas da matriz A e vetor b
 
   Funcao auxiliar ao Metodo de Eliminacao de Gauss com pivoteamento parcial
 */
-void trocaLinha(INTERVAL_t **A, INTERVAL_t *b, long long int i, unsigned long long int iPivo,long long int n) {
+void troca_linha(INTERVAL_t **A, INTERVAL_t *b, long long int i, unsigned long long int iPivo,long long int n) {
   if (i != iPivo)
   {
     for (long long int j = 0; j < n; ++j)
@@ -208,10 +206,12 @@ void trocaLinha(INTERVAL_t **A, INTERVAL_t *b, long long int i, unsigned long lo
   Utiliza a aritmetica intervalar para realizar todos os calculos necessarios
 */
 void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,long long int n) {
+
+  // Percorre as linhas
   for (long long int i = 0; i < n; ++i) {
-    unsigned long long int iPivo = encontraMax(A, i, n);
+    unsigned long long int iPivo = encontra_max(A, i, n);
     if (i != iPivo)
-      trocaLinha(A, b, i, iPivo, n);
+      troca_linha(A, b, i, iPivo, n);
 
     for (long long int k = i + 1; k < n; ++k) {
       INTERVAL_t m = calcula_div(A[k][i], A[i][i]);
@@ -228,8 +228,6 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,long long in
   }
 }
 
-
-
 /*  
   Calcula o valor estimado dado um vetor de coeficientes
 
@@ -241,8 +239,7 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long l
   valor_previsto.m.f = 0.0;
   valor_previsto.M.f = 0.0;
 
-  for(long long int i = 0; i <= n; i++)
-  {
+  for(long long int i = 0; i <= n; i++) {
     INTERVAL_t termo = calcula_pot(x,i);
     INTERVAL_t produto = calcula_mult(coeficientes[i],termo);
 
@@ -251,9 +248,9 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long l
   return valor_previsto;
 }
 
-INTERVAL_t calcula_valor_estimadoOtimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n){
+// INTERVAL_t calcula_valor_estimado_otimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n){
 
-}
+// }
 
 /*  
   Calcula o residuo entre a tabela de pontos e a equacao de ajuste
@@ -276,7 +273,7 @@ void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *res
     }
 }
 
-void calcula_residuoOtimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g){
+void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g){
 
 }
 

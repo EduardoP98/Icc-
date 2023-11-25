@@ -33,6 +33,4 @@ TABELA_t *aloca_tabela (long long int k);
 // Libera memoria utilizada
 void libera_tabela (TABELA_t *tabela);
 
-
-
 #endif

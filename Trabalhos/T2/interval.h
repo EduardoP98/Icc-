@@ -18,7 +18,7 @@
 */
 typedef struct {
   Double_t m; 
-    Double_t M;
+  Double_t M;
 } INTERVAL_t;
 
 // Dado um numero x retorna o intervalo de representacao [m(x), M(x)]
@@ -37,6 +37,8 @@ INTERVAL_t calcula_div(INTERVAL_t x, INTERVAL_t y);
 INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y);
 
 // Calcula a potencia de um intervalo
-INTERVAL_t calcula_pot(INTERVAL_t x,int p);
+INTERVAL_t calcula_pot(INTERVAL_t x, long long int p);
+
+INTERVAL_t calcula_pot_otimizado(INTERVAL_t x, long long int p);
 
 #endif
