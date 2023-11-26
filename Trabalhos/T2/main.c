@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
   //Inicia Likwid
   // LIKWID_MARKER_INIT;
   
-  // Passo 01: Metodo dos Minimos Quadrados
+  // Passo 1: Metodo dos Minimos Quadrados
   // LIKWID_MARKER_START("gera-sistema-linear");
   t_inicio = timestamp();
   min_quadrados (Tabela, N, SL);
@@ -78,7 +78,6 @@ int main(int argc, char **argv) {
   // LIKWID_MARKER_STOP("gera-sistema-linear");
   tgeraSL = t_final - t_inicio;
 
-  // Passo 1.1: Otimizacao
   t_inicio = timestamp();
   min_quadrados_otimizado_v2 (Tabela, N, SL_ot);
   t_final = timestamp();
@@ -89,7 +88,7 @@ int main(int argc, char **argv) {
   imprime_sistema_linear(SL_ot);
   #endif
 
-  // Passo 02: Eliminacao de Gauss
+  // Passo 2: Eliminacao de Gauss
   // LIKWID_MARKER_START("soluciona-sistema-linear");
   t_inicio = timestamp();
   elimGauss_parcial(SL->A, SL->b, SL->x, N+1);
@@ -98,11 +97,17 @@ int main(int argc, char **argv) {
   // LIKWID_MARKER_STOP("soluciona-sistema-linear");
   tsolSL = t_final - t_inicio;
 
-  // Passo 3: Calcula residuo
-  calcula_residuo(Tabela, SL_ot->x, residuo_ot, N);
+  // LIKWID_MARKER_START("soluciona-sistema-linear");
+  t_inicio = timestamp();
+  elimGauss_parcial(SL_ot->A, SL_ot->b, SL_ot->x, N+1);
+  retrosubs(SL_ot->A, SL_ot->b, SL_ot->x, N+1);
+  t_final = timestamp();
+  // LIKWID_MARKER_STOP("soluciona-sistema-linear");
+  tsolSL_ot = t_final - t_inicio;
 
-  // Passo 3.1: Otimizacao
+  // Passo 3: Calcula residuo
   calcula_residuo(Tabela, SL->x, residuo, N);
+  calcula_residuo(Tabela, SL_ot->x, residuo_ot, N);
 
   // Imprime resultados
   printf("\nSem otimização\n");

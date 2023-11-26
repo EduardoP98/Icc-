@@ -9,7 +9,7 @@
 #ifndef  SISTEMA_LINEAR_H
 #define  SISTEMA_LINEAR_H
 
-#define UF 4
+#define UF 2
 
 /*  
   Estrutura de dados utilizada para definicao do sistema linear

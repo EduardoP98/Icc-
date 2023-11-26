@@ -129,18 +129,6 @@ void min_quadrados_otimizado (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_
 }
 
 void min_quadrados_otimizado_v2 (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
-  // Residuo do loop unroll
-  int residuo = tabela->k % UF;
-
-  #ifdef DEBUG
-  printf("\n****************************************\n");
-  printf("**    MÉTODO DOS MINIMOS QUADRADOS    **\n");
-  printf("****************************************\n");
-  printf("tabela->k: %lld\n", tabela->k);
-  printf("Residuo: %d\n", residuo);
-  printf("tabela->k - residuo: %lld\n", tabela->k - residuo);
-  #endif
-
   // Percorre a tabela de pontos inves de percorrer o n
   for (long long int k = 0; k < tabela->k; k++) {
 
@@ -159,4 +147,50 @@ void min_quadrados_otimizado_v2 (TABELA_t *tabela, long long int n, SISTEMA_LINE
     }
   }
 
+}
+
+
+void min_quadrados_otimizado_v3 (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
+  // Residuo do loop unroll
+  int residuo = tabela->k % UF;
+
+  #ifdef DEBUG
+  printf("\n****************************************\n");
+  printf("**    MÉTODO DOS MINIMOS QUADRADOS    **\n");
+  printf("****************************************\n");
+  printf("tabela->k: %lld\n", tabela->k);
+  printf("Residuo: %d\n", residuo);
+  printf("tabela->k - residuo: %lld\n", tabela->k - residuo);
+  #endif
+
+  // Percorre a tabela de pontos inves de percorrer o n
+  for (long long int k = 0; k < tabela->k - residuo; k+=UF) {
+    // Primeira iteração do loop externo
+    for (long long int i = 0; i <= n; i++) {
+        // Preencher a matriz A
+        for (long long int j = 0; j <= n; j++) {
+            INTERVAL_t termo1 = calcula_pot(tabela->x[k], i+j);
+            SL->A[i][j] = calcula_soma(SL->A[i][j], termo1);
+        }
+
+        // Preencher o vetor B
+        INTERVAL_t termo1 = calcula_pot(tabela->x[k], i);
+        INTERVAL_t produto = calcula_mult(termo1, tabela->y[k]);
+        SL->b[i] = calcula_soma(SL->b[i], produto);
+    }
+
+    // Segunda iteração do loop externo
+    for (long long int i = 0; i <= n; i++) {
+        // Preencher a matriz A
+        for (long long int j = 0; j <= n; j++) {
+            INTERVAL_t termo1 = calcula_pot(tabela->x[k+1], i+j);
+            SL->A[i][j] = calcula_soma(SL->A[i][j], termo1);
+        }
+
+        // Preencher o vetor B
+        INTERVAL_t termo1 = calcula_pot(tabela->x[k+1], i);
+        INTERVAL_t produto = calcula_mult(termo1, tabela->y[k+1]);
+        SL->b[i] = calcula_soma(SL->b[i], produto);
+    }
+  }
 }
