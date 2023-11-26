@@ -63,7 +63,6 @@ void preencher_tabela_potencias(INTERVAL_t base, long long int n, INTERVAL_t *ta
 void min_quadrados_otimizado (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL) {
   INTERVAL_t *tabela_potencias_base = malloc((2 * n + 1) * sizeof(INTERVAL_t));
   INTERVAL_t produto;
-
   for (long long int k = 0; k < tabela->k; k++) {
     preencher_tabela_potencias(tabela->x[k], (2 * n) , tabela_potencias_base);
 
@@ -76,6 +75,4 @@ void min_quadrados_otimizado (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_
       SL->b[i] = calcula_soma(SL->b[i], produto);
     }
   }
-
 }
-
