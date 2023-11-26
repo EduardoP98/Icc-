@@ -39,6 +39,4 @@ INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y);
 // Calcula a potencia de um intervalo
 INTERVAL_t calcula_pot(INTERVAL_t x, long long int p);
 
-INTERVAL_t calcula_pot_otimizado(INTERVAL_t x, long long int p);
-
 #endif
