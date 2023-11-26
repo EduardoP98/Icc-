@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
   tgeraSL = t_final - t_inicio;
 
   t_inicio = timestamp();
-  min_quadrados_otimizado_v2 (Tabela, N, SL_ot);
+  min_quadrados_otimizado (Tabela, N, SL_ot);
   t_final = timestamp();
   tgeraSL_ot = t_final - t_inicio;
 
@@ -112,10 +112,12 @@ int main(int argc, char **argv) {
   // Imprime resultados
   printf("\nSem otimização\n");
   imprime_coef(SL);
+  printf("\n\n");
   imprime_residuo(residuo, K);
 
   printf("\nCom otimização\n");
   imprime_coef(SL_ot);
+  printf("\n\n");
   imprime_residuo(residuo_ot, K);
 
   printf("\nSem otimização\n");
