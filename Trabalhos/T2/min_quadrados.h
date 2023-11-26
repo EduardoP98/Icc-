@@ -14,8 +14,6 @@ void min_quadrados(TABELA_t *tabela, long long int n,SISTEMA_LINEAR_t *SL);
 
 void min_quadrados_otimizado(TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL);
 
-void min_quadrados_otimizado_v2 (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL);
-
-void min_quadrados_otimizado_v3 (TABELA_t *tabela, long long int n, SISTEMA_LINEAR_t *SL);
+void preencher_tabela_potencias(INTERVAL_t base, long long int n, INTERVAL_t *tabela_potencias);
 
 #endif
