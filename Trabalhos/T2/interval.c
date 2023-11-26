@@ -179,7 +179,7 @@ INTERVAL_t calcula_mult(INTERVAL_t x, INTERVAL_t y) {
   c = y.m.f
   d = y.M.f
 */
-INTERVAL_t calcula_pot(INTERVAL_t x, int p) {
+INTERVAL_t calcula_pot(INTERVAL_t x, long long int p) {
   INTERVAL_t resultado;
 
   if(p == 0) {
@@ -207,6 +207,72 @@ INTERVAL_t calcula_pot(INTERVAL_t x, int p) {
       // Caso p eh par, x.m < 0 e x.M >= 0, o resultado eh [0, max{x.m^p, x.M^p}]
       double m_pow_p = pow(x.m.f, p);
       double M_pow_p = pow(x.M.f, p);
+      resultado.m.f = 0.0;
+      resultado.M.f = fmax(m_pow_p, M_pow_p);
+    }
+  }
+
+  return resultado;
+}
+
+/*  
+  Calcula a potenciacao entre dois intervalos sem a utilizacao da funcao pow()
+
+  A definicao de um intervalo X = [a,b] elevado a um numero inteiro p ≥ 0 eh dado por:
+
+  [a,b]^p = 
+    [1,1] se p = 0
+    [a^p, b^p] se p eh impar
+    [a^p, b^p] se p eh par e a ≥ 0
+    [b^p, a^p] se p eh par e b < 0
+    [0, max{a^p,b^p}] se p eh par e a < 0 ≤ b 
+
+  a = x.m.f
+  b = x.M.f
+  c = y.m.f
+  d = y.M.f
+*/
+INTERVAL_t calcula_pot_otimizado(INTERVAL_t x, long long int p) {
+  INTERVAL_t resultado;
+  resultado.m.f = 1.0;
+  resultado.M.f = 1.0;
+
+  if(p == 0) {
+    // Caso p = 0, o resultado eh [1, 1]
+    resultado.m.f = 1.0;
+    resultado.M.f = 1.0;
+  }
+  else if(p % 2 != 0) {
+    // Caso p eh impar, o resultado eh [x.m^p, x.M^p]
+    for (int i = 0; i < p; i++) {
+        resultado.m.f *= x.m.f;
+        resultado.M.f *= x.M.f;
+    }
+  }
+  else {
+    if(x.m.f >= 0 ) {
+      // Caso p eh par e x.m >= 0, o resultado eh [x.m^p, x.M^p]
+      for (int i = 0; i < p; i++) {
+        resultado.m.f *= x.m.f;
+        resultado.M.f *= x.M.f;
+      }
+    }
+    else if(x.M.f < 0) {
+      // Caso p eh par e x.M < 0, o resultado eh [x.M^p, x.m^p]
+      for (int i = 0; i < p; i++) {
+        resultado.m.f *= x.M.f;
+        resultado.M.f *= x.m.f;
+      }
+    }
+    else if((x.M.f >= 0) && (x.m.f < 0)) {
+      // Caso p eh par, x.m < 0 e x.M >= 0, o resultado eh [0, max{x.m^p, x.M^p}]
+      double m_pow_p = 1.0; double M_pow_p = 1.0;
+
+      for (int i = 0; i < p; i++) {
+        m_pow_p *= x.m.f;
+        M_pow_p *= x.M.f;
+      }
+
       resultado.m.f = 0.0;
       resultado.M.f = fmax(m_pow_p, M_pow_p);
     }

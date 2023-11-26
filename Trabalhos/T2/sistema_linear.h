@@ -9,6 +9,7 @@
 #ifndef  SISTEMA_LINEAR_H
 #define  SISTEMA_LINEAR_H
 
+#define UF 2
 
 /*  
   Estrutura de dados utilizada para definicao do sistema linear
@@ -33,37 +34,33 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL);
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL);
 
 // Libera SL otimizado
-void libera_sistema_linearOtimizado(SISTEMA_LINEAR_t *SL);
+void libera_sistema_linear_otimizado(SISTEMA_LINEAR_t *SL);
 
 // Alocacao de memoria das variaveis
 SISTEMA_LINEAR_t *aloca_sistema_linear(long long int n);
 
 //Alocação Otimizada
-SISTEMA_LINEAR_t *aloca_sistema_linearOtimizado(long long int n);
+SISTEMA_LINEAR_t *aloca_sistema_linear_otimizado(long long int n);
 
 // Resolve um sistema linear triangular por retrosubstituicao
 void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,long long int n);
 
 // Encontrar a linha com o maior valor absoluto na coluna i
-unsigned int encontraMax(INTERVAL_t **A, long long int i, long long int n);
+unsigned int encontra_max(INTERVAL_t **A, long long int i, long long int n);
 
 //  Troca duas linhas da matriz A e vetor b
-void trocaLinha(INTERVAL_t **A, INTERVAL_t *b, long long int i, unsigned long long int iPivo, long long int n);
+void troca_linha(INTERVAL_t **A, INTERVAL_t *b, long long int i, unsigned long long int iPivo, long long int n);
 
 // Eliminacao de Gauss com Pivoteamento Parcial
 void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, long long int n);
 
 // Calcula o valor estimado dado um vetor de coeficientes
 INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
-
-INTERVAL_t calcula_valor_estimadoOtimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
-
+// INTERVAL_t calcula_valor_estimado_otimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
 
 // Calcula o residuo entre a tabela de pontos e a equacao de ajuste
 void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
-
-void calcula_residuoOtimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
-
+void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
 
 // Imprime o residuo na formatacao de entrega definida pelo professor
 void imprime_residuo(INTERVAL_t *residuo,long long int n);
