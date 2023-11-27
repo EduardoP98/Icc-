@@ -31,14 +31,14 @@ int main(int argc, char **argv) {
   long long int N;
   
   // K = quantidade de pontos da tabela (2a linha)
-  int K; 
+  long long int K; 
 
   // Variaveis para calculo do tempo gasto
-  double t_inicio = 0.0, t_final = 0.0, tgeraSL, tsolSL, tResiduo;;
+  double tgeraSL, tsolSL, tResiduo, t_inicio = 0.0, t_final = 0.0;
 
   TABELA_t *Tabela;
-  SISTEMA_LINEAR_t *SL_ot;
-  INTERVAL_t *residuo_ot;
+  SISTEMA_LINEAR_t *SL;
+  INTERVAL_t *residuo;
   
   // Le parametros de entrada
   int entrada = scanf("%lld", &N);
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-  entrada = scanf("%d", &K);
+  entrada = scanf("%lld", &K);
   if (entrada != 1) {
     perror("Erro ao ler o valor de K");
     exit(1);
@@ -55,8 +55,8 @@ int main(int argc, char **argv) {
 
   // Alocacao de memoria
   Tabela = aloca_tabela (K);
-  SL_ot = aloca_sistema_linear_otimizado(N+1);
-  residuo_ot = malloc (K * sizeof (INTERVAL_t));
+  SL = aloca_sistema_linear (N+1);
+  residuo = malloc (K * sizeof (INTERVAL_t));
   
   // Le tabela de pontos e calcula intervalo para cada valor
   le_tabela(Tabela);
@@ -67,72 +67,51 @@ int main(int argc, char **argv) {
 
   //Inicia Likwid
   // LIKWID_MARKER_INIT;
-
+  
+  // // Gera SL a partir da tabela de pontos
   // LIKWID_MARKER_START("gera-sistema-linear");
   t_inicio = timestamp();
-  min_quadrados_otimizado (Tabela, N, SL_ot);
+  minQuadrados (Tabela, N, SL);
   t_final = timestamp();
-  tgeraSL = t_final - t_inicio;
   // LIKWID_MARKER_STOP("gera-sistema-linear");
+  tgeraSL = t_final - t_inicio;
 
   #ifdef DEBUG
-  imprime_sistema_linear(SL_ot);
+  imprime_sistema_linear(SL);
   #endif
 
-  // Passo 2: Eliminacao de Gauss
+  // Soluciona o sistema linear
   // LIKWID_MARKER_START("soluciona-sistema-linear");
   t_inicio = timestamp();
-  elimGauss_parcial(SL_ot->A, SL_ot->b, SL_ot->x, N+1);
-  retrosubs(SL_ot->A, SL_ot->b, SL_ot->x, N+1);
+  elimGauss_parcial(SL->A, SL->b, SL->x, N+1);
+  retrosubs(SL->A, SL->b, SL->x, N+1);
   t_final = timestamp();
   // LIKWID_MARKER_STOP("soluciona-sistema-linear");
   tsolSL = t_final - t_inicio;
 
-  // Passo 3: Calcula residuo
+  // Calcula residuo
   // LIKWID_MARKER_START("calcula-residuo");
   t_inicio = timestamp();
-  calcula_residuo_otimizado(Tabela, SL_ot->x, residuo_ot, N);
+  calcula_residuo(Tabela, SL->x, residuo, N);
   t_final = timestamp();
   tResiduo = t_final - t_inicio;
   // LIKWID_MARKER_STOP("calcula-residuo");
 
   // Imprime resultados
-  // printf("\nSem otimização\n");
   // imprime_coef(SL);
-  // printf("\n\n");
   // imprime_residuo(residuo, K);
-
-  // printf("\nCom otimização\n");
-  // imprime_coef(SL_ot);
-  // printf("\n\n");
-  // imprime_residuo(residuo_ot, K);
-
-  // printf("\nSem otimização\n");
-  // printf("%1.8e\n", tgeraSL);
-  // printf("%1.8e\n", tsolSL);
-  // printf("%1.8e\n", tResiduo);
-
-  // printf("\nCom otimização\n");
-  // printf("%1.8e\n", tgeraSL_ot);
-  // printf("%1.8e\n", tsolSL_ot);
-  // printf("%1.8e\n\n", tResiduo_ot);
-
-  // printf("\nCom otimização\n");
-
-  //Imprime Resultados
-  // imprime_coef(SL_ot);
-  // imprime_residuo(residuo_ot, K);
   printf("%1.8e\n", tgeraSL);
   printf("%1.8e\n", tsolSL);
-  printf("%1.8e\n\n", tResiduo);
-
+  printf("%1.8e\n", tResiduo);
+  
 
   // Finaliza o Likwid
   // LIKWID_MARKER_CLOSE;
+
   // Libera memoria alocada
   libera_tabela(Tabela);
-  libera_sistema_linear_otimizado(SL_ot);
-  free(residuo_ot);
+  libera_sistema_linear(SL);
+  free(residuo);
 
   return 0;
 }

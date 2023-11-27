@@ -5,13 +5,9 @@
 */
 
 #include "sistema_linear.h"
-#include "min_quadrados.h"
-
 #include <stdlib.h>
-#include <fenv.h>
 #include <stdio.h>
 #include <math.h>
-
 
 /*  
   Funcao auxiliar para debugar o codigo
@@ -55,6 +51,7 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
       printf("x[%d]: [%.8e, %.8e]  ", i, SL->x[i].m.f, SL->x[i].M.f);
       printf("\n");
     }
+     printf("\n\n\n");
 }
 
 /*  
@@ -64,7 +61,6 @@ void imprime_sistema_linear(SISTEMA_LINEAR_t *SL) {
   - Vetor X
   - Sistema linear
 */
-
 void libera_sistema_linear(SISTEMA_LINEAR_t *SL) {
   // Libera matriz de coeficientes
   for (int i = 0; i < SL->n; i++)
@@ -78,20 +74,6 @@ void libera_sistema_linear(SISTEMA_LINEAR_t *SL) {
   // Libera SL
   free(SL);
 }
-void libera_sistema_linear_otimizado(SISTEMA_LINEAR_t *SL) {
-  // Libera matriz de coeficientes
-  // libera a memória da matriz
-  free (SL->A[0]);
-  free (SL->A);
-
-  // Libera vetores
-  free(SL->b);
-  free(SL->x);
-
-  // Libera SL
-  free(SL);
-}
-
 
 /*  
   Alocacao de memoria das variaveis
@@ -99,7 +81,6 @@ void libera_sistema_linear_otimizado(SISTEMA_LINEAR_t *SL) {
   - Vetor B
   - Vetor X
 */
-
 SISTEMA_LINEAR_t *aloca_sistema_linear(int n) {
   SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
 
@@ -112,28 +93,6 @@ SISTEMA_LINEAR_t *aloca_sistema_linear(int n) {
 
     SL->b= malloc (SL->n * sizeof (INTERVAL_t));
 
-    SL->x= malloc (SL->n * sizeof (INTERVAL_t));
-
-    return SL;
-}
-
-SISTEMA_LINEAR_t *aloca_sistema_linear_otimizado(int n) {
-  SISTEMA_LINEAR_t *SL = (SISTEMA_LINEAR_t *)malloc(sizeof(SISTEMA_LINEAR_t));
-
-    SL->n = n;
-
-    // Aloca um vetor de LIN ponteiros para linhas
-    SL->A = malloc (SL->n * sizeof (INTERVAL_t*));
-
-    // Aloca um vetor com todos os elementos da matriz
-    SL->A[0] = malloc (SL->n * SL->n * sizeof (INTERVAL_t));
-
-    // Ajusta os demais ponteiros de linhas (i > 0)
-    for (int i = 1; i < SL->n; i++)
-      SL->A[i] = SL->A[0] + i * SL->n;
-
-    SL->b= malloc (SL->n * sizeof (INTERVAL_t));
-    
     SL->x= malloc (SL->n * sizeof (INTERVAL_t));
 
     return SL;
@@ -165,7 +124,7 @@ void retrosubs(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n) {
   Funcao auxiliar ao Metodo de Eliminacao de Gauss
   Utilizada para realizar o pivoteamento parcial
 */
-unsigned int encontra_max(INTERVAL_t **A, int i, int n) {
+unsigned int encontraMax(INTERVAL_t **A,int i, int n) {
   unsigned int maxIndex = i;
   double maxValor = fabs(A[i][i].m.f);
 
@@ -182,12 +141,13 @@ unsigned int encontra_max(INTERVAL_t **A, int i, int n) {
 }
 
 
+
 /*  
   Troca duas linhas da matriz A e vetor b
 
   Funcao auxiliar ao Metodo de Eliminacao de Gauss com pivoteamento parcial
 */
-void troca_linha(INTERVAL_t **A, INTERVAL_t *b, int i, unsigned int iPivo,int n) {
+void trocaLinha(INTERVAL_t **A, INTERVAL_t *b,  int i,  int iPivo,  int n) {
   if (i != iPivo)
   {
     for (int j = 0; j < n; ++j)
@@ -208,13 +168,11 @@ void troca_linha(INTERVAL_t **A, INTERVAL_t *b, int i, unsigned int iPivo,int n)
 
   Utiliza a aritmetica intervalar para realizar todos os calculos necessarios
 */
-void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,int n) {
-
-  // Percorre as linhas
+void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x, int n) {
   for (int i = 0; i < n; ++i) {
-    unsigned int iPivo = encontra_max(A, i, n);
+    unsigned int iPivo = encontraMax(A, i, n);
     if (i != iPivo)
-      troca_linha(A, b, i, iPivo, n);
+      trocaLinha(A, b, i, iPivo, n);
 
     for (int k = i + 1; k < n; ++k) {
       INTERVAL_t m = calcula_div(A[k][i], A[i][i]);
@@ -231,6 +189,8 @@ void elimGauss_parcial(INTERVAL_t **A, INTERVAL_t *b, INTERVAL_t *x,int n) {
   }
 }
 
+
+
 /*  
   Calcula o valor estimado dado um vetor de coeficientes
 
@@ -242,7 +202,8 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, int n)
   valor_previsto.m.f = 0.0;
   valor_previsto.M.f = 0.0;
 
-  for(int i = 0; i <= n; i++) {
+  for(int i = 0; i <= n; i++)
+  {
     INTERVAL_t termo = calcula_pot(x,i);
     INTERVAL_t produto = calcula_mult(coeficientes[i],termo);
 
@@ -250,10 +211,6 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, int n)
   }
   return valor_previsto;
 }
-
-// INTERVAL_t calcula_valor_estimado_otimizado(INTERVAL_t *coeficientes, INTERVAL_t x, int n){
-
-// }
 
 /*  
   Calcula o residuo entre a tabela de pontos e a equacao de ajuste
@@ -274,25 +231,6 @@ void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *res
         // Calcula o residuo para o ponto atual (ri = yi - f(xi))
         residuos[i] = calcula_subtracao(tabela->y[i], valor_estimado);
     }
-}
-
-void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos, int n) {
-    INTERVAL_t valor_previsto;
-    INTERVAL_t produto;
-    INTERVAL_t *tabela_potencias_base = malloc((2 * n + 1) * sizeof(INTERVAL_t));
-
-    for (int k = 0; k < tabela->k; k++) {
-      preencher_tabela_potencias(tabela->x[k], (2 * n) , tabela_potencias_base);
-      valor_previsto.m.f = 0.0;
-      valor_previsto.M.f = 0.0;
-
-      for(int i = 0; i <= n; i++) {
-        produto = calcula_mult(coeficientes[i], tabela_potencias_base[i]);
-        valor_previsto = calcula_soma(valor_previsto, produto);
-      }
-    
-    residuos[k] = calcula_subtracao(tabela->y[k], valor_previsto);
-  }
 }
 
 // Imprime o residuo na formatacao de entrega definida pelo professor

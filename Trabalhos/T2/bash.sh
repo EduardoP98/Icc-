@@ -1,41 +1,76 @@
 #!/bin/bash
 
 # Verifica se o programa está disponível
-if [ ! -f ajustePol ]; then
+if [ ! -f matmult ]; then
+  echo  
   echo "O programa não foi encontrado. Compilando..."
+  echo
   make
   if [ $? -ne 0 ]; then
+    echo
     echo "Falha na compilação do programa."
     exit 1
   fi
 fi
 
 echo
-echo "Programa compilado. Executando com o arquivo de entrada 'teste.in'..."
+echo "Programa compilado. Iniciando preparação do ambiente..."
+echo
 
-# Execute o LIKWID para medir o desempenho
-likwid-perfctr -C 1 -g FLOPS_DP -m ./ajustePol < teste.in > resultado_flops.out
-likwid-perfctr -C 1 -g ENERGY -m ./ajustePol < teste.in > resultado_energy.out
+# Topologia
+echo "Criando arquivo contendo informações sobre a topologia..."
+likwid-topology -g -c > informacoes/likwid_topology.txt
+echo
 
-# Filtra as métricas do LIKWID relacionadas a operações aritméticas e energia
-# Para operações aritméticas, utilizamos o grupo FLOPS_DP e reportamos FLOPS_DP e FLOPS_AVX
-# Para energia, utilizamos o grupo ENERGY e reportamos Energy[J]
-grep -n "." resultado_flops.out | sed -n '1,10p' | cut -d: -f2- > resultado.out
-grep -E 'Region (gera|soluciona)|DP \[MFLOP/s\]|AVX DP \[MFLOP/s\]' resultado_flops.out >> resultado.out
-echo -------------------------------------------------------------------------------- >> resultado.out
-grep -E 'Region (gera|soluciona)|Energy \[J\]' resultado_energy.out >> resultado.out
-echo -------------------------------------------------------------------------------- >> resultado.out
+# Frequencia do processador
+echo  "Fixando frequência do processador..."
+chmod a+rw /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+echo "performance" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
-# Remove arquivo temporário
-rm resultado_flops.out
-rm resultado_energy.out
+# Modulos
+echo
+echo "Carregando módulo msr"
+echo modprobe msr
 
-# Limpando
+# Nucleo
+CORE_ID=1
+echo "Utilizando o core ${CORE_ID}..."
+
+# Teste unico
+# likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > debug.txt
+
+# # Verifique se a pasta já existe
+# if [ ! -d "resultados" ]; then
+#     # Crie a pasta se ela não existir
+#     mkdir "resultados"
+# fi
+
+# Iniciando testes
+# echo
+# echo "Iniciando testes de desempenho..."
+# echo
+# for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
+# do
+#   echo "N = $n"
+#   # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./matmult ${n} > resultados/L2CACHE_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY_$n.txt
+#   # likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP_$n.txt
+# done
+# echo "Pronto! Arquivos criados no diretório resultados..."
+# echo
+
+# # Limpando
 echo
 echo "Finalizando execução e removendo arquivos temporários"
 make purge
 
+# Frequencia original
+echo
+echo "Retornando computador a frequencia original..."
+echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+
 # Mensagem final
 echo
-echo "O resultado final encontra-se no arquivo 'resultado.out'"
+echo "Pronto!"
 echo
