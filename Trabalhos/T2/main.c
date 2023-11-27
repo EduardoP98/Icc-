@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
   int K; 
 
   // Variaveis para calculo do tempo gasto
-  double tgeraSL, tsolSL, t_inicio = 0.0, t_final = 0.0, tgeraSL_ot, tsolSL_ot;
+  double tgeraSL, tsolSL, t_inicio = 0.0, t_final = 0.0, tgeraSL_ot, tsolSL_ot, tResiduo, tResiduo_ot;;
 
   TABELA_t *Tabela;
   SISTEMA_LINEAR_t *SL,*SL_ot;
@@ -106,27 +106,48 @@ int main(int argc, char **argv) {
   tsolSL_ot = t_final - t_inicio;
 
   // Passo 3: Calcula residuo
+  t_inicio = timestamp();
   calcula_residuo(Tabela, SL->x, residuo, N);
-  calcula_residuo(Tabela, SL_ot->x, residuo_ot, N);
+  t_final = timestamp();
+  tResiduo = t_final - t_inicio;
+
+  t_inicio = timestamp();
+  calcula_residuo_otimizado(Tabela, SL_ot->x, residuo_ot, N);
+  t_final = timestamp();
+  tResiduo_ot = t_final - t_inicio;
 
   // Imprime resultados
+  // printf("\nSem otimização\n");
+  // imprime_coef(SL);
+  // printf("\n\n");
+  // imprime_residuo(residuo, K);
+
+  // printf("\nCom otimização\n");
+  // imprime_coef(SL_ot);
+  // printf("\n\n");
+  // imprime_residuo(residuo_ot, K);
+
+  // printf("\nSem otimização\n");
+  // printf("%1.8e\n", tgeraSL);
+  // printf("%1.8e\n", tsolSL);
+  // printf("%1.8e\n", tResiduo);
+
+  // printf("\nCom otimização\n");
+  // printf("%1.8e\n", tgeraSL_ot);
+  // printf("%1.8e\n", tsolSL_ot);
+  // printf("%1.8e\n\n", tResiduo_ot);
+
   printf("\nSem otimização\n");
-  imprime_coef(SL);
-  printf("\n\n");
-  imprime_residuo(residuo, K);
+  printf("%f\n", tgeraSL);
+  printf("%f\n", tsolSL);
+  printf("%f\n", tResiduo);
 
   printf("\nCom otimização\n");
-  imprime_coef(SL_ot);
-  printf("\n\n");
-  imprime_residuo(residuo_ot, K);
+  printf("%f\n", tgeraSL_ot);
+  printf("%f\n", tsolSL_ot);
+  printf("%f\n\n", tResiduo_ot);
 
-  printf("\nSem otimização\n");
-  printf("%1.8e\n", tgeraSL);
-  printf("%1.8e\n", tsolSL);
 
-  printf("\nCom otimização\n");
-  printf("%1.8e\n", tgeraSL_ot);
-  printf("%1.8e\n", tsolSL_ot);
   // Finaliza o Likwid
   // LIKWID_MARKER_CLOSE;
 

@@ -5,7 +5,10 @@
 */
 
 #include "sistema_linear.h"
+#include "min_quadrados.h"
+
 #include <stdlib.h>
+#include <fenv.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -273,8 +276,23 @@ void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *res
     }
 }
 
-void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g){
+void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos, long long int n) {
+    INTERVAL_t valor_previsto;
+    INTERVAL_t produto;
+    INTERVAL_t *tabela_potencias_base = malloc((2 * n + 1) * sizeof(INTERVAL_t));
 
+    for (long long int k = 0; k < tabela->k; k++) {
+      preencher_tabela_potencias(tabela->x[k], (2 * n) , tabela_potencias_base);
+      valor_previsto.m.f = 0.0;
+      valor_previsto.M.f = 0.0;
+
+      for(long long int i = 0; i <= n; i++) {
+        produto = calcula_mult(coeficientes[i], tabela_potencias_base[i]);
+        valor_previsto = calcula_soma(valor_previsto, produto);
+      }
+    
+    residuos[k] = calcula_subtracao(tabela->y[k], valor_previsto);
+  }
 }
 
 // Imprime o residuo na formatacao de entrega definida pelo professor

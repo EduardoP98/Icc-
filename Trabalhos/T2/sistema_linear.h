@@ -59,8 +59,9 @@ INTERVAL_t calcula_valor_estimado(INTERVAL_t *coeficientes, INTERVAL_t x, long l
 // INTERVAL_t calcula_valor_estimado_otimizado(INTERVAL_t *coeficientes, INTERVAL_t x, long long int n);
 
 // Calcula o residuo entre a tabela de pontos e a equacao de ajuste
-void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
-void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos,long long int g);
+void calcula_residuo(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos, long long int g);
+
+void calcula_residuo_otimizado(TABELA_t *tabela, INTERVAL_t *coeficientes, INTERVAL_t *residuos, long long int n);
 
 // Imprime o residuo na formatacao de entrega definida pelo professor
 void imprime_residuo(INTERVAL_t *residuo,long long int n);
