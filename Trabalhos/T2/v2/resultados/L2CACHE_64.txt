@@ -1,0 +1,109 @@
+--------------------------------------------------------------------------------
+CPU name:	AMD Ryzen 5 2600 Six-Core Processor            
+CPU type:	AMD K17 (Zen+) architecture
+CPU clock:	3.39 GHz
+--------------------------------------------------------------------------------
+5.41992188e-02
+3.90625000e-03
+1.90429688e-02
+
+--------------------------------------------------------------------------------
+Region gera-sistema-linear, Group 1: CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000055 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |     441180 |
+|      MAX_CPU_CLOCK     |  FIXC2  |     398548 |
+|  RETIRED_INSTRUCTIONS  |   PMC0  |     263607 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |     221783 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |     124781 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        311 |
++------------------------+---------+------------+
+
++-------------------------+------------+
+|          Metric         | HWThread 1 |
++-------------------------+------------+
+|   Runtime (RDTSC) [s]   |     0.0001 |
+|   Runtime unhalted [s]  |     0.0001 |
+|       Clock [MHz]       |  3756.6828 |
+|           CPI           |     0.8413 |
+|   data cache requests   |     124781 |
+| data cache request rate |     0.4734 |
+|    data cache misses    |        311 |
+|   data cache miss rate  |     0.0012 |
+|  data cache miss ratio  |     0.0025 |
++-------------------------+------------+
+
+Region soluciona-sistema-linear, Group 1: CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000004 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |     239607 |
+|      MAX_CPU_CLOCK     |  FIXC2  |     217464 |
+|  RETIRED_INSTRUCTIONS  |   PMC0  |      22658 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |      29261 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |      11313 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        292 |
++------------------------+---------+------------+
+
++-------------------------+--------------+
+|          Metric         |  HWThread 1  |
++-------------------------+--------------+
+|   Runtime (RDTSC) [s]   | 3.817112e-06 |
+|   Runtime unhalted [s]  |       0.0001 |
+|       Clock [MHz]       |    3739.2239 |
+|           CPI           |       1.2914 |
+|   data cache requests   |        11313 |
+| data cache request rate |       0.4993 |
+|    data cache misses    |          292 |
+|   data cache miss rate  |       0.0129 |
+|  data cache miss ratio  |       0.0258 |
++-------------------------+--------------+
+
+Region calcula-residuo, Group 1: CACHE
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000020 |
+|     call count    |          1 |
++-------------------+------------+
+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |     302096 |
+|      MAX_CPU_CLOCK     |  FIXC2  |     271218 |
+|  RETIRED_INSTRUCTIONS  |   PMC0  |     102209 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |      86084 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |      46270 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        316 |
++------------------------+---------+------------+
+
++-------------------------+--------------+
+|          Metric         |  HWThread 1  |
++-------------------------+--------------+
+|   Runtime (RDTSC) [s]   | 1.981692e-05 |
+|   Runtime unhalted [s]  |       0.0001 |
+|       Clock [MHz]       |    3780.0349 |
+|           CPI           |       0.8422 |
+|   data cache requests   |        46270 |
+| data cache request rate |       0.4527 |
+|    data cache misses    |          316 |
+|   data cache miss rate  |       0.0031 |
+|  data cache miss ratio  |       0.0068 |
++-------------------------+--------------+
+

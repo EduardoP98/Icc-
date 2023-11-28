@@ -11,7 +11,7 @@ else
 endif
 
 # Flags
-flags_compilacao = -Wall -O3 -mavx -march=native $(debug_flags) -lm #-DLIKWID_PERFMON -llikwid 
+flags_compilacao = -Wall -O3 -mavx -march=native $(debug_flags) -lm -DLIKWID_PERFMON -llikwid 
 
 # Compilador
 CC = gcc

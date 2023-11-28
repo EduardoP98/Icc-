@@ -1,21 +1,10 @@
 #!/bin/bash
 
-# Verifica se o programa está disponível
-if [ ! -f matmult ]; then
-  echo  
-  echo "O programa não foi encontrado. Compilando..."
-  echo
-  make
-  if [ $? -ne 0 ]; then
-    echo
-    echo "Falha na compilação do programa."
-    exit 1
-  fi
-fi
 
-echo
-echo "Programa compilado. Iniciando preparação do ambiente..."
-echo
+if [ ! -d "informacoes" ]; then
+    # Crie a pasta se ela não existir
+    mkdir "informacoes"
+fi
 
 # Topologia
 echo "Criando arquivo contendo informações sobre a topologia..."
@@ -39,31 +28,97 @@ echo "Utilizando o core ${CORE_ID}..."
 # Teste unico
 # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult 64 > debug.txt
 
-# # Verifique se a pasta já existe
-# if [ ! -d "resultados" ]; then
-#     # Crie a pasta se ela não existir
-#     mkdir "resultados"
-# fi
-
 # Iniciando testes
 # echo
-# echo "Iniciando testes de desempenho..."
+echo "Iniciando testes de desempenho... Utilizando a Versão 1"
+echo
+cd v1
+# Verifique se a pasta já existe
+if [ ! -d "resultados" ]; then
+    # Crie a pasta se ela não existir
+    mkdir "resultados"
+fi
+
+# Verifica se o programa está disponível
+if [ ! -f ajustePol ]; then
+  echo  
+  echo "O programa não foi encontrado. Compilando..."
+  echo
+  make
+  if [ $? -ne 0 ]; then
+    echo
+    echo "Falha na compilação do programa."
+    exit 1
+  fi
+fi
+
+echo
+echo "Programa compilado. Iniciando preparação do ambiente..."
+echo
+
+for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 100000 1000000 10000000 100000000 
+do
+
+  echo "N = $n"
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
+    
+done
+echo "Pronto! Arquivos criados no diretório resultados..."
+echo
+# # Limpando
+echo
+echo "Finalizando execução e removendo arquivos temporários"
+make purge
+cd ..
+
+
+# echo "Iniciando testes de desempenho... Utilizando a Versão 2"
 # echo
-# for n in 64 100 128 200 256 512 600 900 1024 2000 2048 3000 4000
-# do
-#   echo "N = $n"
-#   # likwid-perfctr -C ${CORE_ID} -g L3 -m ./matmult ${n} > resultados/L3_$n.txt
-#   # likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./matmult ${n} > resultados/L2CACHE_$n.txt
-#   # likwid-perfctr -C ${CORE_ID} -g ENERGY  -m ./matmult ${n} > resultados/ENERGY_$n.txt
-#   # likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./matmult ${n} > resultados/FLOPS_DP_$n.txt
-# done
-# echo "Pronto! Arquivos criados no diretório resultados..."
-# echo
+cd v2
+# Verifique se a pasta já existe
+if [ ! -d "resultados" ]; then
+    # Crie a pasta se ela não existir
+    mkdir "resultados"
+fi
+
+# Verifica se o programa está disponível
+if [ ! -f ajustePol ]; then
+  echo  
+  echo "O programa não foi encontrado. Compilando..."
+  echo
+  make
+  if [ $? -ne 0 ]; then
+    echo
+    echo "Falha na compilação do programa."
+    exit 1
+  fi
+fi
+
+echo
+echo "Programa compilado. Iniciando preparação do ambiente..."
+echo
+
+for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 100000 1000000 10000000 100000000 
+do
+  
+  echo "N = $n" 
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
+done
+echo "Pronto! Arquivos criados no diretório resultados..."
+echo
+
+sleep 1
 
 # # Limpando
 echo
 echo "Finalizando execução e removendo arquivos temporários"
 make purge
+
+cd ..
 
 # Frequencia original
 echo
