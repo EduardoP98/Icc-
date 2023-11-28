@@ -17,14 +17,14 @@
 #include "interval.h"
 #include "min_quadrados.h"
 
-// #ifdef LIKWID_PERFMON
-// #include <likwid.h>
-// #else
-// #define LIKWID_MARKER_INIT
-// #define LIKWID_MARKER_START(regionTag)
-// #define LIKWID_MARKER_STOP(regionTag)
-// #define LIKWID_MARKER_CLOSE
-// #endif
+#ifdef LIKWID_PERFMON
+#include <likwid.h>
+#else
+#define LIKWID_MARKER_INIT
+#define LIKWID_MARKER_START(regionTag)
+#define LIKWID_MARKER_STOP(regionTag)
+#define LIKWID_MARKER_CLOSE
+#endif
 
 int main(int argc, char **argv) {
   // N = grau do polinomio de ajuste (1a linha)
@@ -66,14 +66,14 @@ int main(int argc, char **argv) {
   #endif
 
   //Inicia Likwid
-  // LIKWID_MARKER_INIT;
+  LIKWID_MARKER_INIT;
   
   // // Gera SL a partir da tabela de pontos
-  // LIKWID_MARKER_START("gera-sistema-linear");
+  LIKWID_MARKER_START("gera-sistema-linear");
   t_inicio = timestamp();
   minQuadrados (Tabela, N, SL);
   t_final = timestamp();
-  // LIKWID_MARKER_STOP("gera-sistema-linear");
+  LIKWID_MARKER_STOP("gera-sistema-linear");
   tgeraSL = t_final - t_inicio;
 
   #ifdef DEBUG
@@ -81,21 +81,21 @@ int main(int argc, char **argv) {
   #endif
 
   // Soluciona o sistema linear
-  // LIKWID_MARKER_START("soluciona-sistema-linear");
+  LIKWID_MARKER_START("soluciona-sistema-linear");
   t_inicio = timestamp();
   elimGauss_parcial(SL->A, SL->b, SL->x, N+1);
   retrosubs(SL->A, SL->b, SL->x, N+1);
   t_final = timestamp();
-  // LIKWID_MARKER_STOP("soluciona-sistema-linear");
+  LIKWID_MARKER_STOP("soluciona-sistema-linear");
   tsolSL = t_final - t_inicio;
 
   // Calcula residuo
-  // LIKWID_MARKER_START("calcula-residuo");
+  LIKWID_MARKER_START("calcula-residuo");
   t_inicio = timestamp();
   calcula_residuo(Tabela, SL->x, residuo, N);
   t_final = timestamp();
   tResiduo = t_final - t_inicio;
-  // LIKWID_MARKER_STOP("calcula-residuo");
+  LIKWID_MARKER_STOP("calcula-residuo");
 
   // Imprime resultados
   // imprime_coef(SL);
@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
   
 
   // Finaliza o Likwid
-  // LIKWID_MARKER_CLOSE;
+  LIKWID_MARKER_CLOSE;
 
   // Libera memoria alocada
   libera_tabela(Tabela);

@@ -1,0 +1,109 @@
+--------------------------------------------------------------------------------
+CPU name:	AMD Ryzen 5 2600 Six-Core Processor            
+CPU type:	AMD K17 (Zen+) architecture
+CPU clock:	3.39 GHz
+--------------------------------------------------------------------------------
+5.43798829e+00
+5.12695313e-03
+2.19189454e+00
+
+--------------------------------------------------------------------------------
+Region gera-sistema-linear, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.005439 |
+|     call count    |          1 |
++-------------------+------------+
+
++----------------------+---------+------------+
+|         Event        | Counter | HWThread 1 |
++----------------------+---------+------------+
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |   20946010 |
+|     MAX_CPU_CLOCK    |  FIXC2  |   18757570 |
+| RETIRED_INSTRUCTIONS |   PMC0  |   24156240 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |   20640860 |
+|       L3_ACCESS      |  CPMC0  |      97116 |
+|        L3_MISS       |  CPMC1  |      51313 |
++----------------------+---------+------------+
+
++--------------------------------+------------+
+|             Metric             | HWThread 1 |
++--------------------------------+------------+
+|       Runtime (RDTSC) [s]      |     0.0054 |
+|      Runtime unhalted [s]      |     0.0062 |
+|           Clock [MHz]          |  3789.5998 |
+|               CPI              |     0.8545 |
+| L3 access bandwidth [MBytes/s] |  1142.7565 |
+| L3 access data volume [GBytes] |     0.0062 |
+|       L3 access rate [%]       |     0.4020 |
+|        L3 miss rate [%]        |     0.2124 |
+|        L3 miss ratio [%]       |    52.8368 |
++--------------------------------+------------+
+
+Region soluciona-sistema-linear, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.000005 |
+|     call count    |          1 |
++-------------------+------------+
+
++----------------------+---------+------------+
+|         Event        | Counter | HWThread 1 |
++----------------------+---------+------------+
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |     364703 |
+|     MAX_CPU_CLOCK    |  FIXC2  |     321164 |
+| RETIRED_INSTRUCTIONS |   PMC0  |      22658 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |      42690 |
+|       L3_ACCESS      |  CPMC0  |       6462 |
+|        L3_MISS       |  CPMC1  |       2995 |
++----------------------+---------+------------+
+
++--------------------------------+--------------+
+|             Metric             |  HWThread 1  |
++--------------------------------+--------------+
+|       Runtime (RDTSC) [s]      | 5.199680e-06 |
+|      Runtime unhalted [s]      |       0.0001 |
+|           Clock [MHz]          |    3853.7283 |
+|               CPI              |       1.8841 |
+| L3 access bandwidth [MBytes/s] |   79537.2023 |
+| L3 access data volume [GBytes] |       0.0004 |
+|       L3 access rate [%]       |      28.5197 |
+|        L3 miss rate [%]        |      13.2183 |
+|        L3 miss ratio [%]       |      46.3479 |
++--------------------------------+--------------+
+
+Region calcula-residuo, Group 1: L3
++-------------------+------------+
+|    Region Info    | HWThread 1 |
++-------------------+------------+
+| RDTSC Runtime [s] |   0.002192 |
+|     call count    |          1 |
++-------------------+------------+
+
++----------------------+---------+------------+
+|         Event        | Counter | HWThread 1 |
++----------------------+---------+------------+
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |    8699416 |
+|     MAX_CPU_CLOCK    |  FIXC2  |    7777432 |
+| RETIRED_INSTRUCTIONS |   PMC0  |    9006305 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |    8220844 |
+|       L3_ACCESS      |  CPMC0  |     168131 |
+|        L3_MISS       |  CPMC1  |      89719 |
++----------------------+---------+------------+
+
++--------------------------------+------------+
+|             Metric             | HWThread 1 |
++--------------------------------+------------+
+|       Runtime (RDTSC) [s]      |     0.0022 |
+|      Runtime unhalted [s]      |     0.0026 |
+|           Clock [MHz]          |  3795.9675 |
+|               CPI              |     0.9128 |
+| L3 access bandwidth [MBytes/s] |  4908.0790 |
+| L3 access data volume [GBytes] |     0.0108 |
+|       L3 access rate [%]       |     1.8668 |
+|        L3 miss rate [%]        |     0.9962 |
+|        L3 miss ratio [%]       |    53.3626 |
++--------------------------------+------------+
+
