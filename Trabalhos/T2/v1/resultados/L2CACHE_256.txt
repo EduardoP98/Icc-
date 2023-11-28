@@ -3,41 +3,41 @@ CPU name:	AMD Ryzen 5 2600 Six-Core Processor
 CPU type:	AMD K17 (Zen+) architecture
 CPU clock:	3.39 GHz
 --------------------------------------------------------------------------------
-4.47265625e-01
+5.78125000e-01
 4.15039063e-03
-9.98535157e-02
+1.30126954e-01
 --------------------------------------------------------------------------------
 Region gera-sistema-linear, Group 1: CACHE
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000448 |
+| RDTSC Runtime [s] |   0.000578 |
 |     call count    |          1 |
 +-------------------+------------+
 
 +------------------------+---------+------------+
 |          Event         | Counter | HWThread 1 |
 +------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |    2032989 |
-|      MAX_CPU_CLOCK     |  FIXC2  |    1772556 |
-|  RETIRED_INSTRUCTIONS  |   PMC0  |    3082323 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |    1724486 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |    1025365 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        445 |
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |    2505403 |
+|      MAX_CPU_CLOCK     |  FIXC2  |    2182766 |
+|  RETIRED_INSTRUCTIONS  |   PMC0  |    3082320 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |    2230972 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |    1024130 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        793 |
 +------------------------+---------+------------+
 
 +-------------------------+------------+
 |          Metric         | HWThread 1 |
 +-------------------------+------------+
-|   Runtime (RDTSC) [s]   |     0.0004 |
-|   Runtime unhalted [s]  |     0.0006 |
-|       Clock [MHz]       |  3892.2253 |
-|           CPI           |     0.5595 |
-|   data cache requests   |    1025365 |
-| data cache request rate |     0.3327 |
-|    data cache misses    |        445 |
-|   data cache miss rate  |     0.0001 |
-|  data cache miss ratio  |     0.0004 |
+|   Runtime (RDTSC) [s]   |     0.0006 |
+|   Runtime unhalted [s]  |     0.0007 |
+|       Clock [MHz]       |  3895.3369 |
+|           CPI           |     0.7238 |
+|   data cache requests   |    1024130 |
+| data cache request rate |     0.3323 |
+|    data cache misses    |        793 |
+|   data cache miss rate  |     0.0003 |
+|  data cache miss ratio  |     0.0008 |
 +-------------------------+------------+
 
 Region soluciona-sistema-linear, Group 1: CACHE
@@ -51,45 +51,45 @@ Region soluciona-sistema-linear, Group 1: CACHE
 +------------------------+---------+------------+
 |          Event         | Counter | HWThread 1 |
 +------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |     238460 |
-|      MAX_CPU_CLOCK     |  FIXC2  |     207910 |
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |     269929 |
+|      MAX_CPU_CLOCK     |  FIXC2  |     238578 |
 |  RETIRED_INSTRUCTIONS  |   PMC0  |      22767 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |      29322 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |      11771 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        316 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |      34518 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |      11593 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        353 |
 +------------------------+---------+------------+
 
 +-------------------------+--------------+
 |          Metric         |  HWThread 1  |
 +-------------------------+--------------+
-|   Runtime (RDTSC) [s]   | 3.837173e-06 |
+|   Runtime (RDTSC) [s]   | 4.448253e-06 |
 |   Runtime unhalted [s]  |       0.0001 |
-|       Clock [MHz]       |    3892.2710 |
-|           CPI           |       1.2879 |
-|   data cache requests   |        11771 |
-| data cache request rate |       0.5170 |
-|    data cache misses    |          316 |
-|   data cache miss rate  |       0.0139 |
-|  data cache miss ratio  |       0.0268 |
+|       Clock [MHz]       |    3839.6688 |
+|           CPI           |       1.5161 |
+|   data cache requests   |        11593 |
+| data cache request rate |       0.5092 |
+|    data cache misses    |          353 |
+|   data cache miss rate  |       0.0155 |
+|  data cache miss ratio  |       0.0304 |
 +-------------------------+--------------+
 
 Region calcula-residuo, Group 1: CACHE
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000100 |
+| RDTSC Runtime [s] |   0.000130 |
 |     call count    |          1 |
 +-------------------+------------+
 
 +------------------------+---------+------------+
 |          Event         | Counter | HWThread 1 |
 +------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |     618616 |
-|      MAX_CPU_CLOCK     |  FIXC2  |     537438 |
-|  RETIRED_INSTRUCTIONS  |   PMC0  |     673299 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |     401537 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |     253247 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        403 |
+|    ACTUAL_CPU_CLOCK    |  FIXC1  |     755351 |
+|      MAX_CPU_CLOCK     |  FIXC2  |     658478 |
+|  RETIRED_INSTRUCTIONS  |   PMC0  |     673293 |
+|   CPU_CLOCKS_UNHALTED  |   PMC1  |     520950 |
+|   DATA_CACHE_ACCESSES  |   PMC2  |     252557 |
+| DATA_CACHE_REFILLS_ALL |   PMC3  |        457 |
 +------------------------+---------+------------+
 
 +-------------------------+------------+
@@ -97,12 +97,12 @@ Region calcula-residuo, Group 1: CACHE
 +-------------------------+------------+
 |   Runtime (RDTSC) [s]   |     0.0001 |
 |   Runtime unhalted [s]  |     0.0002 |
-|       Clock [MHz]       |  3906.2109 |
-|           CPI           |     0.5964 |
-|   data cache requests   |     253247 |
-| data cache request rate |     0.3761 |
-|    data cache misses    |        403 |
-|   data cache miss rate  |     0.0006 |
-|  data cache miss ratio  |     0.0016 |
+|       Clock [MHz]       |  3892.9798 |
+|           CPI           |     0.7737 |
+|   data cache requests   |     252557 |
+| data cache request rate |     0.3751 |
+|    data cache misses    |        457 |
+|   data cache miss rate  |     0.0007 |
+|  data cache miss ratio  |     0.0018 |
 +-------------------------+------------+
 

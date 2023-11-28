@@ -3,26 +3,26 @@ CPU name:	AMD Ryzen 5 2600 Six-Core Processor
 CPU type:	AMD K17 (Zen+) architecture
 CPU clock:	3.39 GHz
 --------------------------------------------------------------------------------
-8.88239747e+01
+8.03471680e+01
 3.90625000e-03
-3.00209961e+01
+2.80239258e+01
 
 --------------------------------------------------------------------------------
 Region gera-sistema-linear, Group 1: FLOPS_DP
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.088826 |
+| RDTSC Runtime [s] |   0.080349 |
 |     call count    |          1 |
 +-------------------+------------+
 
 +----------------------------------+---------+------------+
 |               Event              | Counter | HWThread 1 |
 +----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |  324012400 |
-|           MAX_CPU_CLOCK          |  FIXC2  |  301868300 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |  402506900 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |  322576900 |
+|         ACTUAL_CPU_CLOCK         |  FIXC1  |  306118700 |
+|           MAX_CPU_CLOCK          |  FIXC2  |  272972600 |
+|       RETIRED_INSTRUCTIONS       |   PMC0  |  402506100 |
+|        CPU_CLOCKS_UNHALTED       |   PMC1  |  305293800 |
 | RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |    9600013 |
 |               MERGE              |   PMC3  |          0 |
 +----------------------------------+---------+------------+
@@ -30,11 +30,11 @@ Region gera-sistema-linear, Group 1: FLOPS_DP
 +----------------------+------------+
 |        Metric        | HWThread 1 |
 +----------------------+------------+
-|  Runtime (RDTSC) [s] |     0.0888 |
-| Runtime unhalted [s] |     0.0955 |
-|      Clock [MHz]     |  3642.6161 |
-|          CPI         |     0.8014 |
-|     DP [MFLOP/s]     |   108.0769 |
+|  Runtime (RDTSC) [s] |     0.0803 |
+| Runtime unhalted [s] |     0.0902 |
+|      Clock [MHz]     |  3805.5442 |
+|          CPI         |     0.7585 |
+|     DP [MFLOP/s]     |   119.4796 |
 +----------------------+------------+
 
 Region soluciona-sistema-linear, Group 1: FLOPS_DP
@@ -48,10 +48,10 @@ Region soluciona-sistema-linear, Group 1: FLOPS_DP
 +----------------------------------+---------+------------+
 |               Event              | Counter | HWThread 1 |
 +----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |     275834 |
-|           MAX_CPU_CLOCK          |  FIXC2  |     255374 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |      22658 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |      34221 |
+|         ACTUAL_CPU_CLOCK         |  FIXC1  |     268736 |
+|           MAX_CPU_CLOCK          |  FIXC2  |     238918 |
+|       RETIRED_INSTRUCTIONS       |   PMC0  |      22660 |
+|        CPU_CLOCKS_UNHALTED       |   PMC1  |      31301 |
 | RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |        372 |
 |               MERGE              |   PMC3  |          0 |
 +----------------------------------+---------+------------+
@@ -59,28 +59,28 @@ Region soluciona-sistema-linear, Group 1: FLOPS_DP
 +----------------------+--------------+
 |        Metric        |  HWThread 1  |
 +----------------------+--------------+
-|  Runtime (RDTSC) [s] | 4.097633e-06 |
+|  Runtime (RDTSC) [s] | 3.797116e-06 |
 | Runtime unhalted [s] |       0.0001 |
-|      Clock [MHz]     |    3665.5606 |
-|          CPI         |       1.5103 |
-|     DP [MFLOP/s]     |      90.7841 |
+|      Clock [MHz]     |    3817.0069 |
+|          CPI         |       1.3813 |
+|     DP [MFLOP/s]     |      97.9691 |
 +----------------------+--------------+
 
 Region calcula-residuo, Group 1: FLOPS_DP
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.030022 |
+| RDTSC Runtime [s] |   0.028025 |
 |     call count    |          1 |
 +-------------------+------------+
 
 +----------------------------------+---------+------------+
 |               Event              | Counter | HWThread 1 |
 +----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |  110270400 |
-|           MAX_CPU_CLOCK          |  FIXC2  |  102299900 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |  150006900 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |  108042400 |
+|         ACTUAL_CPU_CLOCK         |  FIXC1  |  106655900 |
+|           MAX_CPU_CLOCK          |  FIXC2  |   95438170 |
+|       RETIRED_INSTRUCTIONS       |   PMC0  |  150006800 |
+|        CPU_CLOCKS_UNHALTED       |   PMC1  |  104589600 |
 | RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |    4800013 |
 |               MERGE              |   PMC3  |          0 |
 +----------------------------------+---------+------------+
@@ -88,10 +88,10 @@ Region calcula-residuo, Group 1: FLOPS_DP
 +----------------------+------------+
 |        Metric        | HWThread 1 |
 +----------------------+------------+
-|  Runtime (RDTSC) [s] |     0.0300 |
-| Runtime unhalted [s] |     0.0325 |
-|      Clock [MHz]     |  3658.0785 |
-|          CPI         |     0.7202 |
-|     DP [MFLOP/s]     |   159.8822 |
+|  Runtime (RDTSC) [s] |     0.0280 |
+| Runtime unhalted [s] |     0.0314 |
+|      Clock [MHz]     |  3792.3530 |
+|          CPI         |     0.6972 |
+|     DP [MFLOP/s]     |   171.2766 |
 +----------------------+------------+
 
