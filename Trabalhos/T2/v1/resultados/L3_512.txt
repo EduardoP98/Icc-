@@ -5,7 +5,7 @@ CPU clock:	3.39 GHz
 --------------------------------------------------------------------------------
 8.71093750e-01
 4.15039063e-03
-1.97998047e-01
+1.97021485e-01
 --------------------------------------------------------------------------------
 Region gera-sistema-linear, Group 1: L3
 +-------------------+------------+
@@ -18,12 +18,12 @@ Region gera-sistema-linear, Group 1: L3
 +----------------------+---------+------------+
 |         Event        | Counter | HWThread 1 |
 +----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |    3629475 |
-|     MAX_CPU_CLOCK    |  FIXC2  |    3163768 |
-| RETIRED_INSTRUCTIONS |   PMC0  |    6158167 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |    3380227 |
-|       L3_ACCESS      |  CPMC0  |       7658 |
-|        L3_MISS       |  CPMC1  |       2762 |
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |    3642563 |
+|     MAX_CPU_CLOCK    |  FIXC2  |    3171656 |
+| RETIRED_INSTRUCTIONS |   PMC0  |    6158164 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |    3381258 |
+|       L3_ACCESS      |  CPMC0  |       3047 |
+|        L3_MISS       |  CPMC1  |       1132 |
 +----------------------+---------+------------+
 
 +--------------------------------+------------+
@@ -31,13 +31,13 @@ Region gera-sistema-linear, Group 1: L3
 +--------------------------------+------------+
 |       Runtime (RDTSC) [s]      |     0.0009 |
 |      Runtime unhalted [s]      |     0.0011 |
-|           Clock [MHz]          |  3893.1893 |
-|               CPI              |     0.5489 |
-| L3 access bandwidth [MBytes/s] |   561.9900 |
-| L3 access data volume [GBytes] |     0.0005 |
-|       L3 access rate [%]       |     0.1244 |
-|        L3 miss rate [%]        |     0.0449 |
-|        L3 miss ratio [%]       |    36.0669 |
+|           Clock [MHz]          |  3897.5875 |
+|               CPI              |     0.5491 |
+| L3 access bandwidth [MBytes/s] |   223.7474 |
+| L3 access data volume [GBytes] |     0.0002 |
+|       L3 access rate [%]       |     0.0495 |
+|        L3 miss rate [%]        |     0.0184 |
+|        L3 miss ratio [%]       |    37.1513 |
 +--------------------------------+------------+
 
 Region soluciona-sistema-linear, Group 1: L3
@@ -51,45 +51,45 @@ Region soluciona-sistema-linear, Group 1: L3
 +----------------------+---------+------------+
 |         Event        | Counter | HWThread 1 |
 +----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |     236159 |
-|     MAX_CPU_CLOCK    |  FIXC2  |     204918 |
-| RETIRED_INSTRUCTIONS |   PMC0  |      22670 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |      29531 |
-|       L3_ACCESS      |  CPMC0  |        854 |
-|        L3_MISS       |  CPMC1  |        115 |
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |     245221 |
+|     MAX_CPU_CLOCK    |  FIXC2  |     209032 |
+| RETIRED_INSTRUCTIONS |   PMC0  |      22668 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |      29655 |
+|       L3_ACCESS      |  CPMC0  |        754 |
+|        L3_MISS       |  CPMC1  |        147 |
 +----------------------+---------+------------+
 
 +--------------------------------+--------------+
 |             Metric             |  HWThread 1  |
 +--------------------------------+--------------+
-|       Runtime (RDTSC) [s]      | 3.686896e-06 |
+|       Runtime (RDTSC) [s]      | 3.736922e-06 |
 |      Runtime unhalted [s]      |       0.0001 |
-|           Clock [MHz]          |    3911.0263 |
-|               CPI              |       1.3026 |
-| L3 access bandwidth [MBytes/s] |   14824.3943 |
-| L3 access data volume [GBytes] |       0.0001 |
-|       L3 access rate [%]       |       3.7671 |
-|        L3 miss rate [%]        |       0.5073 |
-|        L3 miss ratio [%]       |      13.4660 |
+|           Clock [MHz]          |    3981.2529 |
+|               CPI              |       1.3082 |
+| L3 access bandwidth [MBytes/s] |   12913.3014 |
+| L3 access data volume [GBytes] | 4.825600e-05 |
+|       L3 access rate [%]       |       3.3263 |
+|        L3 miss rate [%]        |       0.6485 |
+|        L3 miss ratio [%]       |      19.4960 |
 +--------------------------------+--------------+
 
 Region calcula-residuo, Group 1: L3
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000198 |
+| RDTSC Runtime [s] |   0.000197 |
 |     call count    |          1 |
 +-------------------+------------+
 
 +----------------------+---------+------------+
 |         Event        | Counter | HWThread 1 |
 +----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |     997479 |
-|     MAX_CPU_CLOCK    |  FIXC2  |     869788 |
-| RETIRED_INSTRUCTIONS |   PMC0  |    1340690 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |     778389 |
-|       L3_ACCESS      |  CPMC0  |       2085 |
-|        L3_MISS       |  CPMC1  |        283 |
+|   ACTUAL_CPU_CLOCK   |  FIXC1  |     994476 |
+|     MAX_CPU_CLOCK    |  FIXC2  |     866116 |
+| RETIRED_INSTRUCTIONS |   PMC0  |    1340694 |
+|  CPU_CLOCKS_UNHALTED |   PMC1  |     776948 |
+|       L3_ACCESS      |  CPMC0  |       1700 |
+|        L3_MISS       |  CPMC1  |        231 |
 +----------------------+---------+------------+
 
 +--------------------------------+------------+
@@ -97,12 +97,12 @@ Region calcula-residuo, Group 1: L3
 +--------------------------------+------------+
 |       Runtime (RDTSC) [s]      |     0.0002 |
 |      Runtime unhalted [s]      |     0.0003 |
-|           Clock [MHz]          |  3891.8553 |
-|               CPI              |     0.5806 |
-| L3 access bandwidth [MBytes/s] |   674.9969 |
+|           Clock [MHz]          |  3896.6655 |
+|               CPI              |     0.5795 |
+| L3 access bandwidth [MBytes/s] |   551.6251 |
 | L3 access data volume [GBytes] |     0.0001 |
-|       L3 access rate [%]       |     0.1555 |
-|        L3 miss rate [%]        |     0.0211 |
-|        L3 miss ratio [%]       |    13.5731 |
+|       L3 access rate [%]       |     0.1268 |
+|        L3 miss rate [%]        |     0.0172 |
+|        L3 miss ratio [%]       |    13.5882 |
 +--------------------------------+------------+
 

@@ -37,6 +37,7 @@ cd v1
 if [ ! -d "resultados" ]; then
     # Crie a pasta se ela não existir
     mkdir "resultados"
+    mkdir "resultados/tempo"
 fi
 
 # Verifica se o programa está disponível
@@ -60,6 +61,7 @@ for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 10
 do
 
   echo "N = $n"
+  ./gera_entrada $n|  ./ajustePol >  resultados/tempo/$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
@@ -81,6 +83,7 @@ cd v2
 if [ ! -d "resultados" ]; then
     # Crie a pasta se ela não existir
     mkdir "resultados"
+    mkdir "resultados/tempo"
 fi
 
 # Verifica se o programa está disponível
@@ -104,6 +107,7 @@ for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 10
 do
   
   echo "N = $n" 
+  ./gera_entrada $n|  ./ajustePol >  resultados/tempo/$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
