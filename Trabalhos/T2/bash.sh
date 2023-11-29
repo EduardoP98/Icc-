@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [ ! -d "informacoes" ]; then
     # Crie a pasta se ela não existir
     mkdir "informacoes"
@@ -30,50 +29,52 @@ echo "Utilizando o core ${CORE_ID}..."
 
 # Iniciando testes
 # echo
-echo "Iniciando testes de desempenho... Utilizando a Versão 1"
-echo
-cd v1
-# Verifique se a pasta já existe
-if [ ! -d "resultados" ]; then
-    # Crie a pasta se ela não existir
-    mkdir "resultados"
-    mkdir "resultados/tempo"
-fi
+# echo "Iniciando testes de desempenho..." 
+# echo "Utilizando a Versão 1"
+# echo
 
-# Verifica se o programa está disponível
-if [ ! -f ajustePol ]; then
-  echo  
-  echo "O programa não foi encontrado. Compilando..."
-  echo
-  make
-  if [ $? -ne 0 ]; then
-    echo
-    echo "Falha na compilação do programa."
-    exit 1
-  fi
-fi
+# cd v1
+# # Verifique se a pasta já existe
+# if [ ! -d "resultados" ]; then
+#     # Crie a pasta se ela não existir
+#     mkdir "resultados"
+#     mkdir "resultados/tempo"
+# fi
 
-echo
-echo "Programa compilado. Iniciando preparação do ambiente..."
-echo
+# # Verifica se o programa está disponível
+# if [ ! -f ajustePol ]; then
+#   echo  
+#   echo "O programa não foi encontrado. Compilando..."
+#   echo
+#   make
+#   if [ $? -ne 0 ]; then
+#     echo
+#     echo "Falha na compilação do programa."
+#     exit 1
+#   fi
+# fi
 
-for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 100000 1000000 10000000 100000000 
-do
+# echo
+# echo "Programa compilado. Iniciando preparação do ambiente..."
+# echo
 
-  echo "N = $n"
-  ./gera_entrada $n|  ./ajustePol >  resultados/tempo/$n.txt
-  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
-  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
-  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
+# for n in 64 128 200 256 512 600 800 1024 2000 3000 4096 6000 7000 10000 50000 100000 1000000 10000000 100000000 
+# do
+
+#   echo "N = $n"
+  # ./gera_entrada $n|  ./ajustePol >  resultados/tempo/$n.txt
+  # ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
+  # ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
+  # ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
     
-done
-echo "Pronto! Arquivos criados no diretório resultados..."
-echo
-# # Limpando
-echo
-echo "Finalizando execução e removendo arquivos temporários"
-make purge
-cd ..
+# done
+# echo "Pronto! Arquivos criados no diretório resultados..."
+# echo
+# # # Limpando
+# echo
+# echo "Finalizando execução e removendo arquivos temporários"
+# make purge
+# cd ..
 
 
 # echo "Iniciando testes de desempenho... Utilizando a Versão 2"
@@ -108,28 +109,28 @@ do
   
   echo "N = $n" 
   ./gera_entrada $n|  ./ajustePol >  resultados/tempo/$n.txt
-  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
-  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
+#  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L3 -m ./ajustePol  > resultados/L3_$n.txt
+  ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g L2CACHE -m ./ajustePol > resultados/L2CACHE_$n.txt
   ./gera_entrada $n  | likwid-perfctr -C ${CORE_ID} -g FLOPS_DP -m ./ajustePol > resultados/FLOPS_DP_$n.txt
 done
 echo "Pronto! Arquivos criados no diretório resultados..."
 echo
 
-sleep 1
+# sleep 1
 
-# # Limpando
-echo
-echo "Finalizando execução e removendo arquivos temporários"
-make purge
+# # # Limpando
+# echo
+# echo "Finalizando execução e removendo arquivos temporários"
+# make purge
 
-cd ..
+# cd ..
 
-# Frequencia original
-echo
-echo "Retornando computador a frequencia original..."
-echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
+# # Frequencia original
+# echo
+# echo "Retornando computador a frequencia original..."
+# echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor
 
-# Mensagem final
-echo
-echo "Pronto!"
-echo
+# # Mensagem final
+# echo
+# echo "Pronto!"
+# echo

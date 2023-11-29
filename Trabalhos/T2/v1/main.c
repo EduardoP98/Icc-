@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
   t_final = timestamp();
   tResiduo = t_final - t_inicio;
   LIKWID_MARKER_STOP("calcula-residuo");
-
+  
   // Imprime resultados
   // imprime_coef(SL);
   // imprime_residuo(residuo, K);
@@ -104,14 +104,13 @@ int main(int argc, char **argv) {
   printf("%1.8e\n", tsolSL);
   printf("%1.8e\n", tResiduo);
   
-
-  // Finaliza o Likwid
-  LIKWID_MARKER_CLOSE;
-
   // Libera memoria alocada
   libera_tabela(Tabela);
   libera_sistema_linear(SL);
   free(residuo);
+
+  // Finaliza o Likwid
+  LIKWID_MARKER_CLOSE;
 
   return 0;
 }

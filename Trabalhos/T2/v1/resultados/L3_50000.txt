@@ -1,108 +1,108 @@
 --------------------------------------------------------------------------------
-CPU name:	AMD Ryzen 5 2600 Six-Core Processor            
-CPU type:	AMD K17 (Zen+) architecture
-CPU clock:	3.39 GHz
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
 --------------------------------------------------------------------------------
-8.68471680e+01
-3.90625000e-03
-2.00461426e+01
+3.09131104e+02
+4.88281250e-03
+5.52700196e+01
 --------------------------------------------------------------------------------
 Region gera-sistema-linear, Group 1: L3
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.086848 |
+| RDTSC Runtime [s] |   0.309133 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------+---------+------------+
-|         Event        | Counter | HWThread 1 |
-+----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |  331513500 |
-|     MAX_CPU_CLOCK    |  FIXC2  |  295072500 |
-| RETIRED_INSTRUCTIONS |   PMC0  |  600756600 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |  330526500 |
-|       L3_ACCESS      |  CPMC0  |    2090110 |
-|        L3_MISS       |  CPMC1  |     619388 |
-+----------------------+---------+------------+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  | 1483023000 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  |  811504000 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  |  535710800 |
+|     L2_LINES_IN_ALL    |   PMC0  |     566585 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |       9964 |
++------------------------+---------+------------+
 
-+--------------------------------+------------+
-|             Metric             | HWThread 1 |
-+--------------------------------+------------+
-|       Runtime (RDTSC) [s]      |     0.0868 |
-|      Runtime unhalted [s]      |     0.0977 |
-|           Clock [MHz]          |  3812.8193 |
-|               CPI              |     0.5502 |
-| L3 access bandwidth [MBytes/s] |  1540.2361 |
-| L3 access data volume [GBytes] |     0.1338 |
-|       L3 access rate [%]       |     0.3479 |
-|        L3 miss rate [%]        |     0.1031 |
-|        L3 miss ratio [%]       |    29.6342 |
-+--------------------------------+------------+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |     0.3091 |
+|      Runtime unhalted [s]     |     0.4784 |
+|          Clock [MHz]          |  2569.3328 |
+|              CPI              |     0.5472 |
+|  L3 load bandwidth [MBytes/s] |   117.3004 |
+|  L3 load data volume [GBytes] |     0.0363 |
+| L3 evict bandwidth [MBytes/s] |     2.0629 |
+| L3 evict data volume [GBytes] |     0.0006 |
+|    L3 bandwidth [MBytes/s]    |   119.3633 |
+|    L3 data volume [GBytes]    |     0.0369 |
++-------------------------------+------------+
 
 Region soluciona-sistema-linear, Group 1: L3
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000004 |
+| RDTSC Runtime [s] |   0.000005 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------+---------+------------+
-|         Event        | Counter | HWThread 1 |
-+----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |     276532 |
-|     MAX_CPU_CLOCK    |  FIXC2  |     245922 |
-| RETIRED_INSTRUCTIONS |   PMC0  |      22769 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |      34380 |
-|       L3_ACCESS      |  CPMC0  |       1186 |
-|        L3_MISS       |  CPMC1  |        294 |
-+----------------------+---------+------------+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  |      20108 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  |      21978 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  |      14348 |
+|     L2_LINES_IN_ALL    |   PMC0  |        404 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |         24 |
++------------------------+---------+------------+
 
-+--------------------------------+--------------+
-|             Metric             |  HWThread 1  |
-+--------------------------------+--------------+
-|       Runtime (RDTSC) [s]      | 4.227827e-06 |
-|      Runtime unhalted [s]      |       0.0001 |
-|           Clock [MHz]          |    3816.1176 |
-|               CPI              |       1.5099 |
-| L3 access bandwidth [MBytes/s] |   17953.4309 |
-| L3 access data volume [GBytes] |       0.0001 |
-|       L3 access rate [%]       |       5.2088 |
-|        L3 miss rate [%]        |       1.2912 |
-|        L3 miss ratio [%]       |      24.7892 |
-+--------------------------------+--------------+
++-------------------------------+--------------+
+|             Metric            |  HWThread 1  |
++-------------------------------+--------------+
+|      Runtime (RDTSC) [s]      | 5.005504e-06 |
+|      Runtime unhalted [s]     | 1.295770e-05 |
+|          Clock [MHz]          |    2598.1062 |
+|              CPI              |       1.0930 |
+|  L3 load bandwidth [MBytes/s] |    5165.5138 |
+|  L3 load data volume [GBytes] | 2.585600e-05 |
+| L3 evict bandwidth [MBytes/s] |     306.8622 |
+| L3 evict data volume [GBytes] | 1.536000e-06 |
+|    L3 bandwidth [MBytes/s]    |    5472.3760 |
+|    L3 data volume [GBytes]    | 2.739200e-05 |
++-------------------------------+--------------+
 
 Region calcula-residuo, Group 1: L3
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.020046 |
+| RDTSC Runtime [s] |   0.055272 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------+---------+------------+
-|         Event        | Counter | HWThread 1 |
-+----------------------+---------+------------+
-|   ACTUAL_CPU_CLOCK   |  FIXC1  |   76365750 |
-|     MAX_CPU_CLOCK    |  FIXC2  |   68364140 |
-| RETIRED_INSTRUCTIONS |   PMC0  |  130356200 |
-|  CPU_CLOCKS_UNHALTED |   PMC1  |   75172320 |
-|       L3_ACCESS      |  CPMC0  |     383214 |
-|        L3_MISS       |  CPMC1  |     130377 |
-+----------------------+---------+------------+
++------------------------+---------+------------+
+|          Event         | Counter | HWThread 1 |
++------------------------+---------+------------+
+|    INSTR_RETIRED_ANY   |  FIXC0  |  266250100 |
+|  CPU_CLK_UNHALTED_CORE |  FIXC1  |  141289200 |
+|  CPU_CLK_UNHALTED_REF  |  FIXC2  |   92514600 |
+|     L2_LINES_IN_ALL    |   PMC0  |      45482 |
+| L2_LINES_OUT_DIRTY_ALL |   PMC1  |       2618 |
++------------------------+---------+------------+
 
-+--------------------------------+------------+
-|             Metric             | HWThread 1 |
-+--------------------------------+------------+
-|       Runtime (RDTSC) [s]      |     0.0200 |
-|      Runtime unhalted [s]      |     0.0225 |
-|           Clock [MHz]          |  3790.9146 |
-|               CPI              |     0.5767 |
-| L3 access bandwidth [MBytes/s] |  1223.4855 |
-| L3 access data volume [GBytes] |     0.0245 |
-|       L3 access rate [%]       |     0.2940 |
-|        L3 miss rate [%]        |     0.1000 |
-|        L3 miss ratio [%]       |    34.0220 |
-+--------------------------------+------------+
++-------------------------------+------------+
+|             Metric            | HWThread 1 |
++-------------------------------+------------+
+|      Runtime (RDTSC) [s]      |     0.0553 |
+|      Runtime unhalted [s]     |     0.0833 |
+|          Clock [MHz]          |  2590.3521 |
+|              CPI              |     0.5307 |
+|  L3 load bandwidth [MBytes/s] |    52.6644 |
+|  L3 load data volume [GBytes] |     0.0029 |
+| L3 evict bandwidth [MBytes/s] |     3.0314 |
+| L3 evict data volume [GBytes] |     0.0002 |
+|    L3 bandwidth [MBytes/s]    |    55.6958 |
+|    L3 data volume [GBytes]    |     0.0031 |
++-------------------------------+------------+
 
