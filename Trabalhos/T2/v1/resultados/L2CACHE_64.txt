@@ -1,108 +1,99 @@
 --------------------------------------------------------------------------------
-CPU name:	AMD Ryzen 5 2600 Six-Core Processor            
-CPU type:	AMD K17 (Zen+) architecture
-CPU clock:	3.39 GHz
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
 --------------------------------------------------------------------------------
-1.21093750e-01
-4.15039063e-03
-2.61230469e-02
+2.31201172e-01
+7.08007813e-03
+4.71191407e-02
 --------------------------------------------------------------------------------
-Region gera-sistema-linear, Group 1: CACHE
+Region gera-sistema-linear, Group 1: L2CACHE
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000121 |
+| RDTSC Runtime [s] |   0.000232 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+------------------------+---------+------------+
-|          Event         | Counter | HWThread 1 |
-+------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |     703067 |
-|      MAX_CPU_CLOCK     |  FIXC2  |     610878 |
-|  RETIRED_INSTRUCTIONS  |   PMC0  |     775499 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |     459834 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |     260087 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        398 |
-+------------------------+---------+------------+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |     930351 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |     524059 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |     387379 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |       2804 |
+|     L2_RQSTS_MISS     |   PMC1  |        661 |
++-----------------------+---------+------------+
 
-+-------------------------+------------+
-|          Metric         | HWThread 1 |
-+-------------------------+------------+
-|   Runtime (RDTSC) [s]   |     0.0001 |
-|   Runtime unhalted [s]  |     0.0002 |
-|       Clock [MHz]       |  3905.8642 |
-|           CPI           |     0.5930 |
-|   data cache requests   |     260087 |
-| data cache request rate |     0.3354 |
-|    data cache misses    |        398 |
-|   data cache miss rate  |     0.0005 |
-|  data cache miss ratio  |     0.0015 |
-+-------------------------+------------+
++----------------------+------------+
+|        Metric        | HWThread 1 |
++----------------------+------------+
+|  Runtime (RDTSC) [s] |     0.0002 |
+| Runtime unhalted [s] |     0.0003 |
+|      Clock [MHz]     |  2294.4027 |
+|          CPI         |     0.5633 |
+|    L2 request rate   |     0.0030 |
+|     L2 miss rate     |     0.0007 |
+|     L2 miss ratio    |     0.2357 |
++----------------------+------------+
 
-Region soluciona-sistema-linear, Group 1: CACHE
+Region soluciona-sistema-linear, Group 1: L2CACHE
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000004 |
+| RDTSC Runtime [s] |   0.000007 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+------------------------+---------+------------+
-|          Event         | Counter | HWThread 1 |
-+------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |     240447 |
-|      MAX_CPU_CLOCK     |  FIXC2  |     209712 |
-|  RETIRED_INSTRUCTIONS  |   PMC0  |      22767 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |      29780 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |      12016 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        310 |
-+------------------------+---------+------------+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |      20108 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |      30641 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |      21692 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |       2308 |
+|     L2_RQSTS_MISS     |   PMC1  |        766 |
++-----------------------+---------+------------+
 
-+-------------------------+--------------+
-|          Metric         |  HWThread 1  |
-+-------------------------+--------------+
-|   Runtime (RDTSC) [s]   | 3.726890e-06 |
-|   Runtime unhalted [s]  |       0.0001 |
-|       Clock [MHz]       |    3891.0875 |
-|           CPI           |       1.3080 |
-|   data cache requests   |        12016 |
-| data cache request rate |       0.5278 |
-|    data cache misses    |          310 |
-|   data cache miss rate  |       0.0136 |
-|  data cache miss ratio  |       0.0258 |
-+-------------------------+--------------+
++----------------------+--------------+
+|        Metric        |  HWThread 1  |
++----------------------+--------------+
+|  Runtime (RDTSC) [s] | 6.646326e-06 |
+| Runtime unhalted [s] | 1.806664e-05 |
+|      Clock [MHz]     |    2395.6803 |
+|          CPI         |       1.5238 |
+|    L2 request rate   |       0.1148 |
+|     L2 miss rate     |       0.0381 |
+|     L2 miss ratio    |       0.3319 |
++----------------------+--------------+
 
-Region calcula-residuo, Group 1: CACHE
+Region calcula-residuo, Group 1: L2CACHE
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.000026 |
+| RDTSC Runtime [s] |   0.000047 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+------------------------+---------+------------+
-|          Event         | Counter | HWThread 1 |
-+------------------------+---------+------------+
-|    ACTUAL_CPU_CLOCK    |  FIXC1  |     323619 |
-|      MAX_CPU_CLOCK     |  FIXC2  |     281724 |
-|  RETIRED_INSTRUCTIONS  |   PMC0  |     172745 |
-|   CPU_CLOCKS_UNHALTED  |   PMC1  |     114159 |
-|   DATA_CACHE_ACCESSES  |   PMC2  |      66614 |
-| DATA_CACHE_REFILLS_ALL |   PMC3  |        371 |
-+------------------------+---------+------------+
++-----------------------+---------+------------+
+|         Event         | Counter | HWThread 1 |
++-----------------------+---------+------------+
+|   INSTR_RETIRED_ANY   |  FIXC0  |     192575 |
+| CPU_CLK_UNHALTED_CORE |  FIXC1  |     122433 |
+|  CPU_CLK_UNHALTED_REF |  FIXC2  |      90457 |
+| L2_TRANS_ALL_REQUESTS |   PMC0  |       3196 |
+|     L2_RQSTS_MISS     |   PMC1  |        866 |
++-----------------------+---------+------------+
 
-+-------------------------+--------------+
-|          Metric         |  HWThread 1  |
-+-------------------------+--------------+
-|   Runtime (RDTSC) [s]   | 2.593795e-05 |
-|   Runtime unhalted [s]  |       0.0001 |
-|       Clock [MHz]       |    3898.3882 |
-|           CPI           |       0.6609 |
-|   data cache requests   |        66614 |
-| data cache request rate |       0.3856 |
-|    data cache misses    |          371 |
-|   data cache miss rate  |       0.0021 |
-|  data cache miss ratio  |       0.0056 |
-+-------------------------+--------------+
++----------------------+--------------+
+|        Metric        |  HWThread 1  |
++----------------------+--------------+
+|  Runtime (RDTSC) [s] | 4.748942e-05 |
+| Runtime unhalted [s] |       0.0001 |
+|      Clock [MHz]     |    2295.5240 |
+|          CPI         |       0.6358 |
+|    L2 request rate   |       0.0166 |
+|     L2 miss rate     |       0.0045 |
+|     L2 miss ratio    |       0.2710 |
++----------------------+--------------+
 

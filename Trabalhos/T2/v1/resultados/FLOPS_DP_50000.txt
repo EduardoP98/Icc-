@@ -1,39 +1,43 @@
 --------------------------------------------------------------------------------
-CPU name:	AMD Ryzen 5 2600 Six-Core Processor            
-CPU type:	AMD K17 (Zen+) architecture
-CPU clock:	3.39 GHz
+CPU name:	Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
+CPU type:	Intel Core IvyBridge processor
+CPU clock:	1.70 GHz
 --------------------------------------------------------------------------------
-1.02039063e+02
-4.15039063e-03
-2.64150391e+01
+1.51011231e+02
+4.88281250e-03
+3.11599122e+01
 --------------------------------------------------------------------------------
 Region gera-sistema-linear, Group 1: FLOPS_DP
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.102040 |
+| RDTSC Runtime [s] |   0.151013 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------------------+---------+------------+
-|               Event              | Counter | HWThread 1 |
-+----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |  388104900 |
-|           MAX_CPU_CLOCK          |  FIXC2  |  346731600 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |  600757000 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |  386466100 |
-| RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |   62800020 |
-|               MERGE              |   PMC3  |          0 |
-+----------------------------------+---------+------------+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |  723304700 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |  385440900 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |  254176300 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |  196063200 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
 
 +----------------------+------------+
 |        Metric        | HWThread 1 |
 +----------------------+------------+
-|  Runtime (RDTSC) [s] |     0.1020 |
-| Runtime unhalted [s] |     0.1144 |
-|      Clock [MHz]     |  3798.6387 |
-|          CPI         |     0.6433 |
-|     DP [MFLOP/s]     |   615.4451 |
+|  Runtime (RDTSC) [s] |     0.1510 |
+| Runtime unhalted [s] |     0.2272 |
+|      Clock [MHz]     |  2572.0607 |
+|          CPI         |     0.5329 |
+|     DP [MFLOP/s]     |  1298.3157 |
+|   AVX DP [MFLOP/s]   |          0 |
+|   Packed [MUOPS/s]   |          0 |
+|   Scalar [MUOPS/s]   |  1298.3157 |
+|  Vectorization ratio |          0 |
 +----------------------+------------+
 
 Region soluciona-sistema-linear, Group 1: FLOPS_DP
@@ -44,53 +48,61 @@ Region soluciona-sistema-linear, Group 1: FLOPS_DP
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------------------+---------+------------+
-|               Event              | Counter | HWThread 1 |
-+----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |     295896 |
-|           MAX_CPU_CLOCK          |  FIXC2  |     264350 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |      22664 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |      39480 |
-| RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |        372 |
-|               MERGE              |   PMC3  |          0 |
-+----------------------------------+---------+------------+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |      20405 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |      26805 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |      18921 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |        785 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
 
 +----------------------+--------------+
 |        Metric        |  HWThread 1  |
 +----------------------+--------------+
-|  Runtime (RDTSC) [s] | 4.658650e-06 |
-| Runtime unhalted [s] |       0.0001 |
-|      Clock [MHz]     |    3798.6744 |
-|          CPI         |       1.7420 |
-|     DP [MFLOP/s]     |      79.8515 |
+|  Runtime (RDTSC) [s] | 5.280851e-06 |
+| Runtime unhalted [s] | 1.580365e-05 |
+|      Clock [MHz]     |    2402.8696 |
+|          CPI         |       1.3136 |
+|     DP [MFLOP/s]     |     148.6503 |
+|   AVX DP [MFLOP/s]   |            0 |
+|   Packed [MUOPS/s]   |            0 |
+|   Scalar [MUOPS/s]   |     148.6503 |
+|  Vectorization ratio |            0 |
 +----------------------+--------------+
 
 Region calcula-residuo, Group 1: FLOPS_DP
 +-------------------+------------+
 |    Region Info    | HWThread 1 |
 +-------------------+------------+
-| RDTSC Runtime [s] |   0.026416 |
+| RDTSC Runtime [s] |   0.031160 |
 |     call count    |          1 |
 +-------------------+------------+
 
-+----------------------------------+---------+------------+
-|               Event              | Counter | HWThread 1 |
-+----------------------------------+---------+------------+
-|         ACTUAL_CPU_CLOCK         |  FIXC1  |  100573900 |
-|           MAX_CPU_CLOCK          |  FIXC2  |   90059000 |
-|       RETIRED_INSTRUCTIONS       |   PMC0  |  130356600 |
-|        CPU_CLOCKS_UNHALTED       |   PMC1  |   99016620 |
-| RETIRED_SSE_AVX_FLOPS_DOUBLE_ALL |   PMC2  |   10000020 |
-|               MERGE              |   PMC3  |          0 |
-+----------------------------------+---------+------------+
++--------------------------------------+---------+------------+
+|                 Event                | Counter | HWThread 1 |
++--------------------------------------+---------+------------+
+|           INSTR_RETIRED_ANY          |  FIXC0  |  147404300 |
+|         CPU_CLK_UNHALTED_CORE        |  FIXC1  |   79419110 |
+|         CPU_CLK_UNHALTED_REF         |  FIXC2  |   52039200 |
+| FP_COMP_OPS_EXE_SSE_FP_PACKED_DOUBLE |   PMC0  |          0 |
+| FP_COMP_OPS_EXE_SSE_FP_SCALAR_DOUBLE |   PMC1  |   30350920 |
+|       SIMD_FP_256_PACKED_DOUBLE      |   PMC2  |          0 |
++--------------------------------------+---------+------------+
 
 +----------------------+------------+
 |        Metric        | HWThread 1 |
 +----------------------+------------+
-|  Runtime (RDTSC) [s] |     0.0264 |
-| Runtime unhalted [s] |     0.0296 |
-|      Clock [MHz]     |  3789.9236 |
-|          CPI         |     0.7596 |
-|     DP [MFLOP/s]     |   378.5552 |
+|  Runtime (RDTSC) [s] |     0.0312 |
+| Runtime unhalted [s] |     0.0468 |
+|      Clock [MHz]     |  2588.5281 |
+|          CPI         |     0.5388 |
+|     DP [MFLOP/s]     |   974.0250 |
+|   AVX DP [MFLOP/s]   |          0 |
+|   Packed [MUOPS/s]   |          0 |
+|   Scalar [MUOPS/s]   |   974.0250 |
+|  Vectorization ratio |          0 |
 +----------------------+------------+
 
